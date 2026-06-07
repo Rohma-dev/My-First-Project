@@ -322,21 +322,26 @@
         </div>
     </div>
 
-    <!-- DIRECT SECURE FORMSPREE BACKEND -->
+    <!-- DIRECT OPEN-SOURCE BACKEND (NO ACCOUNTS, NO KEYS) -->
     <div id="booking" class="section">
         <h2 class="section-title">Table Reservation</h2>
         <p class="section-subtitle">Instant Digital Allocation</p>
         
         <div class="booking-box">
-            <form action="https://formspree.io/f/xoqoolez" method="POST" id="resForm">
+            <form action="https://formsubmit.co/241980038@gift.edu.pk" method="POST" id="resForm">
                 
+                <!-- Aapki website par wapas bhejne ke liye -->
+                <input type="hidden" name="_next" value="https://rohmanoor.github.io/My-First-Project/restaurant.html">
+                <!-- Captcha ko band karne ke liye taaki seedha submit ho -->
+                <input type="hidden" name="_captcha" value="false">
+
                 <div class="form-group">
                     <label>Full Name</label>
-                    <input type="text" name="customer_name" required placeholder="Enter your name">
+                    <input type="text" name="Name" required placeholder="Enter your name">
                 </div>
                 <div class="form-group">
                     <label>Guests Count</label>
-                    <select name="guests_count">
+                    <select name="Guests">
                         <option>1 Member</option>
                         <option>2 Members</option>
                         <option>4 Members</option>
@@ -345,7 +350,7 @@
                 </div>
                 <div class="form-group">
                     <label>Preferred Time Slot</label>
-                    <input type="time" name="booking_time" required>
+                    <input type="time" name="Time" required>
                 </div>
                 <button type="submit" class="btn" style="width: 100%;">Confirm Secure Booking</button>
             </form>
