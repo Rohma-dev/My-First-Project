@@ -3,445 +3,461 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Brainiac Quiz</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Galactic Knowledge Odyssey</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            background: radial-gradient(circle at 50% 50%, #1a1b2f 0%, #080710 100%);
+            background: #020208;
+            font-family: 'Rajdhani', sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #fff;
-            padding: 20px;
+            color: #00f2ff;
             overflow: hidden;
-        }
-
-        /* Abstract glowing background blobs */
-        .blob {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            background: linear-gradient(#1845ad, #23a2f6);
-            border-radius: 50%;
-            filter: blur(150px);
-            z-index: 1;
-            opacity: 0.5;
-        }
-        .blob.left { top: -10%; left: -10%; background: linear-gradient(#ff512f, #f09819); }
-        .blob.right { bottom: -10%; right: -10%; }
-
-        /* Main Glass container */
-        .quiz-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(15px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 24px;
-            width: 100%;
-            max-width: 600px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-            z-index: 10;
             position: relative;
-            transition: all 0.5s ease;
         }
 
-        /* Top Header Info */
-        .quiz-header {
+        /* Animated Starfield Background */
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Futuristic Neon Glass Container */
+        .universe-box {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 650px;
+            background: rgba(6, 6, 22, 0.75);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 242, 255, 0.25);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 0 40px rgba(0, 242, 255, 0.15), inset 0 0 20px rgba(0, 242, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        /* Top Bar Indicators */
+        .hud-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(0, 242, 255, 0.2);
+            padding-bottom: 15px;
         }
 
-        .title {
-            font-size: 1.5rem;
-            font-weight: 800;
-            background: linear-gradient(45deg, #ff7675, #74b9ff);
+        .hud-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 1.4rem;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px #00f2ff;
+            background: linear-gradient(45deg, #00f2ff, #9d4edd);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
         }
 
-        .timer-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: #00cec9;
-            box-shadow: 0 0 15px rgba(0, 206, 201, 0.2);
+        .hud-timer {
+            font-family: 'Orbitron', sans-serif;
+            background: rgba(255, 0, 92, 0.1);
+            border: 1px solid #ff005c;
+            color: #ff005c;
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-weight: 700;
+            text-shadow: 0 0 8px #ff005c;
+            box-shadow: 0 0 10px rgba(255, 0, 92, 0.2);
         }
 
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
+        /* Level Matrix (Progress Dots) */
+        .matrix-dots {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 35px;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 35px;
             height: 6px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #00f2ff;
+            box-shadow: 0 0 10px #00f2ff;
+        }
+
+        .dot.passed {
+            background: #9d4edd;
+            box-shadow: 0 0 10px #9d4edd;
+        }
+
+        /* Question Command Center */
+        .hud-question {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            line-height: 1.4;
             margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* Cyberpunk Grid Options */
+        .grid-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .opt-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 242, 255, 0.15);
+            padding: 18px 25px;
+            border-radius: 12px;
+            color: #b0b0d0;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            position: relative;
             overflow: hidden;
         }
 
-        .progress-bar {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #a29bfe, #6c5ce7);
-            border-radius: 10px;
-            transition: width 0.4s ease;
+        .opt-card:hover {
+            background: rgba(0, 242, 255, 0.05);
+            color: #00f2ff;
+            border-color: #00f2ff;
+            transform: translateX(5px);
+            box-shadow: -5px 0 15px rgba(0, 242, 255, 0.2);
         }
 
-        /* Question Panel */
-        .question-text {
-            font-size: 1.35rem;
-            font-weight: 600;
-            line-height: 1.5;
-            margin-bottom: 25px;
-            min-height: 70px;
+        /* Selection Status Modifications */
+        .opt-card.correct {
+            background: rgba(0, 255, 136, 0.1) !important;
+            border-color: #00ff88 !important;
+            color: #00ff88 !important;
+            text-shadow: 0 0 10px rgba(0,255,136,0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.2);
         }
 
-        /* Options Wrapper */
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
+        .opt-card.wrong {
+            background: rgba(255, 0, 92, 0.1) !important;
+            border-color: #ff005c !important;
+            color: #ff005c !important;
+            text-shadow: 0 0 10px rgba(255,0,92,0.4);
+            box-shadow: 0 0 20px rgba(255, 0, 92, 0.2);
         }
 
-        .option-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            padding: 16px 24px;
-            border-radius: 14px;
-            text-align: left;
-            color: #fff;
-            font-size: 1.05rem;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .option-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-
-        /* Correct & Incorrect Answers States */
-        .option-btn.correct {
-            background: rgba(46, 204, 113, 0.2) !important;
-            border-color: #2ecc71 !important;
-            color: #2ecc71;
-            font-weight: 600;
-            box-shadow: 0 0 15px rgba(46, 204, 113, 0.3);
-        }
-
-        .option-btn.wrong {
-            background: rgba(231, 76, 60, 0.2) !important;
-            border-color: #e74c3c !important;
-            color: #e74c3c;
-            box-shadow: 0 0 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .option-btn.disabled {
+        .opt-card.disabled {
             pointer-events: none;
-            opacity: 0.6;
+            opacity: 0.5;
         }
-        .option-btn.disabled.correct { opacity: 1; }
+        .opt-card.disabled.correct { opacity: 1; }
 
-        /* Action Footer */
-        .quiz-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .score-tracker {
-            font-size: 0.95rem;
-            color: #b2bec3;
-        }
-
-        .next-btn {
-            background: linear-gradient(135deg, #00cec9, #0984e3);
-            color: #fff;
+        /* Next Vector Button */
+        .next-vector-btn {
+            font-family: 'Orbitron', sans-serif;
+            width: 100%;
+            background: linear-gradient(90deg, #9d4edd, #00f2ff);
+            color: #020208;
             border: none;
-            padding: 12px 30px;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 12px;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            border-radius: 10px;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(9, 132, 227, 0.3);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
             transition: all 0.3s ease;
             opacity: 0;
-            transform: scale(0.9);
+            transform: translateY(10px);
             pointer-events: none;
         }
 
-        .next-btn.show {
+        .next-vector-btn.active {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
             pointer-events: auto;
         }
 
-        .next-btn:hover {
-            box-shadow: 0 8px 25px rgba(0, 206, 201, 0.5);
-            transform: translateY(-2px);
+        .next-vector-btn:hover {
+            box-shadow: 0 0 30px #00f2ff;
+            letter-spacing: 4px;
         }
 
-        /* Result Screen View Styles */
-        .result-screen {
+        /* Terminal Results Screen */
+        .terminal-results {
             display: none;
             text-align: center;
-            animation: fadeIn 0.8s ease forwards;
         }
 
-        .result-emoji {
-            font-size: 4.5rem;
-            margin-bottom: 15px;
-            animation: bounce 2s infinite;
-        }
-
-        .result-title {
-            font-size: 2rem;
-            font-weight: 800;
+        .rank-badge {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
             margin-bottom: 10px;
-            color: #fdcb6e;
+            text-shadow: 0 0 20px #9d4edd;
         }
 
-        .final-score {
-            font-size: 1.4rem;
-            margin-bottom: 30px;
-            color: #dfe6e9;
+        .rank-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
         }
 
-        .final-score span {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #00cec9;
+        .data-stream {
+            font-size: 1.2rem;
+            color: #b0b0d0;
+            margin-bottom: 35px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .data-stream span {
+            color: #00f2ff;
+            font-weight: bold;
+            font-size: 1.6rem;
         }
     </style>
 </head>
 <body>
 
-    <div class="blob left"></div>
-    <div class="blob right"></div>
+    <canvas id="starfield"></canvas>
 
-    <div class="quiz-container">
-        <div id="quiz-box">
-            <div class="quiz-header">
-                <div class="title">BRAIN STORM</div>
-                <div class="timer-box">⏱️ <span id="timer">15</span>s</div>
+    <div class="universe-box">
+        <div id="quiz-panel">
+            <div class="hud-header">
+                <div class="hud-title">MISSION CONTROL</div>
+                <div class="hud-timer">T-MINUS: <span id="timer-sec">15</span>s</div>
             </div>
 
-            <div class="progress-container">
-                <div class="progress-bar" id="progress"></div>
-            </div>
-
-            <div class="question-text" id="question">Loading Awesome Question...</div>
-
-            <div class="options-list" id="options-container">
+            <div class="matrix-dots" id="matrix-wrapper">
                 </div>
 
-            <div class="quiz-footer">
-                <div class="score-tracker">Question <span id="current-idx">1</span> of <span id="total-count">5</span></div>
-                <button class="next-btn" id="next-btn" onclick="loadNextQuestion()">Next Ques ✨</button>
-            </div>
+            <div class="hud-question" id="quest-field">Initializing transmission...</div>
+
+            <div class="grid-options" id="options-wrapper">
+                </div>
+
+            <button class="next-vector-btn" id="next-v-btn" onclick="nextTransmission()">NEXT TRANSMISSION 🚀</button>
         </div>
 
-        <div id="result-box" class="result-screen">
-            <div class="result-emoji" id="res-emoji">🏆</div>
-            <div class="result-title" id="res-title">Absolute Genius!</div>
-            <div class="final-score">You scored <span><span id="res-score">0</span></span> out of <span id="res-total">5</span></div>
-            <button class="btn next-btn show" style="margin: 0 auto;" onclick="restartQuiz()">Play Again 🔄</button>
+        <div id="results-panel" class="terminal-results">
+            <div class="rank-badge" id="r-badge">🚀</div>
+            <div class="rank-title" id="r-title">GALACTIC EXPLORER</div>
+            <div class="data-stream">Sync Complete. Accuracy Matrix: <span><span id="r-score">0</span> / 5</span></div>
+            <button class="next-vector-btn active" onclick="rebootMission()">REBOOT MISSION 🔄</button>
         </div>
     </div>
 
     <script>
-        // High-Quality Quiz Dataset
-        const quizData = [
-            {
-                question: "Which programming language is known as the standard language for Web Development?",
-                options: ["Python", "JavaScript", "C++", "Java"],
-                answer: 1
-            },
-            {
-                question: "What does HTML stand for in modern web design ecosystem?",
-                options: ["Hyper Text Markup Language", "High Tech Multi Language", "Hyper Transfer Main Log", "Home Tool Markup Language"],
-                answer: 0
-            },
-            {
-                question: "Which CSS property is strategically used to create premium layout alignments smoothly?",
-                options: ["Float", "Flexbox / Grid", "Position: absolute", "Display: block"],
-                answer: 1
-            },
-            {
-                question: "In Github workflow, what action permanent saves code alterations into core history?",
-                options: ["Push", "Fetch", "Commit", "Pull"],
-                answer: 2
-            },
-            {
-                question: "Which database solution relies directly on Collections instead of rigid rows and tables?",
-                options: ["MySQL", "PostgreSQL", "MongoDB", "SQLite"],
-                answer: 2
-            }
+        // Starfield Core Engine Animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        for(let i=0; i<120; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.5,
+                speed: Math.random() * 0.5 + 0.1
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "rgba(255,255,255,0.8)";
+            stars.forEach(star => {
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI*2);
+                ctx.fill();
+                star.y += star.speed;
+                if(star.y > canvas.height) {
+                    star.y = 0;
+                    star.x = Math.random() * canvas.width;
+                }
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        // Audio Frequency Synthesizer (Bina kisi audio file ke, browser se digital sounds paida karne ke liye)
+        function playBeep(freq, type, duration) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            
+            oscillator.type = type;
+            oscillator.frequency.value = freq;
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + duration);
+        }
+
+        // Space Knowledge Mission Data Matrix
+        const missionData = [
+            { q: "Which planet in our solar system is scientifically known to rotate backwards (Clockwise)?", opts: ["Mars", "Venus", "Jupiter", "Neptune"], ans: 1 },
+            { q: "What is the coordinate boundary point around a Black Hole where nothing can escape?", opts: ["Singularity", "Dark Matter Edge", "Event Horizon", "Nebula Core"], ans: 2 },
+            { q: "Which cosmic element makes up roughly 27% of the observable universe structure?", opts: ["Dark Matter", "Stellar Hydrogen", "Cosmic Dust", "Anti-matter"], ans: 0 },
+            { q: "What is the approximate age of our universe based on cosmic background light?", opts: ["4.6 Billion Years", "13.8 Billion Years", "20.1 Billion Years", "95 Billion Years"], ans: 1 },
+            { q: "Which telescope was deployed into orbit to capture deep field infrared space views?", opts: ["Hubble", "Kepler", "James Webb", "Voyager 1"], ans: 2 }
         ];
 
-        let currentQuestionIndex = 0;
+        let index = 0;
         let score = 0;
-        let timeLeft = 15;
-        let timerInterval;
+        let clock = 15;
+        let interval;
 
-        const questionEl = document.getElementById('question');
-        const optionsContainer = document.getElementById('options-container');
-        const currentIdxEl = document.getElementById('current-idx');
-        const totalCountEl = document.getElementById('total-count');
-        const progressBar = document.getElementById('progress');
-        const nextBtn = document.getElementById('next-btn');
-        const timerEl = document.getElementById('timer');
-
-        // Initialize App UI
-        function startQuiz() {
-            currentQuestionIndex = 0;
+        // UI Initialization Linkers
+        function bootMission() {
+            index = 0;
             score = 0;
-            totalCountEl.innerText = quizData.length;
-            document.getElementById('quiz-box').style.display = 'block';
-            document.getElementById('result-box').style.display = 'none';
-            showQuestion();
-        }
-
-        // Render Active Data Item
-        function showQuestion() {
-            resetTimer();
-            nextBtn.classList.remove('show');
-            let currentQ = quizData[currentQuestionIndex];
+            document.getElementById('quiz-panel').style.display = 'block';
+            document.getElementById('results-panel').style.display = 'none';
             
-            // Text values updates
-            currentIdxEl.innerText = currentQuestionIndex + 1;
-            questionEl.innerText = currentQ.question;
-            progressBar.style.width = `${((currentQuestionIndex) / quizData.length) * 100}%`;
-            
-            // Rendering HTML elements dynamically
-            optionsContainer.innerHTML = '';
-            currentQ.options.forEach((opt, index) => {
-                const button = document.createElement('button');
-                button.classList.add('option-btn');
-                button.innerText = opt;
-                button.addEventListener('click', () => selectOption(index, button));
-                optionsContainer.appendChild(button);
+            // Build Matrix Dots Dynamically
+            const wrapper = document.getElementById('matrix-wrapper');
+            wrapper.innerHTML = '';
+            missionData.forEach(() => {
+                let d = document.createElement('div');
+                d.classList.add('dot');
+                wrapper.appendChild(d);
             });
             
-            startTimer();
+            loadTransmission();
         }
 
-        // Handle user selection logic securely
-        function selectOption(selectedIndex, clickedBtn) {
-            clearInterval(timerInterval);
-            let correctIndex = quizData[currentQuestionIndex].answer;
-            let allOptionBtns = document.querySelectorAll('.option-btn');
+        function loadTransmission() {
+            clearInterval(interval);
+            document.getElementById('next-v-btn').classList.remove('active');
+            
+            // Update dots state matrix
+            let dots = document.querySelectorAll('.dot');
+            dots.forEach((d, idx) => {
+                d.className = 'dot';
+                if(idx < index) d.classList.add('passed');
+                if(idx === index) d.classList.add('active');
+            });
 
-            if (selectedIndex === correctIndex) {
-                clickedBtn.classList.add('correct');
+            let current = missionData[index];
+            document.getElementById('quest-field').innerText = current.q;
+            
+            const optWrapper = document.getElementById('options-wrapper');
+            optWrapper.innerHTML = '';
+            
+            current.opts.forEach((o, i) => {
+                let card = document.createElement('button');
+                card.classList.add('opt-card');
+                card.innerText = `${i+1}. ${o}`;
+                card.addEventListener('click', () => triggerEvaluation(i, card));
+                optWrapper.appendChild(card);
+            });
+
+            startClock();
+        }
+
+        function triggerEvaluation(selected, cardElement) {
+            clearInterval(interval);
+            let correct = missionData[index].ans;
+            let cards = document.querySelectorAll('.opt-card');
+
+            if(selected === correct) {
+                cardElement.classList.add('correct');
+                playBeep(880, 'sine', 0.15); // High positive beep
                 score++;
             } else {
-                clickedBtn.classList.add('wrong');
-                allOptionBtns[correctIndex].classList.add('correct'); // Highlight answer
+                cardElement.classList.add('wrong');
+                cards[correct].classList.add('correct');
+                playBeep(220, 'sawtooth', 0.3); // Deep error buzz
             }
 
-            // Disable everything else immediately
-            allOptionBtns.forEach(btn => btn.classList.add('disabled'));
-            nextBtn.classList.add('show');
+            cards.forEach(c => c.classList.add('disabled'));
+            document.getElementById('next-v-btn').classList.add('active');
         }
 
-        // Timer Execution Flow
-        function startTimer() {
-            timeLeft = 15;
-            timerEl.innerText = timeLeft;
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerEl.innerText = timeLeft;
-                if(timeLeft <= 0){
-                    clearInterval(timerInterval);
-                    autoTimeoutForce();
+        function startClock() {
+            clock = 15;
+            document.getElementById('timer-sec').innerText = clock;
+            interval = setInterval(() => {
+                clock--;
+                document.getElementById('timer-sec').innerText = clock;
+                if(clock <= 0) {
+                    clearInterval(interval);
+                    playBeep(180, 'triangle', 0.4);
+                    let correct = missionData[index].ans;
+                    let cards = document.querySelectorAll('.opt-card');
+                    cards[correct].classList.add('correct');
+                    cards.forEach(c => c.classList.add('disabled'));
+                    document.getElementById('next-v-btn').classList.add('active');
                 }
             }, 1000);
         }
 
-        function resetTimer() {
-            clearInterval(timerInterval);
-        }
-
-        // Auto timeout configuration block
-        function autoTimeoutForce() {
-            let correctIndex = quizData[currentQuestionIndex].answer;
-            let allOptionBtns = document.querySelectorAll('.option-btn');
-            allOptionBtns[correctIndex].classList.add('correct');
-            allOptionBtns.forEach(btn => btn.classList.add('disabled'));
-            nextBtn.classList.add('show');
-        }
-
-        // Main lifecycle progression trigger
-        function loadNextQuestion() {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                showQuestion();
+        function nextTransmission() {
+            index++;
+            if(index < missionData.length) {
+                playBeep(600, 'sine', 0.05);
+                loadTransmission();
             } else {
-                showResultsPanel();
+                terminateAndShowResults();
             }
         }
 
-        // Final view evaluation frame 
-        function showResultsPanel() {
-            progressBar.style.width = '100%';
-            document.getElementById('quiz-box').style.display = 'none';
-            document.getElementById('result-box').style.display = 'block';
+        function terminateAndShowResults() {
+            document.getElementById('quiz-panel').style.display = 'none';
+            document.getElementById('results-panel').style.display = 'block';
             
-            document.getElementById('res-score').innerText = score;
-            document.getElementById('res-total').innerText = quizData.length;
+            document.getElementById('r-score').innerText = score;
+            
+            const badge = document.getElementById('r-badge');
+            const title = document.getElementById('r-title');
 
-            // Conditional responses styling variations based on score
-            const emojiEl = document.getElementById('res-emoji');
-            const titleEl = document.getElementById('res-title');
-
-            if(score === quizData.length) {
-                emojiEl.innerText = "👑";
-                titleEl.innerText = "Absolute Legend!";
-            } else if (score >= 3) {
-                emojiEl.innerText = "🎉";
-                titleEl.innerText = "Brilliant Work!";
+            if(score === 5) {
+                badge.innerText = "👑";
+                title.innerText = "GALACTIC EMPEROR";
+                playBeep(523.25, 'sine', 0.1); setTimeout(() => playBeep(659.25, 'sine', 0.1), 100); setTimeout(() => playBeep(783.99, 'sine', 0.3), 200);
+            } else if(score >= 3) {
+                badge.innerText = "🎖️";
+                title.innerText = "STAR COMMANDER";
+                playBeep(587.33, 'sine', 0.1); setTimeout(() => playBeep(783.99, 'sine', 0.2), 120);
             } else {
-                emojiEl.innerText = "💡";
-                titleEl.innerText = "Keep Practicing!";
+                badge.innerText = "👨‍🚀";
+                title.innerText = "SPACE CADET";
+                playBeep(293.66, 'triangle', 0.4);
             }
         }
 
-        function restartQuiz() {
-            startQuiz();
-        }
-
-        // Launch app setup initially
-        startQuiz();
+        bootMission();
     </script>
 </body>
 </html>
