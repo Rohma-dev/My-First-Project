@@ -3,266 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohma Dev | Cyber-Grid Analytics Core Engine</title>
+    <title>Enterprise Academic Portal | Rohma Noor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
     <style>
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: radial-gradient(circle at top right, #0b0f19 0%, #05070c 60%, #020305 100%);
+            font-family: 'Inter', sans-serif; 
+            background-color: #f8fafc;
         }
-        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+        .display-font { font-family: 'Plus Jakarta Sans', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', sans-serif; }
         
-        /* Premium Sci-Fi Cyberpunk Panels styling */
-        .cyber-panel {
-            background: rgba(13, 20, 38, 0.7);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(59, 130, 246, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-        .cyber-panel:hover {
-            border-color: rgba(236, 72, 153, 0.3);
-            box-shadow: 0 0 20px rgba(236, 72, 153, 0.1);
-        }
-        .cyber-sidebar {
-            background: rgba(8, 12, 24, 0.9);
-            backdrop-filter: blur(24px);
-            border-right: 1px solid rgba(59, 130, 246, 0.2);
+        /* App Component View Switch Matrix Visibility */
+        .tab-view { display: none; }
+        .tab-view.active-view { display: block; animation: fadeIn 0.2s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Fixed Visibility Matrix Logic for Tabs */
-        .tab-view { display: none; opacity: 0; transform: scale(0.98) translateY(10px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .tab-view.active-view { display: block; opacity: 1; transform: scale(1) translateY(0); }
-        
-        /* Custom Smooth Matrix Scrollbar */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: #05070c; }
-        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ec4899; }
+        /* Clean professional scrollbar styling */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
     </style>
 </head>
-<body class="text-blue-100 min-h-screen flex flex-col xl:flex-row antialiased overflow-x-hidden selection:bg-pink-500 selection:text-white">
+<body class="text-slate-800 min-h-screen flex flex-col lg:flex-row antialiased">
 
-    <aside class="w-full xl:w-80 cyber-sidebar flex flex-col justify-between p-6 z-30 shrink-0 shadow-2xl relative">
-        <div class="space-y-8">
-            <div class="flex items-center gap-3.5 border-b border-blue-900/50 pb-5">
-                <div class="w-11 h-11 bg-gradient-to-tr from-pink-600 via-indigo-600 to-blue-500 rounded-xl flex items-center justify-center font-bold text-white text-xl shadow-lg shadow-pink-500/20 font-mono tracking-tighter">
-                    ΩR
+    <aside class="w-full lg:w-72 bg-white border-r border-slate-200 flex flex-col justify-between p-6 shrink-0 z-20">
+        <div class="space-y-7">
+            <div class="flex items-center gap-3 pb-5 border-b border-slate-100">
+                <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center font-bold text-white text-lg display-font shadow-sm shadow-blue-500/20">
+                    R
                 </div>
                 <div>
-                    <h2 class="text-white heading-font font-bold text-base tracking-wider leading-none">ROHMA CORE</h2>
-                    <span class="text-[9px] text-pink-400 tracking-widest font-mono uppercase block mt-1.5 font-bold bg-pink-950/40 px-2 py-0.5 rounded border border-pink-900/60">SYSTEM STACK V6.0</span>
+                    <h2 class="text-slate-900 display-font font-bold text-sm tracking-tight">Academic Portal</h2>
+                    <span class="text-[10px] text-blue-600 font-semibold uppercase tracking-wider block mt-0.5">Student Information Desk</span>
                 </div>
             </div>
 
             <div class="space-y-2">
-                <span class="text-[9px] font-bold tracking-widest text-blue-400/60 uppercase block pl-1 font-mono">Routing Profile Channel</span>
-                <div class="bg-slate-950/80 border border-blue-900/60 p-1 rounded-xl flex gap-1 text-[11px] font-mono">
-                    <button onclick="toggleContext('student')" id="contextStudentBtn" class="flex-1 py-2 rounded-lg text-center transition duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md">STUDENT_NODE</button>
-                    <button onclick="toggleContext('faculty')" id="contextFacultyBtn" class="flex-1 py-2 rounded-lg text-center transition duration-200 text-blue-400 hover:text-white">FACULTY_DECK</button>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-1">Portal Environment</span>
+                <div class="bg-slate-100 border border-slate-200/60 p-1 rounded-xl flex gap-1 text-xs font-medium">
+                    <button onclick="toggleContext('student')" id="contextStudentBtn" class="flex-1 py-1.5 rounded-lg text-center bg-white text-slate-900 shadow-xs border border-slate-200/40 font-semibold">Student</button>
+                    <button onclick="toggleContext('faculty')" id="contextFacultyBtn" class="flex-1 py-1.5 rounded-lg text-center text-slate-500 hover:text-slate-800 transition">Faculty Admin</button>
                 </div>
             </div>
 
-            <div class="space-y-2">
-                <span class="text-[9px] font-bold tracking-widest text-blue-400/60 uppercase block pl-1 font-mono">Operational Modules Terminal</span>
-                <nav class="space-y-2 text-xs font-mono font-medium" id="appNavigationLinks">
-                    <button onclick="routeToView('dashboard-view', this)" class="w-full flex items-center justify-between px-4 py-3.5 rounded-xl bg-gradient-to-r from-blue-950 to-slate-900 border border-blue-500/40 text-white shadow-md nav-link-btn">
-                        <span class="flex items-center gap-3 text-pink-400"><span>📊</span> CONTROL_DASHBOARD</span>
-                        <span class="w-1.5 h-1.5 rounded-full bg-pink-500 animate-pulse"></span>
+            <div class="space-y-1.5">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block px-1">Main Academic Hub</span>
+                <nav class="space-y-1 text-xs font-medium text-slate-600" id="appNavigationLinks">
+                    <button onclick="routeToView('dashboard-view', this)" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg bg-blue-50/80 border border-blue-100/50 text-blue-700 font-semibold nav-link-btn text-left">
+                        <span class="flex items-center gap-2.5"><span>📊</span> Control Dashboard</span>
+                        <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
                     </button>
-                    <button onclick="routeToView('curriculum-view', this)" class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-blue-400 border border-transparent hover:border-blue-900 hover:bg-blue-950/30 hover:text-white transition-all duration-150 nav-link-btn">
-                        <span>🧬</span> COURSE_CURRICULUM
+                    <button onclick="routeToView('curriculum-view', this)" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-transparent hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition text-left nav-link-btn">
+                        <span>📖</span> Course Curriculum
                     </button>
-                    <button onclick="routeToView('transcript-view', this)" class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-blue-400 border border-transparent hover:border-blue-900 hover:bg-blue-950/30 hover:text-white transition-all duration-150 nav-link-btn">
-                        <span>🎚️</span> EXAM_TRANSCRIPT
+                    <button onclick="routeToView('transcript-view', this)" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-transparent hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition text-left nav-link-btn">
+                        <span>📜</span> Exam Transcript
                     </button>
-                    <button onclick="routeToView('finance-view', this)" class="w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-blue-400 border border-transparent hover:border-blue-900 hover:bg-blue-950/30 hover:text-white transition-all duration-150 nav-link-btn">
-                        <span>🛡️</span> FINANCE_ACCOUNTS
+                    <button onclick="routeToView('finance-view', this)" class="w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-transparent hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition text-left nav-link-btn">
+                        <span>💳</span> Finance & Accounts
                     </button>
                 </nav>
             </div>
         </div>
 
-        <div class="border-t border-blue-900/40 pt-5 mt-8 flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-600 to-indigo-700 flex items-center justify-center text-white font-bold font-mono text-sm shadow-inner">
+        <div class="border-t border-slate-100 pt-4 mt-6 flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center font-bold text-slate-700 font-mono text-xs">
                 RN
             </div>
             <div class="min-w-0 flex-1">
-                <h4 id="profileCardName" class="text-white font-bold text-xs tracking-wider truncate heading-font">ROHMA NOOR</h4>
-                <p id="profileCardId" class="text-[9px] text-pink-400 font-mono font-bold mt-0.5 truncate tracking-normal">UID://2026-SE-442</p>
+                <h4 id="profileCardName" class="text-slate-900 font-semibold text-xs truncate">Rohma Noor</h4>
+                <p id="profileCardId" class="text-[10px] text-slate-400 font-mono truncate">Reg ID: 2026-SE-442</p>
             </div>
         </div>
     </aside>
 
-    <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto flex flex-col relative">
+    <main class="flex-1 p-5 md:p-7 lg:p-9 space-y-6 overflow-y-auto flex flex-col">
         
-        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 cyber-panel p-5 rounded-xl border border-blue-900/40">
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
             <div>
-                <h1 id="hudMainGreeting" class="text-lg md:text-xl font-bold text-white tracking-wider heading-font uppercase">SYSTEM_INITIALIZED // TERMINAL ACTIVE</h1>
-                <p id="hudScopeIndicator" class="text-[10px] text-blue-400 font-mono mt-1 font-bold tracking-widest">LOC_MATRIX // MODULE_CONTROL_DASHBOARD_ROUTER</p>
+                <h1 id="hudMainGreeting" class="text-base md:text-lg font-bold text-slate-900 display-font">Student Performance Analytics Terminal</h1>
+                <p id="hudScopeIndicator" class="text-[11px] text-slate-400 font-mono mt-0.5 uppercase tracking-wider">WORKSPACE // CORE_DASHBOARD</p>
             </div>
-            <div class="flex items-center gap-3 font-mono">
-                <div class="text-right hidden sm:block">
-                    <span class="text-[9px] block text-blue-500 uppercase font-bold">GRID SERVER DUPLEX</span>
-                    <span class="text-xs text-emerald-400 font-bold">128.09.20.26 // OK</span>
-                </div>
-                <div class="bg-pink-950/60 border border-pink-500/40 text-pink-400 px-4 py-2 rounded-xl text-[10px] font-bold tracking-widest">
-                    <span class="w-2 h-2 inline-block rounded-full bg-pink-500 animate-ping mr-1.5"></span> LIVE CHANNEL
-                </div>
+            <div class="flex items-center gap-2 bg-emerald-50 text-emerald-700 border border-emerald-200/60 px-3 py-1.5 rounded-xl text-xs font-medium">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 block"></span> Secure Gateway Operational
             </div>
         </header>
 
         <div id="dashboard-view" class="tab-view active-view space-y-6">
             
             <div id="studentMetricsDeck" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="cyber-panel p-5 rounded-xl border-l-2 border-l-pink-500">
-                    <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest block font-mono">INTEGRATED_CGPA</span>
-                    <h2 class="text-2xl font-bold text-white mt-2 font-mono tracking-tight">3.91 <span class="text-xs text-blue-500 font-sans">/ 4.00</span></h2>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Cumulative CGPA</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1 display-font">3.91 <span class="text-xs text-slate-400 font-normal">/ 4.00</span></h2>
                 </div>
-                <div class="cyber-panel p-5 rounded-xl">
-                    <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest block font-mono">CREDITS_INDEXED</span>
-                    <h2 class="text-2xl font-bold text-white mt-2 font-mono tracking-tight">18 <span class="text-xs text-pink-400 font-sans">Cr Hrs</span></h2>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Registered Courses</span>
+                    <h2 class="text-2xl font-bold text-slate-900 mt-1 display-font">03 <span class="text-xs text-slate-400 font-normal">Active</span></h2>
                 </div>
-                <div class="cyber-panel p-5 rounded-xl border-l-2 border-l-blue-500">
-                    <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest block font-mono">ATTENDANCE_RATIO</span>
-                    <h2 class="text-2xl font-bold text-blue-400 mt-2 font-mono tracking-tight">94.8%</h2>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Net Term Attendance</span>
+                    <h2 class="text-2xl font-bold text-blue-600 mt-1 display-font">94.8%</h2>
                 </div>
-                <div class="cyber-panel p-5 rounded-xl">
-                    <span class="text-[9px] font-bold text-blue-400 uppercase tracking-widest block font-mono">INVOICE_BALANCES</span>
-                    <h2 class="text-2xl font-bold text-emerald-400 mt-2 font-mono tracking-tight">0.00 <span class="text-xs text-slate-500 font-sans">PKR</span></h2>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Outstanding Arrears</span>
+                    <h2 class="text-2xl font-bold text-emerald-600 mt-1 display-font">0.00 <span class="text-xs text-slate-400 font-normal">PKR</span></h2>
                 </div>
             </div>
 
             <div id="studentOperationsGrid" class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div class="xl:col-span-2 cyber-panel p-6 rounded-xl space-y-4">
-                    <div class="border-b border-blue-900/60 pb-3 flex items-center justify-between font-mono">
-                        <h3 class="text-white font-bold text-xs uppercase tracking-widest flex items-center gap-2"><span>⚡</span> ACTIVE_ACADEMIC_PIPELINES</h3>
-                        <span id="coursesCounterHUD" class="text-[9px] bg-pink-950 border border-pink-500/40 text-pink-400 px-2.5 py-1 rounded font-bold">3 COMPUTE NODES RUNNING</span>
+                <div class="xl:col-span-2 bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-xs">
+                    <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                        <h3 class="text-slate-900 font-bold text-sm display-font">Current Registered Academic Courses</h3>
+                        <span id="coursesCounterHUD" class="text-[11px] bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-lg text-slate-600 font-medium font-mono">03 Courses Connected</span>
                     </div>
-                    <div id="studentCourseRowsContainer" class="space-y-3.5"></div>
+                    <div id="studentCourseRowsContainer" class="space-y-3"></div>
                 </div>
 
                 <div class="space-y-6">
-                    <div class="cyber-panel p-6 rounded-xl space-y-4">
-                        <h3 class="text-white font-bold font-mono text-xs uppercase tracking-widest border-b border-blue-900/60 pb-3">EVALUATION_TASKS_STREAM</h3>
-                        <div id="studentAssignmentsContainer" class="space-y-3 max-h-[290px] overflow-y-auto pr-1"></div>
+                    <div class="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-xs">
+                        <h3 class="text-slate-900 font-bold text-sm display-font border-b border-slate-100 pb-3">Course Tasks Pending Stream</h3>
+                        <div id="studentAssignmentsContainer" class="space-y-2.5 max-h-[280px] overflow-y-auto pr-1"></div>
                     </div>
                     
-                    <div class="cyber-panel p-5 rounded-xl space-y-4 border border-blue-900/50">
-                        <h3 class="text-white font-bold font-mono text-xs uppercase tracking-widest border-b border-blue-900/60 pb-2">GRADE_FORECAST_SIMULATOR</h3>
-                        <div class="space-y-3 text-xs font-mono">
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl space-y-3.5 shadow-xs">
+                        <h3 class="text-slate-900 font-bold text-xs uppercase tracking-wider border-b border-slate-100 pb-2">GPA Forecasting Simulator Tool</h3>
+                        <div class="space-y-2.5 text-xs">
                             <div class="flex gap-2">
-                                <select id="predictorInputGrade" class="bg-slate-950 border border-blue-900 rounded-lg p-2.5 font-mono text-white focus:outline-none focus:border-pink-500 flex-1 text-xs">
-                                    <option value="4.00">TARGET_VECTOR_A (4.00)</option>
-                                    <option value="3.67">TARGET_VECTOR_A- (3.67)</option>
-                                    <option value="3.33">TARGET_VECTOR_B+ (3.33)</option>
+                                <select id="predictorInputGrade" class="bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-slate-700 font-medium focus:outline-none focus:border-blue-500 flex-1">
+                                    <option value="4.00">Expected: Grade A (4.00)</option>
+                                    <option value="3.67">Expected: Grade A- (3.67)</option>
+                                    <option value="3.33">Expected: Grade B+ (3.33)</option>
                                 </select>
-                                <button onclick="runGpaPredictionMetrics()" class="bg-gradient-to-r from-pink-600 to-indigo-600 text-white font-bold px-4 rounded-lg text-[10px] tracking-wider uppercase hover:scale-[1.02] transition">RUN_SIM 🎯</button>
+                                <button onclick="runGpaPredictionMetrics()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 rounded-xl shadow-xs transition">Calculate</button>
                             </div>
-                            <div id="predictorResultBox" class="hidden p-3.5 bg-blue-950/80 border border-blue-500/30 text-blue-400 rounded-lg text-[11px] leading-relaxed shadow-inner"></div>
+                            <div id="predictorResultBox" class="hidden p-3 bg-slate-50 border border-slate-200 text-slate-600 rounded-xl leading-relaxed"></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="facultyOperationsGrid" class="hidden grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div class="cyber-panel p-6 rounded-xl space-y-4 h-fit">
-                    <h3 class="text-white font-bold font-mono text-xs uppercase tracking-widest border-b border-blue-900/60 pb-3">BROADCAST_PAYLOAD_UNIT</h3>
-                    <form id="facultyBroadcastForm" class="space-y-4 text-xs font-mono">
+                <div class="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-xs h-fit">
+                    <h3 class="text-slate-900 font-bold text-sm display-font border-b border-slate-100 pb-3">Deploy Evaluation Assignment Payload</h3>
+                    <form id="facultyBroadcastForm" class="space-y-4 text-xs">
                         <div class="space-y-1.5">
-                            <label class="text-[9px] font-bold text-blue-400 uppercase tracking-wider block">TARGET CHANNEL TARGET</label>
-                            <select id="fInpCourse" class="w-full bg-slate-950 border border-blue-900/80 rounded-lg px-3 py-2.5 text-slate-300 focus:outline-none focus:border-pink-500">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Target Lecture Channel</label>
+                            <select id="fInpCourse" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-700 font-medium focus:outline-none focus:border-blue-500">
                                 <option value="Advanced Software Engineering Frameworks">Advanced Software Engineering Frameworks</option>
                                 <option value="Distributed Cloud Databases Systems">Distributed Cloud Databases Systems</option>
                                 <option value="Neural Networks & Deep Architectures">Neural Networks & Deep Architectures</option>
                             </select>
                         </div>
                         <div class="space-y-1.5">
-                            <label class="text-[9px] font-bold text-blue-400 uppercase tracking-wider block">DISPATCH DESCRIPTOR META TITLE</label>
-                            <input type="text" id="fInpTitle" required placeholder="E.g., Compile Cloud Cluster Partition Matrix" class="w-full bg-slate-950 border border-blue-900/80 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-pink-500">
+                            <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Assignment Descriptive Title</label>
+                            <input type="text" id="fInpTitle" required placeholder="E.g., Midterm Evaluation Term Design Submission" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-800 font-medium focus:outline-none focus:border-blue-500">
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="space-y-1.5">
-                                <label class="text-[9px] font-bold text-blue-400 uppercase tracking-wider block">MAX WEIGHT SCALE</label>
-                                <input type="number" id="fInpMarks" required placeholder="25" class="w-full bg-slate-950 border border-blue-900/80 rounded-lg px-3 py-2.5 text-white focus:outline-none">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Maximum Weight Score</label>
+                                <input type="number" id="fInpMarks" required placeholder="25" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-800 focus:outline-none">
                             </div>
                             <div class="space-y-1.5">
-                                <label class="text-[9px] font-bold text-blue-400 uppercase tracking-wider block">EXPIRY TIMESTAMP</label>
-                                <input type="date" id="fInpDate" required class="w-full bg-slate-950 border border-blue-900/80 rounded-lg px-3 py-2 text-white focus:outline-none">
+                                <label class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Final Due Date Calendar</label>
+                                <input type="date" id="fInpDate" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-slate-800 focus:outline-none">
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-pink-600 to-indigo-600 text-white font-bold py-3 rounded-lg text-[10px] tracking-widest uppercase shadow-md shadow-pink-500/10">TRANSMIT_NEW_DATA_TASK +</button>
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-xl uppercase tracking-wider text-[10px] shadow-xs transition">Dispatch Deliverable Task</button>
                     </form>
                 </div>
-                <div class="xl:col-span-2 cyber-panel p-6 rounded-xl space-y-4 flex flex-col justify-between min-h-[440px]">
+                <div class="xl:col-span-2 bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-xs flex flex-col justify-between min-h-[440px]">
                     <div class="space-y-4">
-                        <h3 class="text-white font-bold font-mono text-xs uppercase tracking-widest border-b border-blue-900/60 pb-3">SYSTEM_AUDIT_LOGS_REGISTRY</h3>
-                        <div id="centralSystemAuditLogsWrapper" class="space-y-2.5 font-mono text-[11px]"></div>
+                        <h3 class="text-slate-900 font-bold text-sm display-font border-b border-slate-100 pb-3">Central Transaction Portal System Audit Trail</h3>
+                        <div id="centralSystemAuditLogsWrapper" class="space-y-2 font-mono text-[11px]"></div>
                     </div>
                 </div>
             </div>
         </div>
 
         <div id="curriculum-view" class="tab-view space-y-6">
-            <div class="cyber-panel p-6 rounded-xl space-y-6">
-                <div class="border-b border-blue-900/60 pb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-                    <div>
-                        <span class="text-[9px] font-mono font-bold text-pink-400 bg-pink-950/60 border border-pink-900/60 px-2 py-0.5 rounded">STRUCTURE_MAP_NODE_ACTIVE</span>
-                        <h3 class="text-white font-bold heading-font text-lg uppercase tracking-wider mt-2">CONNECTED_ACADEMIC_SYLLABUS_MATRIX</h3>
-                    </div>
-                    <span class="text-[11px] font-mono text-blue-400 bg-slate-950 border border-blue-900 px-3 py-1 rounded-md">CORE RESPONSES STACK: VALIDATED</span>
+            <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-xs space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-[10px] font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded-md uppercase">Syllabus Registry</span>
+                    <h3 class="text-slate-900 font-bold display-font text-lg mt-2">Course Core Syllabus Framework Maps</h3>
+                    <p class="text-xs text-slate-400">Access and download verified structural curriculum specifications documents modules.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 font-mono text-xs">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 text-xs">
                     
-                    <div class="p-5 bg-slate-950/80 border border-blue-900 rounded-xl relative overflow-hidden group space-y-4">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-pink-500"></div>
-                        <div class="flex justify-between items-center border-b border-blue-900/60 pb-2">
-                            <span class="text-pink-400 font-bold text-[10px]">VECTOR_NODE // SE-401</span>
-                            <span class="text-[9px] px-2 py-0.5 bg-blue-950 border border-blue-800 text-blue-300 rounded">CORE_UNIT</span>
+                    <div class="p-5 bg-slate-50/50 border border-slate-200 rounded-xl space-y-4 hover:border-blue-300 transition shadow-2xs relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-blue-600"></div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                            <span>REG_CODE // SE-401</span>
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded font-bold text-slate-600">3 Cr Hrs</span>
                         </div>
-                        <h4 class="text-white font-bold font-sans text-sm group-hover:text-pink-400 transition">Advanced Software Engineering Frameworks</h4>
+                        <h4 class="text-slate-900 font-bold text-sm display-font">Advanced Software Engineering Frameworks</h4>
                         
-                        <div class="space-y-1.5 text-[10px] text-slate-400 bg-blue-950/20 p-2.5 rounded border border-blue-900/50">
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> Microservices Architecture Topology</div>
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> CQRS Design System Implementation</div>
-                            <div class="flex items-center gap-2"><span class="text-pink-500 animate-pulse">▶</span> Event-Driven Pipeline Compilation</div>
+                        <div class="space-y-2 text-slate-500 border-t border-b border-slate-200/60 py-3 my-2">
+                            <div class="flex items-center gap-2">✔ Microservices Architectural Topologies</div>
+                            <div class="flex items-center gap-2">✔ Domain Driven Architecture Design Core</div>
+                            <div class="flex items-center gap-2">✔ Distributed Messaging Operations</div>
                         </div>
-                        <button onclick="alert('Establishing secure node connection to stream SE-401 framework data payload indices...')" class="w-full py-2 bg-blue-950 hover:bg-pink-600 text-blue-400 hover:text-white border border-blue-800 hover:border-pink-500 rounded-lg font-bold text-[10px] tracking-wider uppercase transition">STREAM_RESOURCES_VAULT 📥</button>
+                        <button onclick="alert('Downloading compiled framework document syllabus source matrix archive...')" class="w-full py-2.5 bg-white hover:bg-blue-600 text-blue-600 hover:text-white border border-slate-200 hover:border-blue-600 rounded-xl font-semibold transition text-center shadow-2xs">Download Syllabus Blueprint 📥</button>
                     </div>
 
-                    <div class="p-5 bg-slate-950/80 border border-blue-900 rounded-xl relative overflow-hidden group space-y-4">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
-                        <div class="flex justify-between items-center border-b border-blue-900/60 pb-2">
-                            <span class="text-blue-400 font-bold text-[10px]">VECTOR_NODE // CS-418</span>
-                            <span class="text-[9px] px-2 py-0.5 bg-blue-950 border border-blue-800 text-blue-300 rounded">CLUSTER_NET</span>
+                    <div class="p-5 bg-slate-50/50 border border-slate-200 rounded-xl space-y-4 hover:border-blue-300 transition shadow-2xs relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-indigo-600"></div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                            <span>REG_CODE // CS-418</span>
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded font-bold text-slate-600">4 Cr Hrs</span>
                         </div>
-                        <h4 class="text-white font-bold font-sans text-sm group-hover:text-blue-400 transition">Distributed Cloud Databases Systems</h4>
+                        <h4 class="text-slate-900 font-bold text-sm display-font">Distributed Cloud Databases Systems</h4>
                         
-                        <div class="space-y-1.5 text-[10px] text-slate-400 bg-blue-950/20 p-2.5 rounded border border-blue-900/50">
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> Global Sharding & Replication Topologies</div>
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> NoSQL Clusters Consistency Quantizers</div>
-                            <div class="flex items-center gap-2"><span class="text-blue-400 animate-pulse">▶</span> Fault Tolerance Isolation Matrices</div>
+                        <div class="space-y-2 text-slate-500 border-t border-b border-slate-200/60 py-3 my-2">
+                            <div class="flex items-center gap-2">✔ Global Sharding Shards Distribution Map</div>
+                            <div class="flex items-center gap-2">✔ Consistency Quantization Boundaries</div>
+                            <div class="flex items-center gap-2">✔ High Availability Recovery Arrays</div>
                         </div>
-                        <button onclick="alert('Configuring proxy tunneling pipelines to fetch CS-418 dataset clusters map...')" class="w-full py-2 bg-blue-950 hover:bg-blue-600 text-blue-400 hover:text-white border border-blue-800 hover:border-blue-500 rounded-lg font-bold text-[10px] tracking-wider uppercase transition">STREAM_RESOURCES_VAULT 📥</button>
+                        <button onclick="alert('Downloading Cloud Cluster Topologies blueprints logs...')" class="w-full py-2.5 bg-white hover:bg-indigo-600 text-indigo-600 hover:text-white border border-slate-200 hover:border-indigo-600 rounded-xl font-semibold transition text-center shadow-2xs">Download Syllabus Blueprint 📥</button>
                     </div>
 
-                    <div class="p-5 bg-slate-950/80 border border-blue-900 rounded-xl relative overflow-hidden group space-y-4">
-                        <div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
-                        <div class="flex justify-between items-center border-b border-blue-900/60 pb-2">
-                            <span class="text-purple-400 font-bold text-[10px]">VECTOR_NODE // AI-490</span>
-                            <span class="text-[9px] px-2 py-0.5 bg-blue-950 border border-blue-800 text-blue-300 rounded">NEURAL_DECK</span>
+                    <div class="p-5 bg-slate-50/50 border border-slate-200 rounded-xl space-y-4 hover:border-blue-300 transition shadow-2xs relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-purple-600"></div>
+                        <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                            <span>REG_CODE // AI-490</span>
+                            <span class="px-2 py-0.5 bg-white border border-slate-200 rounded font-bold text-slate-600">3 Cr Hrs</span>
                         </div>
-                        <h4 class="text-white font-bold font-sans text-sm group-hover:text-purple-400 transition">Neural Networks & Deep Architectures</h4>
+                        <h4 class="text-slate-900 font-bold text-sm display-font">Neural Networks & Deep Architectures</h4>
                         
-                        <div class="space-y-1.5 text-[10px] text-slate-400 bg-blue-950/20 p-2.5 rounded border border-blue-900/50">
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> Deep Feedforward Layer Matrices Optimization</div>
-                            <div class="flex items-center gap-2"><span class="text-emerald-400">●</span> Convolutional Weight Filters Processing</div>
-                            <div class="flex items-center gap-2"><span class="text-purple-400 animate-pulse">▶</span> Backpropagation Gradient Matrix Vectorization</div>
+                        <div class="space-y-2 text-slate-500 border-t border-b border-slate-200/60 py-3 my-2">
+                            <div class="flex items-center gap-2">✔ Backpropagation Matrix Transformation</div>
+                            <div class="flex items-center gap-2">✔ Convolutional Network Filter Arrays</div>
+                            <div class="flex items-center gap-2">✔ Hyperparameters Extraction Tuning</div>
                         </div>
-                        <button onclick="alert('Connecting terminal vectors arrays channels to download AI-490 documentation...')" class="w-full py-2 bg-blue-950 hover:bg-purple-600 text-blue-400 hover:text-white border border-blue-800 hover:border-purple-500 rounded-lg font-bold text-[10px] tracking-wider uppercase transition">STREAM_RESOURCES_VAULT 📥</button>
+                        <button onclick="alert('Downloading Neural Networks matrices frameworks references...')" class="w-full py-2.5 bg-white hover:bg-purple-600 text-purple-600 hover:text-white border border-slate-200 hover:border-purple-600 rounded-xl font-semibold transition text-center shadow-2xs">Download Syllabus Blueprint 📥</button>
                     </div>
 
                 </div>
@@ -270,68 +249,68 @@
         </div>
 
         <div id="transcript-view" class="tab-view space-y-6">
-            <div class="cyber-panel p-6 rounded-xl space-y-6">
+            <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-xs space-y-6">
                 
-                <div class="border-b border-blue-900/60 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div class="border-b border-slate-100 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div>
-                        <span class="text-[9px] font-mono font-bold text-blue-400 bg-blue-950 border border-blue-800 px-2 py-0.5 rounded">CRYPTOGRAPHICALLY_SECURED_LEDGER</span>
-                        <h3 class="text-white font-bold heading-font text-lg uppercase tracking-wider mt-2">PERFORMANCE_GRADE_TRANSCRIPT_REGISTRIES</h3>
+                        <span class="text-[10px] font-semibold text-slate-500 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded-md uppercase">Official Registry Record</span>
+                        <h3 class="text-slate-900 font-bold display-font text-lg mt-2">Verified Performance Ledger Transcript</h3>
                     </div>
-                    <div class="flex gap-4 font-mono text-[11px]">
-                        <div class="bg-slate-950 p-2.5 rounded border border-blue-900">
-                            <span class="text-slate-500 block text-[9px] uppercase font-bold">ACCUMULATED_GPA_BOUNDS</span>
-                            <span class="text-white font-bold">3.910 CURRENT_CGPA</span>
+                    <div class="flex gap-3 text-xs font-medium">
+                        <div class="bg-slate-50 border border-slate-200 px-3 py-1.5 rounded-xl">
+                            <span class="text-slate-400 block text-[9px] uppercase font-bold">Total Enrolled Weight</span>
+                            <span class="text-slate-900 font-bold">10.00 Credit Units</span>
                         </div>
-                        <div class="bg-slate-950 p-2.5 rounded border border-blue-900">
-                            <span class="text-slate-500 block text-[9px] uppercase font-bold">VERIFICATION_STAMP</span>
-                            <span class="text-emerald-400 font-bold">STATUS://VALID</span>
+                        <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl">
+                            <span class="text-emerald-600 block text-[9px] uppercase font-bold">Current Standing Status</span>
+                            <span class="text-emerald-700 font-bold">CGPA: 3.910 Verified</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="overflow-x-auto bg-slate-950/60 border border-blue-900/80 rounded-xl font-mono text-xs">
+                <div class="overflow-x-auto bg-white border border-slate-200 rounded-xl text-xs font-medium">
                     <table class="w-full text-left border-collapse">
                         <thead>
-                            <tr class="border-b border-blue-900/80 text-blue-400 bg-blue-950/40 uppercase font-bold text-[10px] tracking-widest">
-                                <th class="p-4">VECTOR_ID</th>
-                                <th class="p-4">MODULE_DESCRIPTOR_META_TITLE</th>
-                                <th class="p-4">WEIGHT_HOURS</th>
-                                <th class="p-4 text-center">COMPUTED_GRADE_ALPHA</th>
+                            <tr class="border-b border-slate-200 text-slate-400 bg-slate-50 uppercase text-[9px] tracking-wider font-semibold">
+                                <th class="p-4">Course ID</th>
+                                <th class="p-4">Academic Module Description Meta Title</th>
+                                <th class="p-4">Weight Scale</th>
+                                <th class="p-4 text-center">Earned Alpha Grade</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-blue-950 text-slate-300">
-                            <tr class="hover:bg-blue-950/20 transition duration-100">
-                                <td class="p-4 font-bold text-pink-400">SE-401</td>
-                                <td class="p-4 font-sans text-white font-semibold">Advanced Software Engineering Frameworks</td>
-                                <td class="p-4 text-blue-400/80">3.00 UN_VECTOR</td>
-                                <td class="p-4 text-center"><span class="px-3 py-1 bg-pink-950/60 border border-pink-500/40 text-pink-400 rounded font-bold text-sm">A</span></td>
+                        <tbody class="divide-y divide-slate-100 text-slate-700 font-medium">
+                            <tr class="hover:bg-slate-50/60 transition">
+                                <td class="p-4 font-mono text-blue-600 font-semibold">SE-401</td>
+                                <td class="p-4 text-slate-900 font-bold font-sans text-sm">Advanced Software Engineering Frameworks</td>
+                                <td class="p-4 text-slate-500">3.00 Credits Unit</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-lg font-bold">A</span></td>
                             </tr>
-                            <tr class="hover:bg-blue-950/20 transition duration-100">
-                                <td class="p-4 font-bold text-pink-400">CS-418</td>
-                                <td class="p-4 font-sans text-white font-semibold">Distributed Cloud Databases Systems</td>
-                                <td class="p-4 text-blue-400/80">4.00 UN_VECTOR</td>
-                                <td class="p-4 text-center"><span class="px-3 py-1 bg-pink-950/60 border border-pink-500/40 text-pink-400 rounded font-bold text-sm">A-</span></td>
+                            <tr class="hover:bg-slate-50/60 transition">
+                                <td class="p-4 font-mono text-blue-600 font-semibold">CS-418</td>
+                                <td class="p-4 text-slate-900 font-bold font-sans text-sm">Distributed Cloud Databases Systems</td>
+                                <td class="p-4 text-slate-500">4.00 Credits Unit</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-lg font-bold">A-</span></td>
                             </tr>
-                            <tr class="hover:bg-blue-950/20 transition duration-100">
-                                <td class="p-4 font-bold text-pink-400">AI-490</td>
-                                <td class="p-4 font-sans text-white font-semibold">Neural Networks & Deep Architectures</td>
-                                <td class="p-4 text-blue-400/80">3.00 UN_VECTOR</td>
-                                <td class="p-4 text-center"><span class="px-3 py-1 bg-blue-950/60 border border-blue-800 text-blue-400 rounded font-bold text-sm">B+</span></td>
+                            <tr class="hover:bg-slate-50/60 transition">
+                                <td class="p-4 font-mono text-blue-600 font-semibold">AI-490</td>
+                                <td class="p-4 text-slate-900 font-bold font-sans text-sm">Neural Networks & Deep Architectures</td>
+                                <td class="p-4 text-slate-500">3.00 Credits Unit</td>
+                                <td class="p-4 text-center"><span class="px-2.5 py-1 bg-blue-50 border border-blue-200 text-blue-700 rounded-lg font-bold">B+</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="p-4 bg-slate-950 border border-blue-900 rounded-xl space-y-3 font-mono text-[11px]">
-                    <span class="text-slate-400 font-bold uppercase tracking-wider block">📊 MODULE GRADE VALUE SPECTRUM CHART DISPLAY</span>
-                    <div class="space-y-2">
+                <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3.5 text-xs font-medium">
+                    <span class="text-slate-400 font-bold uppercase tracking-wider block text-[10px]">📊 Visual Course Relative Mark Metrics Progress Chart</span>
+                    <div class="space-y-3">
                         <div>
-                            <div class="flex justify-between text-slate-500 mb-1"><span>SE-401 Frameworks Performance Score Curve</span><span class="text-pink-400 font-bold">96% Matrix Vector</span></div>
-                            <div class="w-full bg-blue-950/50 h-2 rounded border border-blue-900/60 overflow-hidden"><div class="bg-gradient-to-r from-indigo-500 to-pink-500 h-full rounded" style="width: 96%"></div></div>
+                            <div class="flex justify-between text-slate-600 mb-1"><span>SE-401 Frameworks Performance Distribution Curve</span><span class="text-blue-600 font-bold">96% Aggregate Scale</span></div>
+                            <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden"><div class="bg-blue-600 h-full rounded" style="width: 96%"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-slate-500 mb-1"><span>CS-418 Databases Infrastructure Shards</span><span class="text-blue-400 font-bold">92% Matrix Vector</span></div>
-                            <div class="w-full bg-blue-950/50 h-2 rounded border border-blue-900/60 overflow-hidden"><div class="bg-gradient-to-r from-indigo-500 to-blue-500 h-full rounded" style="width: 92%"></div></div>
+                            <div class="flex justify-between text-slate-600 mb-1"><span>CS-418 Distributed Cluster Infrastructure Data</span><span class="text-blue-600 font-bold">92% Aggregate Scale</span></div>
+                            <div class="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden"><div class="bg-blue-600 h-full rounded" style="width: 92%"></div></div>
                         </div>
                     </div>
                 </div>
@@ -340,42 +319,42 @@
         </div>
 
         <div id="finance-view" class="tab-view space-y-6">
-            <div class="cyber-panel p-6 rounded-xl space-y-6">
-                <div class="border-b border-blue-900/60 pb-4">
-                    <span class="text-[9px] font-mono font-bold text-emerald-400 bg-emerald-950/60 border border-emerald-900/60 px-2 py-0.5 rounded">FINANCIAL_LEDGER_SYNCHRONIZED</span>
-                    <h3 class="text-white font-bold heading-font text-lg uppercase tracking-wider mt-2">ACCOUNT_INVOICES_TRANSACTIONAL_REGISTRIES</h3>
-                    <p class="text-xs text-blue-400/80 font-mono mt-0.5">Automated validation tracking outstanding fees architectures.</p>
+            <div class="bg-white border border-slate-200 p-6 rounded-2xl shadow-xs space-y-6">
+                <div class="border-b border-slate-100 pb-4">
+                    <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-md uppercase">Verified Account Node</span>
+                    <h3 class="text-slate-900 font-bold display-font text-lg mt-2">Institutional Ledger & Invoice Balance Tracking</h3>
+                    <p class="text-xs text-slate-400">Review outstanding fee liabilities, semester registrations payments, and transaction history receipts.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono">
-                    <div class="p-5 bg-emerald-950/30 border border-emerald-500/30 text-emerald-400 rounded-xl space-y-1">
-                        <span class="text-[9px] text-emerald-500/80 font-bold uppercase block">NET_AGGREGATE_BALANCES_DUE</span>
-                        <h2 class="text-2xl font-bold tracking-tight">0.00 <span class="text-xs font-sans text-slate-500">PKR</span></h2>
-                        <span class="text-[9px] bg-emerald-900/60 border border-emerald-800/60 px-1.5 py-0.5 rounded font-bold block w-fit mt-2">ACCOUNT CURRENTLY CLEAR</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-medium">
+                    <div class="p-5 bg-emerald-50/50 border border-emerald-200 text-slate-700 rounded-xl space-y-1">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block">Current Balance Outstanding</span>
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900 display-font">0.00 <span class="text-xs text-slate-400 font-normal">PKR</span></h2>
+                        <span class="text-[9px] bg-emerald-100 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-bold inline-block mt-2">ALL ACCOUNTS CLEAR ✔</span>
                     </div>
-                    <div class="p-5 bg-slate-950 border border-blue-900 text-blue-400 rounded-xl space-y-1">
-                        <span class="text-[9px] text-slate-500 font-bold uppercase block">LAST_PAYMENT_TRANSMITTED</span>
-                        <h2 class="text-2xl font-bold tracking-tight text-white">142,500 <span class="text-xs font-sans text-slate-500">PKR</span></h2>
-                        <span class="text-[9px] text-slate-400 block mt-2">Timestamp Track: 2026-02-10</span>
+                    <div class="p-5 bg-slate-50 border border-slate-200 text-slate-700 rounded-xl space-y-1">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block">Last Payment Transmitted</span>
+                        <h2 class="text-2xl font-bold tracking-tight text-slate-900 display-font">142,500 <span class="text-xs text-slate-400 font-normal">PKR</span></h2>
+                        <span class="text-[10px] text-slate-400 block mt-2">Authenticated On: Feb 10, 2026</span>
                     </div>
-                    <div class="p-5 bg-slate-950 border border-blue-900 text-blue-400 rounded-xl space-y-1">
-                        <span class="text-[9px] text-slate-500 font-bold uppercase block">INVOICE_LEDGER_ROUTING_KEY</span>
-                        <h2 class="text-base font-bold tracking-tight text-pink-400 mt-2 truncate">HEX_KEY://F908122BC55A</h2>
-                        <span class="text-[9px] text-slate-500 block">Cryptographic Authentication System Verified</span>
+                    <div class="p-5 bg-slate-50 border border-slate-200 text-slate-700 rounded-xl space-y-1">
+                        <span class="text-[10px] text-slate-400 font-bold uppercase block">Core Invoice Reference Token</span>
+                        <h2 class="text-sm font-bold tracking-tight text-blue-600 font-mono mt-2.5 truncate">INV-2026-F908122BC</h2>
+                        <span class="text-[9px] text-slate-400 block mt-1">Official Bank Sync System Stamp Secured</span>
                     </div>
                 </div>
 
-                <div class="space-y-3 font-mono text-xs">
-                    <h4 class="text-white font-bold uppercase text-[11px] tracking-widest pl-0.5">TRANSACTIONAL_HISTORY_BLOCKS</h4>
-                    <div class="p-4 bg-slate-950/80 border border-blue-900/60 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:border-pink-500/40 transition">
+                <div class="space-y-2 text-xs font-medium">
+                    <h4 class="text-slate-400 font-bold uppercase text-[10px] tracking-wider pl-0.5">Historical Account Statements Receipts</h4>
+                    <div class="p-4 bg-white border border-slate-200 rounded-xl flex flex-col sm:flex-row justify-between sm:items-center gap-3 hover:bg-slate-50/50 transition shadow-2xs">
                         <div class="flex items-center gap-3">
-                            <span class="text-emerald-400 font-bold px-2 py-0.5 bg-emerald-950 border border-emerald-900 rounded text-[10px]">✔ SUCCESS</span>
+                            <span class="text-emerald-700 font-bold px-2 py-0.5 bg-emerald-50 border border-emerald-200 rounded text-[10px]">PAID RECEIPT</span>
                             <div>
-                                <h5 class="text-white font-semibold font-sans">Fall 2026 Semester Main Term Registration Fee Pack</h5>
-                                <span class="text-[10px] text-slate-500">Ref Blockchain Token Identifier: #TXN-908122</span>
+                                <h5 class="text-slate-900 font-bold font-sans">Fall Semester Term Regular Enrollment Academic Fee Pack</h5>
+                                <span class="text-[10px] text-slate-400 font-mono">Gateway Token Trace ID: #TXN-908122-PK</span>
                             </div>
                         </div>
-                        <span class="text-white font-bold text-right">PKR 142,500</span>
+                        <span class="text-slate-900 font-bold text-right text-sm font-mono">PKR 142,500</span>
                     </div>
                 </div>
             </div>
@@ -384,7 +363,7 @@
     </main>
 
     <script>
-        // High-Fidelity LocalStorage Persistent Dynamic Registries Databases
+        // Static High-Fidelity Data Repositories Initialization Schema
         const coreMockCoursesDatabaseSchema = [
             { id: "SE-401", title: "Advanced Software Engineering Frameworks", professor: "Dr. Asim Farooq", credit: 3, trackingIndex: 96, currentScoreAlpha: "A" },
             { id: "CS-418", title: "Distributed Cloud Databases Systems", professor: "Prof. Maria Qureshi", credit: 4, trackingIndex: 92, currentScoreAlpha: "A-" },
@@ -399,43 +378,41 @@
         if (!localStorage.getItem('aura_lms_courses_v5')) localStorage.setItem('aura_lms_courses_v5', JSON.stringify(coreMockCoursesDatabaseSchema));
         if (!localStorage.getItem('aura_lms_deliverables_v5')) localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(coreMockAssignmentsDatabaseSchema));
 
-        // CRITICAL CONTEXT SYSTEM FIX: High-Fidelity Explicit SPA Views Switch Router Engine Logic
+        // CONTEXT WORKSPACE FRAMEWORK FIX: Standard Multi-view Router Switching Logic
         function routeToView(targetViewId, clickedElementAnchor) {
-            // 1. Hide every existing module tab panel node inside viewport
+            // 1. Terminate visibility states layout records across all viewport cards
             const applicationViews = document.querySelectorAll('.tab-view');
             applicationViews.forEach(view => {
                 view.classList.remove('active-view');
             });
 
-            // 2. Open targeted standalone computing module view card container
+            // 2. Open targeted institutional core panel element inside window DOM layout
             const targetedDOMNodeElement = document.getElementById(targetViewId);
             if(targetedDOMNodeElement) {
                 targetedDOMNodeElement.classList.add('active-view');
             }
 
-            // 3. Clear styling focus highlights properties variables from other anchors lines
+            // 3. Clear focus highlight variables styles properties rules from adjacent nodes rows
             const navLinkButtonsDeck = document.querySelectorAll('.nav-link-btn');
             navLinkButtonsDeck.forEach(btn => {
-                btn.className = "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-blue-400 border border-transparent hover:border-blue-900 hover:bg-blue-950/30 hover:text-white transition-all duration-150 nav-link-btn";
-                const activeCircleDotPulse = btn.querySelector('.animate-pulse');
+                btn.className = "w-full flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg border border-transparent hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition text-left nav-link-btn";
+                const activeCircleDotPulse = btn.querySelector('.rounded-full');
                 if(activeCircleDotPulse) activeCircleDotPulse.remove();
             });
 
-            // 4. Highlight current activated navigational tracking option element node button
-            clickedElementAnchor.className = "w-full flex items-center justify-between px-4 py-3.5 rounded-xl bg-gradient-to-r from-blue-950 to-slate-900 border border-blue-500/40 text-white shadow-md nav-link-btn";
+            // 4. Overwrite activated selected navigation channel button styles explicitly
+            clickedElementAnchor.className = "w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg bg-blue-50/80 border border-blue-100/50 text-blue-700 font-semibold nav-link-btn text-left";
             
-            // Check label contents and append precise icon colored indicators highlights vectors
-            const containsDashboardTextTokenStr = targetViewId.includes('dashboard');
-            const visualPulseDotElementToken = document.createElement('span');
-            visualPulseDotElementToken.className = `w-1.5 h-1.5 rounded-full ${containsDashboardTextTokenStr ? 'bg-pink-500' : 'bg-blue-400'} animate-pulse`;
-            clickedElementAnchor.appendChild(visualPulseDotElementToken);
+            const circlePulseIndicatorToken = document.createElement('span');
+            circlePulseIndicatorToken.className = "w-1.5 h-1.5 rounded-full bg-blue-600";
+            clickedElementAnchor.appendChild(circlePulseIndicatorToken);
 
-            // 5. Update Cockpit Tracking Variable HUD String headers data
+            // 5. Sync Header Greeter HUD String values names indicators tags
             let routingTokenStringClean = targetViewId.replace('-view', '').toUpperCase();
-            document.getElementById('hudScopeIndicator').innerText = `LOC_MATRIX // MODULE_${routingTokenStringClean}_ROUTER`;
+            document.getElementById('hudScopeIndicator').innerText = `WORKSPACE // ENGINE_ROUTER // ${routingTokenStringClean}_NODE`;
         }
 
-        // Live DOM Tree Storage Syncer Core Loop Generator Engine Component
+        // Persistent Loop Storage Syncer Pipeline Data Modules Engine Component
         function syncLMSDataMatrixLayers() {
             const coursesTargetBoxNode = document.getElementById('studentCourseRowsContainer');
             const assignmentsTargetBoxNode = document.getElementById('studentAssignmentsContainer');
@@ -448,45 +425,45 @@
             let coursesArray = JSON.parse(localStorage.getItem('aura_lms_courses_v5'));
             let deliverablesArray = JSON.parse(localStorage.getItem('aura_lms_deliverables_v5'));
 
-            document.getElementById('coursesCounterHUD').innerText = `${coursesArray.length} COMPUTE NODES RUNNING`;
+            document.getElementById('coursesCounterHUD').innerText = `${coursesArray.length} Academic Courses Connected`;
 
             coursesArray.forEach(node => {
                 const elementRow = document.createElement('div');
-                elementRow.className = "p-5 bg-slate-950/40 border border-blue-900/60 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-pink-500/40 transition duration-150 group shadow-sm";
+                elementRow.className = "p-4 bg-slate-50/60 border border-slate-200/80 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-slate-300 transition duration-150 group shadow-2xs";
                 elementRow.innerHTML = `
-                    <div class="space-y-1 font-mono">
-                        <span class="text-[9px] font-bold px-2.5 py-0.5 bg-blue-950 border border-blue-800 text-blue-400 rounded uppercase tracking-wider">${node.id}</span>
-                        <h4 class="text-white font-bold font-sans text-base mt-2 group-hover:text-pink-400 transition-all duration-150">${node.title}</h4>
-                        <p class="text-xs text-slate-400 font-medium font-sans">Academic Lead: ${node.professor} • (${node.credit} Scale Matrix Parameters)</p>
-                        <div class="w-48 bg-blue-950 h-1.5 rounded-full mt-3 overflow-hidden border border-blue-900/40">
-                            <div class="bg-gradient-to-r from-blue-500 to-pink-500 h-full rounded transition-all duration-500" style="width: ${node.trackingIndex}%"></div>
+                    <div class="space-y-1 font-sans">
+                        <span class="text-[9px] font-mono font-bold px-2 py-0.5 bg-blue-50 border border-blue-100 text-blue-700 rounded uppercase tracking-wider">${node.id}</span>
+                        <h4 class="text-slate-900 font-bold text-sm mt-1.5 group-hover:text-blue-600 transition-all">${node.title}</h4>
+                        <p class="text-xs text-slate-400 font-medium">Faculty Supervisor: ${node.professor} • (${node.credit} Scale Credits Weight)</p>
+                        <div class="w-44 bg-slate-200 h-1 rounded-full mt-2 overflow-hidden">
+                            <div class="bg-blue-600 h-full rounded transition-all duration-300" style="width: ${node.trackingIndex}%"></div>
                         </div>
                     </div>
-                    <div class="flex items-center gap-5 text-xs font-mono shrink-0 w-full sm:w-auto justify-between sm:justify-start border-t border-blue-950 sm:border-0 pt-3 sm:pt-0">
+                    <div class="flex items-center gap-5 text-xs font-medium shrink-0 w-full sm:w-auto justify-between sm:justify-start border-t border-slate-100 sm:border-0 pt-3 sm:pt-0">
                         <div class="text-left sm:text-right">
-                            <span class="text-[9px] text-slate-500 uppercase tracking-wider block">Attendance Gate</span>
-                            <span class="text-white font-black text-sm">${node.trackingIndex}% Matrix</span>
+                            <span class="text-[9px] text-slate-400 uppercase tracking-wider block">Attendance Record</span>
+                            <span class="text-slate-900 font-bold text-xs font-mono">${node.trackingIndex}% Verified</span>
                         </div>
-                        <div class="bg-slate-950 border border-blue-900 px-4 py-2 rounded-lg text-center min-w-[65px]">
-                            <span class="text-[9px] text-slate-500 uppercase tracking-wider block">Score Index</span>
-                            <span class="text-pink-400 font-bold text-base">${node.currentScoreAlpha}</span>
+                        <div class="bg-white border border-slate-200 px-3.5 py-2 rounded-lg text-center min-w-[55px] shadow-2xs">
+                            <span class="text-[9px] text-slate-400 uppercase tracking-wider block">Mid Term</span>
+                            <span class="text-blue-600 font-bold text-sm font-mono">${node.currentScoreAlpha}</span>
                         </div>
                     </div>`;
                 coursesTargetBoxNode.appendChild(elementRow);
             });
 
             if (deliverablesArray.length === 0) {
-                assignmentsTargetBoxNode.innerHTML = `<div class="text-center py-8 text-slate-500 text-xs border border-dashed border-blue-900 bg-slate-950/40 rounded-xl font-mono">Queue clear. No vectors waiting.</div>`;
+                assignmentsTargetBoxNode.innerHTML = `<div class="text-center py-8 text-slate-400 text-xs border border-dashed border-slate-200 bg-slate-50/50 rounded-xl font-medium">No tasks currently pending review indices.</div>`;
             } else {
                 deliverablesArray.forEach(item => {
                     const singleBlockCardNode = document.createElement('div');
-                    singleBlockCardNode.className = "p-4 bg-slate-950/60 border border-blue-900/50 rounded-xl space-y-3 font-mono text-xs";
+                    singleBlockCardNode.className = "p-3.5 bg-slate-50/50 border border-slate-200/80 rounded-xl flex justify-between items-center gap-3 text-xs font-medium group";
                     singleBlockCardNode.innerHTML = `
-                        <div>
-                            <span class="text-[9px] text-blue-400 font-bold uppercase block truncate">${item.course}</span>
-                            <h4 class="text-xs font-bold text-white mt-1 leading-normal font-sans break-words">${item.title}</h4>
+                        <div class="min-w-0 flex-1">
+                            <span class="text-[9px] text-slate-400 font-bold block truncate uppercase">${item.course}</span>
+                            <h4 class="text-xs font-bold text-slate-800 mt-0.5 truncate font-sans">${item.title}</h4>
                         </div>
-                        <button onclick="triggerPayloadDocumentSubmission(${item.uid})" class="w-full py-2 bg-blue-950 hover:bg-gradient-to-r hover:from-pink-600 hover:to-indigo-600 text-blue-400 hover:text-white rounded-lg font-bold text-[10px] uppercase tracking-widest border border-blue-800 hover:border-pink-500 transition duration-150">TRANSMIT PACKET 📤</button>`;
+                        <button onclick="triggerPayloadDocumentSubmission(${item.uid})" class="px-3 py-2 bg-white hover:bg-blue-600 text-blue-600 hover:text-white border border-slate-200 hover:border-blue-600 rounded-lg font-semibold tracking-wide text-[10px] shadow-2xs transition shrink-0">Upload 📤</button>`;
                     assignmentsTargetBoxNode.appendChild(singleBlockCardNode);
                 });
             }
@@ -495,10 +472,10 @@
         function triggerPayloadDocumentSubmission(uid) {
             let dataList = JSON.parse(localStorage.getItem('aura_lms_deliverables_v5'));
             let selectedNodeItem = dataList.find(x => x.uid === uid);
-            if (confirm(`Authorize transmission of structural files packets for: "${selectedNodeItem.title}"?`)) {
+            if (confirm(`Authorize file upload transmission for task descriptor: "${selectedNodeItem.title}"?`)) {
                 dataList = dataList.filter(x => x.uid !== uid);
                 localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(dataList));
-                injectSystemAuditRegistryLog(`Student node dispatched data cluster file block structure for: "${selectedNodeItem.title.substring(0,20)}..."`, "emerald");
+                injectSystemAuditRegistryLog(`Student account submitted solution matrix document payload block for: "${selectedNodeItem.title.substring(0,25)}..."`, "emerald");
                 syncLMSDataMatrixLayers();
             }
         }
@@ -510,8 +487,8 @@
             const targetedHUDOutputBox = document.getElementById('predictorResultBox');
             targetedHUDOutputBox.classList.remove('hidden');
             targetedHUDOutputBox.innerHTML = `
-                <span class="block text-[9px] text-slate-400 uppercase tracking-wider font-bold mb-1">PROJECTION RADAR SYSTEM RE_CALCULATION RESULT:</span>
-                Estimated Forecast Shards Spectrum Shift: <span class="font-bold underline text-white text-xs">${compoundedOutputResult.toFixed(3)} CGPA UNITS</span> over baseline configuration registries indexes.
+                <span class="block text-[9px] text-slate-400 uppercase font-bold tracking-wider mb-0.5">Simulation Result:</span>
+                Calculated Projected Target Shift: <span class="font-bold text-blue-600 underline">${compoundedOutputResult.toFixed(3)} CGPA UNITS</span> across active registration arrays.
             `;
         }
 
@@ -527,23 +504,23 @@
             dataList.unshift({ uid, course, title, scoreMax, targetTimestamp });
             localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(dataList));
 
-            injectSystemAuditRegistryLog(`Faculty core administration deck issued task payload blueprint: [${title.substring(0,20)}...]`, "blue");
+            injectSystemAuditRegistryLog(`Faculty supervisor issued assignment broadcast notification payload: [${title.substring(0,25)}...]`, "blue");
             document.getElementById('fInpTitle').value = '';
             document.getElementById('fInpMarks').value = '';
             syncLMSDataMatrixLayers();
-            alert("Success! Core task blueprint injected into active systems registry arrays.");
+            alert("Success! Assignment descriptor row data broadcasted successfully.");
         });
 
         function injectSystemAuditRegistryLog(logMessageText, colorStateThemeToken) {
             const operationalLogsBoxNode = document.getElementById('centralSystemAuditLogsWrapper');
             if(!operationalLogsBoxNode) return;
             const currentSystemTimeToken = new Date().toLocaleTimeString();
-            let computationalStyles = "text-blue-400 bg-blue-950/40 border-blue-900/60";
-            if (colorStateThemeToken === "emerald") computationalStyles = "text-emerald-400 bg-emerald-950/30 border-emerald-900/40";
+            let computationalStyles = "text-slate-600 bg-slate-50 border-slate-200";
+            if (colorStateThemeToken === "emerald") computationalStyles = "text-emerald-700 bg-emerald-50 border-emerald-200";
 
             const logElementRowNode = document.createElement('div');
-            logElementRowNode.className = `p-3 rounded-lg border flex items-start gap-2 border-l-2 border-l-pink-500 shadow-sm transition-all duration-150 ${computationalStyles}`;
-            logElementRowNode.innerHTML = `<span class="opacity-40 font-bold shrink-0">[${currentSystemTimeToken}]</span><span class="font-medium tracking-normal">${logMessageText}</span>`;
+            logElementRowNode.className = `p-3 rounded-xl border flex items-start gap-2 border-l-2 border-l-blue-600 shadow-2xs transition-all ${computationalStyles}`;
+            logElementRowNode.innerHTML = `<span class="opacity-50 font-bold shrink-0">[${currentSystemTimeToken}]</span><span class="font-medium tracking-normal">${logMessageText}</span>`;
             operationalLogsBoxNode.insertBefore(logElementRowNode, operationalLogsBoxNode.firstChild);
             if (operationalLogsBoxNode.children.length > 5) operationalLogsBoxNode.removeChild(operationalLogsBoxNode.lastChild);
         }
@@ -556,31 +533,31 @@
             const facultyGridArea = document.getElementById('facultyOperationsGrid');
 
             if (targetIdentityMode === 'student') {
-                studentAnchorBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md";
-                facultyAnchorBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-200 text-blue-400 hover:text-white";
+                studentAnchorBtn.className = "flex-1 py-1.5 rounded-lg text-center bg-white text-slate-900 shadow-xs border border-slate-200/40 font-semibold";
+                facultyAnchorBtn.className = "flex-1 py-1.5 rounded-lg text-center text-slate-500 hover:text-slate-800 transition font-medium";
                 if(studentMetricsDeck) studentMetricsDeck.classList.remove('hidden');
                 if(studentGridArea) studentGridArea.classList.remove('hidden');
                 if(facultyGridArea) facultyGridArea.classList.add('hidden');
 
-                document.getElementById('hudMainGreeting').innerText = "SYSTEM_INITIALIZED // USER_DASHBOARD";
-                document.getElementById('profileCardName').innerText = "ROHMA NOOR";
-                document.getElementById('profileCardId').innerText = "UID://2026-SE-442";
+                document.getElementById('hudMainGreeting').innerText = "Student Performance Analytics Terminal";
+                document.getElementById('profileCardName').innerText = "Rohma Noor";
+                document.getElementById('profileCardId').innerText = "Reg ID: 2026-SE-442";
             } else {
-                facultyAnchorBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-200 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md";
-                studentAnchorBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-200 text-blue-400 hover:text-white";
+                facultyAnchorBtn.className = "flex-1 py-1.5 rounded-lg text-center bg-white text-slate-900 shadow-xs border border-slate-200/40 font-semibold";
+                studentAnchorBtn.className = "flex-1 py-1.5 rounded-lg text-center text-slate-500 hover:text-slate-800 transition font-medium";
                 if(studentMetricsDeck) studentMetricsDeck.classList.add('hidden');
                 if(studentGridArea) studentGridArea.classList.add('hidden');
                 if(facultyGridArea) facultyGridArea.classList.remove('hidden');
 
-                document.getElementById('hudMainGreeting').innerText = "ADMINISTRATIVE_CONTROL_NODE // CORE_DECK";
-                document.getElementById('profileCardName').innerText = "DR. ASIM FAROOQ";
-                document.getElementById('profileCardId').innerText = "ROLE://DEPT_CHAIR";
+                document.getElementById('hudMainGreeting').innerText = "Faculty Administration Control Portal Desk Core";
+                document.getElementById('profileCardName').innerText = "Dr. Asim Farooq";
+                document.getElementById('profileCardId').innerText = "Role: Department Chair Senior";
             }
         }
 
         window.onload = function() {
-            document.getElementById('hudMainGreeting').innerText = "SYSTEM_INITIALIZED // USER_DASHBOARD";
-            injectSystemAuditRegistryLog("Rohma Core hyper-secure compute terminal operational matrix loaded.", "blue");
+            document.getElementById('hudMainGreeting').innerText = "Student Performance Analytics Terminal";
+            injectSystemAuditRegistryLog("Secure local LMS portal environment initialized successfully.", "blue");
             syncLMSDataMatrixLayers();
         }
     </script>
