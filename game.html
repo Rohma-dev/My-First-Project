@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 20px;
+        }
+        .game-box {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            color: #11998e;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+        }
+        button {
+            background: #11998e;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #0f857d;
+        }
+        #message {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="game-box">
+        <h1>Guess The Number</h1>
+        <p>Maine 1 se 50 ke beech ek number socha hai. Andaza lagayein!</p>
+        <input type="number" id="guessInput" min="1" max="50">
+        <button onclick="checkGuess()">Check</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        let randomNumber = Math.floor(Math.random() * 50) + 1;
+        let message = document.getElementById('message');
+
+        function checkGuess() {
+            let userInput = document.getElementById('guessInput').value;
+            
+            if(userInput == randomNumber) {
+                message.style.color = "green";
+                message.innerHTML = "🎉 Mubarak ho! Aapne sahi number pehchan liya!";
+            } else if (userInput > randomNumber) {
+                message.style.color = "red";
+                message.innerHTML = "📈 Bohat bada hai! Chota number try karein.";
+            } else if (userInput < randomNumber) {
+                message.style.color = "red";
+                message.innerHTML = "📉 Bohat chota hai! Bada number try karein.";
+            }
+        }
+    </script>
+</body>
+</html>
