@@ -3,119 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura LMS | High-Tier Enterprise Academic Matrix</title>
+    <title>Aura LMS | High-Tier Enterprise Academic Matrix (Light Edition)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #03050c; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
         .font-mono { font-family: 'JetBrains Mono', sans-serif; }
-        /* Professional Webkit Scrollbars Custom Layer */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #060913; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 20px; }
-        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+        /* Clean Custom Scrollbar for Light Theme */
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 20px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
     </style>
 </head>
-<body class="text-slate-300 min-h-screen flex flex-col xl:flex-row overflow-x-hidden antialiased selection:bg-sky-500/30 selection:text-sky-300">
+<body class="text-slate-700 min-h-screen flex flex-col xl:flex-row overflow-x-hidden antialiased selection:bg-sky-500/20 selection:text-sky-900">
 
-    <div class="fixed inset-0 bg-[linear-gradient(to_right,#0c1020_1px,transparent_1px),linear-gradient(to_bottom,#0c1020_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-40 pointer-events-none z-0"></div>
-    <div class="fixed top-[-20%] left-[-10%] w-[700px] h-[700px] bg-sky-500/5 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[140px] pointer-events-none z-0"></div>
-
-    <aside class="w-full xl:w-72 bg-[#060913]/90 border-b xl:border-b-0 xl:border-r border-slate-900 flex flex-col justify-between p-6 z-30 relative backdrop-blur-xl shrink-0">
+    <aside class="w-full xl:w-72 bg-white border-b xl:border-b-0 xl:border-r border-slate-200 flex flex-col justify-between p-6 z-30 relative shrink-0 shadow-sm">
         <div class="space-y-8">
-            <div class="flex items-center gap-3 border-b border-slate-900 pb-5">
-                <div class="w-10 h-10 bg-gradient-to-tr from-sky-400 via-blue-500 to-indigo-600 rounded-xl flex items-center justify-center font-extrabold text-slate-950 text-xl shadow-[0_0_25px_rgba(56,189,248,0.25)]">
+            <div class="flex items-center gap-3 border-b border-slate-100 pb-5">
+                <div class="w-10 h-10 bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-600 rounded-xl flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-blue-500/20">
                     Α
                 </div>
                 <div>
-                    <h2 class="text-white font-extrabold text-base tracking-wider leading-none font-mono">AURA CORE</h2>
-                    <span class="text-[10px] text-slate-500 tracking-widest uppercase block mt-1">LMS Enterprise v4.2</span>
+                    <h2 class="text-slate-900 font-extrabold text-base tracking-wider leading-none font-mono">AURA CORE</h2>
+                    <span class="text-[10px] text-slate-400 tracking-widest uppercase block mt-1 font-semibold">LMS Enterprise v4.2</span>
                 </div>
             </div>
 
-            <div class="space-y-1.5">
-                <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block pl-1">Operational Context</span>
-                <div class="bg-[#020308] border border-slate-900 p-1.5 rounded-xl flex gap-1 text-xs font-semibold">
-                    <button onclick="switchContext('student')" id="contextStudentBtn" class="flex-1 py-2 rounded-lg text-center transition duration-150 bg-sky-500 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.2)]">Student</button>
-                    <button onclick="switchContext('faculty')" id="contextFacultyBtn" class="flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-300">Faculty</button>
+            <div class="space-y-2">
+                <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase block pl-1">Operational Context</span>
+                <div class="bg-slate-100/80 border border-slate-200 p-1 rounded-xl flex gap-1 text-xs font-semibold">
+                    <button onclick="switchContext('student')" id="contextStudentBtn" class="flex-1 py-2 rounded-lg text-center transition duration-150 bg-white text-sky-700 shadow-sm border border-slate-200/50 font-bold">Student</button>
+                    <button onclick="switchContext('faculty')" id="contextFacultyBtn" class="flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-800">Faculty</button>
                 </div>
             </div>
 
             <div class="space-y-1">
-                <span class="text-[10px] font-bold tracking-widest text-slate-500 uppercase block pl-1 mb-2">Main Core Modules</span>
+                <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase block pl-1 mb-2">Main Core Modules</span>
                 <nav class="space-y-1 text-sm font-semibold">
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-sky-500/10 text-sky-400 border border-sky-500/10 shadow-inner group">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-sky-50 text-sky-700 border border-sky-100 shadow-xs group">
                         <span class="text-base group-hover:scale-110 transition duration-150">💎</span> Central Dashboard Hub
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/40 hover:text-slate-300 transition group">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition group">
                         <span class="text-base group-hover:scale-110 transition duration-150">📚</span> Academic Curriculum
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/40 hover:text-slate-300 transition group">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition group">
                         <span class="text-base group-hover:scale-110 transition duration-150">📅</span> Examination Schedule
                     </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-900/40 hover:text-slate-300 transition group">
+                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:bg-slate-50 hover:text-slate-900 transition group">
                         <span class="text-base group-hover:scale-110 transition duration-150">💳</span> Finance / Fee Ledger
                     </a>
                 </nav>
             </div>
         </div>
 
-        <div class="border-t border-slate-900 pt-5 mt-8 flex items-center gap-3">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-sm font-mono shadow-inner">
+        <div class="border-t border-slate-100 pt-5 mt-8 flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center text-white font-bold text-sm font-mono shadow-md">
                 RN
             </div>
             <div class="min-w-0 flex-1">
-                <h4 id="panelProfileName" class="text-white font-bold text-sm truncate">Rohma Noor</h4>
-                <p id="panelProfileId" class="text-[10px] text-slate-500 font-mono tracking-tight mt-0.5 truncate">UID: 2026-SE-9912</p>
+                <h4 id="panelProfileName" class="text-slate-900 font-bold text-sm truncate">Rohma Noor</h4>
+                <p id="panelProfileId" class="text-[10px] text-slate-400 font-mono tracking-tight mt-0.5 truncate">UID: 2026-SE-9912</p>
             </div>
         </div>
     </aside>
 
     <main class="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto z-10 relative flex flex-col">
         
-        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#060913]/40 border border-slate-900 p-5 rounded-2xl backdrop-blur-md">
+        <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white border border-slate-200 p-5 rounded-2xl shadow-xs">
             <div>
-                <h1 id="hudMainGreeting" class="text-xl md:text-2xl font-black text-white tracking-tight">System Core Matrix Enabled</h1>
-                <p class="text-xs text-slate-500 font-medium mt-0.5">Session Scope: Academic Spring Semester 2026 • Campus Main Network Cloud</p>
+                <h1 id="hudMainGreeting" class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">System Core Matrix Enabled</h1>
+                <p class="text-xs text-slate-400 font-medium mt-0.5">Session Scope: Academic Spring Semester 2026 • Campus Main Network Cloud</p>
             </div>
-            <div class="flex items-center gap-2.5 bg-emerald-500/5 text-emerald-400 border border-emerald-500/10 px-4 py-2 rounded-xl text-xs font-bold font-mono tracking-wide">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> PORTAL LINK ACTIVE
+            <div class="flex items-center gap-2.5 bg-emerald-50 text-emerald-700 border border-emerald-100 px-4 py-2 rounded-xl text-xs font-bold font-mono tracking-wide shadow-2xs">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> PORTAL LINK ACTIVE
             </div>
         </header>
 
         <div id="studentConsoleWrapper" class="space-y-6 block">
             <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div class="bg-[#060913]/30 border border-slate-900 p-4 rounded-xl backdrop-blur-2xs">
-                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Cumulative CGPA</span>
-                    <h2 class="text-2xl font-black text-white mt-1 font-mono tracking-tight">3.91 <span class="text-xs text-slate-600">/ 4.00</span></h2>
+                <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-2xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Cumulative CGPA</span>
+                    <h2 class="text-2xl font-black text-slate-900 mt-1 font-mono tracking-tight">3.91 <span class="text-xs text-slate-400">/ 4.00</span></h2>
                 </div>
-                <div class="bg-[#060913]/30 border border-slate-900 p-4 rounded-xl backdrop-blur-2xs">
-                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Registered Credits</span>
-                    <h2 class="text-2xl font-black text-white mt-1 font-mono tracking-tight">18 <span class="text-xs text-slate-600">Cr. Hours</span></h2>
+                <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-2xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Registered Credits</span>
+                    <h2 class="text-2xl font-black text-slate-900 mt-1 font-mono tracking-tight">18 <span class="text-xs text-slate-400">Cr. Hours</span></h2>
                 </div>
-                <div class="bg-[#060913]/30 border border-slate-900 p-4 rounded-xl backdrop-blur-2xs border-l-2 border-l-sky-500/40">
-                    <span class="text-[10px] font-bold text-sky-400 uppercase tracking-wider block">Attendance Index</span>
-                    <h2 class="text-2xl font-black text-sky-400 mt-1 font-mono tracking-tight">94.8%</h2>
+                <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-2xs border-l-2 border-l-sky-500">
+                    <span class="text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Attendance Index</span>
+                    <h2 class="text-2xl font-black text-sky-600 mt-1 font-mono tracking-tight">94.8%</h2>
                 </div>
-                <div class="bg-[#060913]/30 border border-slate-900 p-4 rounded-xl backdrop-blur-2xs">
-                    <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">Outstanding Invoice</span>
-                    <h2 class="text-2xl font-black text-emerald-400 mt-1 font-mono tracking-tight">Rs. 0.00</h2>
+                <div class="bg-white border border-slate-200 p-4 rounded-xl shadow-2xs">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Outstanding Invoice</span>
+                    <h2 class="text-2xl font-black text-emerald-600 mt-1 font-mono tracking-tight">Rs. 0.00</h2>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div class="xl:col-span-2 bg-[#060913]/40 border border-slate-900 p-5 rounded-2xl space-y-4 shadow-2xl">
-                    <div class="border-b border-slate-900 pb-3 flex items-center justify-between">
-                        <h3 class="text-white font-extrabold text-sm uppercase tracking-wider font-mono">Curriculum Module Tracks</h3>
-                        <span id="coursesCounterHUD" class="text-[10px] bg-slate-900 border border-slate-800 font-mono px-2 py-0.5 rounded text-sky-400">3 Nodes Loaded</span>
+                <div class="xl:col-span-2 bg-white border border-slate-200 p-5 rounded-2xl space-y-4 shadow-sm">
+                    <div class="border-b border-slate-100 pb-3 flex items-center justify-between">
+                        <h3 class="text-slate-900 font-extrabold text-sm uppercase tracking-wider font-mono">Curriculum Module Tracks</h3>
+                        <span id="coursesCounterHUD" class="text-[10px] bg-slate-50 border border-slate-200 font-mono px-2 py-0.5 rounded text-sky-700 font-bold">3 Nodes Loaded</span>
                     </div>
                     <div id="studentCourseStreamContainer" class="space-y-3">
                         </div>
                 </div>
 
-                <div class="bg-[#060913]/40 border border-slate-900 p-5 rounded-2xl space-y-4 shadow-2xl">
-                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider border-b border-slate-900 pb-3 font-mono">Deliverables Queue</h3>
+                <div class="bg-white border border-slate-200 p-5 rounded-2xl space-y-4 shadow-sm">
+                    <h3 class="text-slate-900 font-extrabold text-sm uppercase tracking-wider border-b border-slate-100 pb-3 font-mono">Deliverables Queue</h3>
                     <div id="studentAssignmentSubmissionContainer" class="space-y-3 max-h-[500px] overflow-y-auto pr-1">
                         </div>
                 </div>
@@ -124,47 +120,47 @@
 
         <div id="facultyConsoleWrapper" class="space-y-6 hidden">
             <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
-                <div class="bg-[#060913]/50 border border-slate-900 p-6 rounded-2xl space-y-4 shadow-2xl backdrop-blur-sm h-fit">
-                    <h3 class="text-white font-extrabold text-sm uppercase tracking-wider border-b border-slate-900 pb-3 font-mono">Vector Dispatch Unit</h3>
+                <div class="bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-sm h-fit">
+                    <h3 class="text-slate-900 font-extrabold text-sm uppercase tracking-wider border-b border-slate-100 pb-3 font-mono">Vector Dispatch Unit</h3>
                     <form id="facultyDispatchForm" class="space-y-4 text-xs">
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Target Track Vector</label>
-                            <select id="fInpCourse" class="w-full bg-[#03050c] border border-slate-900 rounded-xl px-3 py-3 text-white font-medium focus:outline-none focus:border-sky-500 transition">
-                                <option value="Advanced Software Engineering Engineering">Advanced Software Engineering Frameworks</option>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Target Track Vector</label>
+                            <select id="fInpCourse" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-slate-800 font-medium focus:outline-none focus:border-sky-500 transition">
+                                <option value="Advanced Software Engineering Frameworks">Advanced Software Engineering Frameworks</option>
                                 <option value="Distributed Cloud Databases">Distributed Cloud Databases</option>
                                 <option value="Neural Networks Architectures">Neural Networks Architectures</option>
                             </select>
                         </div>
                         <div class="space-y-1.5">
-                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Task Objective Title</label>
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Task Objective Title</label>
                             <input type="text" id="fInpTitle" required placeholder="Ex: Map Multi-Threaded Controller Domains" 
-                                   class="w-full bg-[#03050c] border border-slate-900 rounded-xl px-3 py-3 text-white focus:outline-none focus:border-sky-500 transition">
+                                   class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-3 text-slate-800 focus:outline-none focus:border-sky-500 transition">
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="space-y-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Assigned Score</label>
-                                <input type="number" id="fInpMarks" required placeholder="25" class="w-full bg-[#03050c] border border-slate-900 rounded-xl px-3 py-2.5 text-white focus:outline-none focus:border-sky-500">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Assigned Score</label>
+                                <input type="number" id="fInpMarks" required placeholder="25" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-800 focus:outline-none focus:border-sky-500">
                             </div>
                             <div class="space-y-1.5">
-                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-500">Timeline Bound</label>
-                                <input type="date" id="fInpDate" required class="w-full bg-[#03050c] border border-slate-900 rounded-xl px-3 py-2.5 text-slate-400 focus:outline-none focus:border-sky-500">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Timeline Bound</label>
+                                <input type="date" id="fInpDate" required class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-slate-500 focus:outline-none focus:border-sky-500">
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-sky-400 via-blue-500 to-indigo-600 text-slate-950 font-black py-3.5 rounded-xl uppercase tracking-widest text-[11px] hover:shadow-[0_0_25px_rgba(56,189,248,0.25)] transition duration-200">
+                        <button type="submit" class="w-full bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-600 text-white font-extrabold py-3.5 rounded-xl uppercase tracking-widest text-[11px] shadow-md hover:shadow-blue-500/20 transition duration-200">
                             COMPILE & DISPATCH TASK +
                         </button>
                     </form>
                 </div>
 
-                <div class="xl:col-span-2 bg-[#060913]/40 border border-slate-900 p-6 rounded-2xl space-y-4 shadow-2xl flex flex-col justify-between min-h-[500px]">
+                <div class="xl:col-span-2 bg-white border border-slate-200 p-6 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between min-h-[500px]">
                     <div class="space-y-4">
-                        <h3 class="text-white font-extrabold text-sm uppercase tracking-wider border-b border-slate-900 pb-3 font-mono">Central Registry Activity Stream</h3>
-                        <div id="centralSystemAuditLogsWrapper" class="space-y-3 font-mono text-xs text-slate-400 leading-relaxed">
+                        <h3 class="text-slate-900 font-extrabold text-sm uppercase tracking-wider border-b border-slate-100 pb-3 font-mono">Central Registry Activity Stream</h3>
+                        <div id="centralSystemAuditLogsWrapper" class="space-y-3 font-mono text-xs text-slate-600 leading-relaxed">
                             </div>
                     </div>
-                    <div class="border-t border-slate-900 pt-4 flex justify-between items-center">
-                        <p class="text-[11px] text-slate-600 font-mono">System Cache Engine Diagnostics: Stable State</p>
-                        <button onclick="hardFlushLMSDataCache()" class="text-[10px] text-rose-500 hover:text-rose-400 font-bold tracking-wider font-mono uppercase bg-rose-500/5 border border-rose-500/10 px-3 py-1.5 rounded-lg hover:bg-rose-500/10 transition">
+                    <div class="border-t border-slate-100 pt-4 flex justify-between items-center">
+                        <p class="text-[11px] text-slate-400 font-mono">System Cache Engine Diagnostics: Stable State</p>
+                        <button onclick="hardFlushLMSDataCache()" class="text-[10px] text-rose-600 hover:text-rose-700 font-bold tracking-wider font-mono uppercase bg-rose-50 border border-rose-200 px-3 py-1.5 rounded-lg hover:bg-rose-100 transition">
                             Flush Core Storage Memory ⚠️
                         </button>
                     </div>
@@ -211,21 +207,21 @@
             // 1. Loop Map and Re-Render Active Courses Blocks
             coursesArray.forEach(node => {
                 const row = document.createElement('div');
-                row.className = "p-5 bg-[#060913]/30 border border-slate-900/80 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-slate-800 transition duration-150 group";
+                row.className = "p-5 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-slate-300 transition duration-150 group shadow-2xs";
                 row.innerHTML = `
                     <div class="space-y-1">
-                        <span class="text-[10px] font-mono font-bold px-2 py-0.5 bg-slate-900 border border-slate-800 text-sky-400 rounded uppercase tracking-wider">${node.id}</span>
-                        <h4 class="text-white font-bold text-base mt-1.5 group-hover:text-sky-400 transition duration-150">${node.title}</h4>
-                        <p class="text-xs text-slate-500 font-medium">Lead Faculty Chair: ${node.professor} • (${node.credit} Credit Units Metrics)</p>
+                        <span class="text-[10px] font-mono font-bold px-2 py-0.5 bg-sky-50 border border-sky-100 text-sky-700 rounded uppercase tracking-wider">${node.id}</span>
+                        <h4 class="text-slate-900 font-bold text-base mt-1.5 group-hover:text-sky-700 transition duration-150">${node.title}</h4>
+                        <p class="text-xs text-slate-400 font-medium">Lead Faculty Chair: ${node.professor} • (${node.credit} Credit Units Metrics)</p>
                     </div>
-                    <div class="flex items-center gap-5 text-xs font-semibold shrink-0 w-full sm:w-auto justify-between sm:justify-start border-t border-slate-900 sm:border-0 pt-3 sm:pt-0">
+                    <div class="flex items-center gap-5 text-xs font-semibold shrink-0 w-full sm:w-auto justify-between sm:justify-start border-t border-slate-200 sm:border-0 pt-3 sm:pt-0">
                         <div class="text-left sm:text-right">
-                            <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block">Attendance Profile</span>
-                            <span class="text-slate-200 font-mono font-bold">${node.trackingIndex}% Verified</span>
+                            <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Attendance Profile</span>
+                            <span class="text-slate-700 font-mono font-bold">${node.trackingIndex}% Verified</span>
                         </div>
-                        <div class="bg-[#020308] border border-slate-900 px-3.5 py-2 rounded-xl text-center min-w-[50px] shadow-inner">
-                            <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block">Mid-Grade</span>
-                            <span class="text-sky-400 font-black font-mono text-base">${node.currentScoreAlpha}</span>
+                        <div class="bg-white border border-slate-200 px-3.5 py-2 rounded-xl text-center min-w-[50px] shadow-xs">
+                            <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Mid-Grade</span>
+                            <span class="text-sky-600 font-black font-mono text-base">${node.currentScoreAlpha}</span>
                         </div>
                     </div>
                 `;
@@ -235,23 +231,23 @@
             // 2. Loop Map and Re-Render Deliverables Submissions Cards Panel
             if (deliverablesArray.length === 0) {
                 assignTargetBox.innerHTML = `
-                    <div class="text-center py-12 text-slate-600 text-xs border border-dashed border-slate-900 bg-[#060913]/10 rounded-xl font-mono">
+                    <div class="text-center py-12 text-slate-400 text-xs border border-dashed border-slate-200 bg-slate-50 rounded-xl font-mono">
                         Pipeline Clear. No pending task payloads inside execution queue.
                     </div>`;
             } else {
                 deliverablesArray.forEach(item => {
                     const block = document.createElement('div');
-                    block.className = "p-4 bg-[#060913]/20 border border-slate-900 rounded-xl space-y-3 hover:border-sky-500/20 transition group";
+                    block.className = "p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3 hover:border-sky-500/40 transition group shadow-2xs";
                     block.innerHTML = `
                         <div>
-                            <span class="text-[9px] text-slate-500 font-bold font-mono tracking-tight uppercase block truncate">${item.course}</span>
-                            <h4 class="text-xs font-bold text-white mt-1 group-hover:text-sky-400 transition leading-snug break-all">${item.title}</h4>
+                            <span class="text-[9px] text-slate-400 font-bold font-mono tracking-tight uppercase block truncate">${item.course}</span>
+                            <h4 class="text-xs font-bold text-slate-900 mt-1 group-hover:text-sky-700 transition leading-snug break-all">${item.title}</h4>
                         </div>
-                        <div class="flex justify-between items-center text-[10px] font-mono border-t border-slate-900/60 pt-2 text-slate-500">
-                            <span class="text-rose-400 font-bold">📅 Target: ${item.targetTimestamp}</span>
+                        <div class="flex justify-between items-center text-[10px] font-mono border-t border-slate-200 pt-2 text-slate-400">
+                            <span class="text-rose-600 font-bold">📅 Target: ${item.targetTimestamp}</span>
                             <span>Max Scale: ${item.scoreMax}</span>
                         </div>
-                        <button onclick="executeSubmissionDispatchTrigger(${item.uid})" class="w-full py-2 bg-slate-900 hover:bg-sky-500 text-slate-400 hover:text-slate-950 rounded-lg font-bold text-[10px] uppercase tracking-widest border border-slate-800 hover:border-sky-400 transition duration-150">
+                        <button onclick="executeSubmissionDispatchTrigger(${item.uid})" class="w-full py-2 bg-white hover:bg-sky-600 text-slate-600 hover:text-white rounded-lg font-bold text-[10px] uppercase tracking-widest border border-slate-200 hover:border-sky-600 shadow-2xs transition duration-150">
                             Upload Solution Stream 📤
                         </button>
                     `;
@@ -302,12 +298,12 @@
             const logsBox = document.getElementById('centralSystemAuditLogsWrapper');
             const timeToken = new Date().toLocaleTimeString();
 
-            let designStyleTheme = "text-sky-400 bg-sky-500/5 border-sky-500/10";
-            if (statusBadgeColorClass === "emerald") designStyleTheme = "text-emerald-400 bg-emerald-500/5 border-emerald-500/10";
-            if (statusBadgeColorClass === "purple") designStyleTheme = "text-purple-400 bg-purple-500/5 border-purple-500/10";
+            let designStyleTheme = "text-sky-700 bg-sky-50 border-sky-100";
+            if (statusBadgeColorClass === "emerald") designStyleTheme = "text-emerald-700 bg-emerald-50 border-emerald-100";
+            if (statusBadgeColorClass === "purple") designStyleTheme = "text-purple-700 bg-purple-50 border-purple-100";
 
             const logRowNode = document.createElement('div');
-            logRowNode.className = `p-3 rounded-xl border flex items-start gap-2 border-l-2 border-l-slate-600 ${designStyleTheme}`;
+            logRowNode.className = `p-3 rounded-xl border flex items-start gap-2 border-l-2 border-l-slate-400 shadow-2xs ${designStyleTheme}`;
             logRowNode.innerHTML = `
                 <span class="opacity-50 shrink-0 font-bold">[${timeToken}]</span>
                 <span class="font-medium">${logTextContent}</span>
@@ -337,8 +333,8 @@
             const facPanel = document.getElementById('facultyConsoleWrapper');
 
             if (targetContextMode === 'student') {
-                stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-sky-500 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.2)]";
-                facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-300";
+                stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-white text-sky-700 shadow-sm border border-slate-200/50 font-bold";
+                facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-800";
                 stuPanel.classList.replace('hidden', 'block');
                 facPanel.classList.replace('block', 'hidden');
 
@@ -346,8 +342,8 @@
                 document.getElementById('panelProfileName').innerText = "Rohma Noor";
                 document.getElementById('panelProfileId').innerText = "UID: 2026-SE-9912";
             } else {
-                facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-sky-500 text-slate-950 shadow-[0_0_15px_rgba(56,189,248,0.2)]";
-                stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-300";
+                facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-white text-sky-700 shadow-sm border border-slate-200/50 font-bold";
+                stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-slate-500 hover:text-slate-800";
                 facPanel.classList.replace('hidden', 'block');
                 stuPanel.classList.replace('block', 'hidden');
 
