@@ -3,96 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus | Pro Enterprise Dashboard</title>
+    <title>Nexus Pro | Ultimate Enterprise Matrix</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Rajdhani', sans-serif; background: #04050e; }
+        .font-hud { font-family: 'Orbitron', sans-serif; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-thumb { background: #06b6d4; border-radius: 10px; }
     </style>
 </head>
-<body class="bg-[#060814] text-slate-300 min-h-screen p-4 md:p-10 relative overflow-x-hidden">
+<body class="text-slate-300 min-h-screen p-3 md:p-6 relative overflow-x-hidden">
 
-    <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#0f1123_1px,transparent_1px),linear-gradient(to_bottom,#0f1123_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-40 pointer-events-none"></div>
+    <div class="absolute top-0 left-1/4 w-[500px] h-[250px] bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-10 right-10 w-[400px] h-[400px] bg-purple-600/5 rounded-full blur-[150px] pointer-events-none"></div>
 
-    <div class="max-w-6xl mx-auto space-y-6 relative z-10">
+    <div class="max-w-[1600px] mx-auto space-y-6 relative z-10">
         
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl backdrop-blur-md">
+        <header class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 bg-[#090d20]/80 border border-cyan-500/20 p-5 rounded-xl shadow-[0_0_30px_rgba(6,182,212,0.05)] backdrop-blur-md">
             <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">NEXUS ENTERPRISE</h1>
-                <p class="text-xs text-slate-400 font-mono mt-1">v2.4 • Advanced Local Engine Core Matrix</p>
+                <div class="flex items-center gap-3">
+                    <h1 class="text-3xl font-black font-hud tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500">NEXUS PRO</h1>
+                    <span class="text-[10px] font-hud bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 px-2 py-0.5 rounded animate-pulse">v3.1 STABLE</span>
+                </div>
+                <p class="text-xs text-slate-500 font-mono mt-1">CORE PERFORMANCE TRACKING PLATFORM • ALL SYSTEMS OPERATIONAL</p>
             </div>
-            <button onclick="clearAllTasks()" class="bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white border border-rose-500/20 px-4 py-2 rounded-xl text-xs font-semibold transition duration-300">
-                Wipe Database ⚠️
-            </button>
+            
+            <div class="flex flex-col items-end gap-1.5 w-full lg:w-auto">
+                <span class="text-[10px] font-hud text-slate-400 uppercase tracking-widest">Live Server Matrix Pulse</span>
+                <div class="flex gap-1">
+                    <span class="w-1.5 h-4 bg-cyan-500 rounded-sm animate-pulse"></span>
+                    <span class="w-1.5 h-4 bg-cyan-400 rounded-sm animate-pulse [animation-delay:0.2s]"></span>
+                    <span class="w-1.5 h-4 bg-blue-500 rounded-sm animate-pulse [animation-delay:0.4s]"></span>
+                    <span class="w-1.5 h-4 bg-purple-500 rounded-sm animate-pulse [animation-delay:0.1s]"></span>
+                    <span class="w-1.5 h-4 bg-purple-400 rounded-sm animate-pulse [animation-delay:0.3s]"></span>
+                </div>
+            </div>
         </header>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm">
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Vectors</p>
-                <h2 id="statTotal" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
-            </div>
-            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-rose-500/40">
-                <p class="text-xs font-semibold text-rose-400 uppercase tracking-wider">🔴 High Priority</p>
-                <h2 id="statHigh" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
-            </div>
-            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-amber-500/40">
-                <p class="text-xs font-semibold text-amber-400 uppercase tracking-wider">🟡 Medium</p>
-                <h2 id="statMedium" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
-            </div>
-            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-green-500/40">
-                <p class="text-xs font-semibold text-green-400 uppercase tracking-wider">🟢 Low Priority</p>
-                <h2 id="statLow" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
-            </div>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
-            <div class="bg-slate-900/60 border border-slate-800/60 p-6 rounded-2xl h-fit space-y-4 backdrop-blur-md shadow-xl">
-                <h3 class="text-white font-bold text-base tracking-wide border-b border-slate-800 pb-2">DATA INPUT NODE</h3>
-                <form id="taskForm" class="space-y-4">
-                    <div class="space-y-1.5">
-                        <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Task Objective</label>
-                        <input type="text" id="taskTitle" required placeholder="Ex: Audit system database codes" 
-                               class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition duration-200">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div class="space-y-1.5">
-                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Priority</label>
-                            <select id="taskPriority" class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-3 py-3 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
-                                <option value="High">High</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Low">Low</option>
-                            </select>
-                        </div>
-                        <div class="space-y-1.5">
-                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Timeline</label>
-                            <input type="date" id="taskDate" required
-                                   class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
-                        </div>
-                    </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-slate-950 font-extrabold py-3.5 rounded-xl transition duration-300 text-xs tracking-wider uppercase shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20">
-                        Commit Matrix +
-                    </button>
-                </form>
-            </div>
-
-            <div class="md:col-span-2 space-y-4">
-                
-                <div class="flex flex-col sm:flex-row gap-3 bg-slate-900/30 p-3 rounded-xl border border-slate-800/40 backdrop-blur-sm">
-                    <input type="text" id="searchBar" oninput="loadTasks()" placeholder="🔍 Query task titles..." 
-                           class="flex-1 bg-[#03050a] border border-slate-800 rounded-lg px-4 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+            <div class="space-y-6 lg:col-span-1">
+                <div class="bg-[#090d20]/60 border border-slate-800/80 p-5 rounded-xl backdrop-blur-md space-y-5 shadow-lg">
+                    <h3 class="text-white font-hud text-xs font-bold tracking-widest text-slate-400 border-b border-slate-800/80 pb-2">CORE PERFORMANCE METRICS</h3>
                     
-                    <div class="flex gap-1 bg-[#03050a] p-1 rounded-lg border border-slate-800">
-                        <button onclick="filterPriority('All')" id="btnFilterAll" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 bg-cyan-500 text-slate-950">All</button>
-                        <button onclick="filterPriority('High')" id="btnFilterHigh" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">High</button>
-                        <button onclick="filterPriority('Medium')" id="btnFilterMedium" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">Med</button>
-                        <button onclick="filterPriority('Low')" id="btnFilterLow" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">Low</button>
+                    <div class="relative w-40 h-40 mx-auto flex items-center justify-center">
+                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="40" stroke="#131a35" stroke-width="8" fill="transparent"/>
+                            <circle cx="50" cy="50" r="40" stroke="url(#cyanGrad)" stroke-width="8" fill="transparent" stroke-dasharray="251.2" stroke-dashoffset="70" stroke-linecap="round" class="transition-all duration-1000"/>
+                            <defs>
+                                <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100% border">
+                                    <stop offset="0%" stop-color="#06b6d4" />
+                                    <stop offset="100%" stop-color="#a855f7" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute text-center">
+                            <span id="circleCount" class="text-4xl font-black font-hud text-white">0</span>
+                            <p class="text-[10px] text-slate-500 font-mono uppercase tracking-widest">Total Tasks</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 pt-2">
+                        <div class="bg-[#050713] border border-slate-800 p-3 rounded-lg border-l-2 border-l-rose-500">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block">High Priority</span>
+                            <h2 id="highCounter" class="text-xl font-bold text-white font-hud mt-0.5">0</h2>
+                        </div>
+                        <div class="bg-[#050713] border border-slate-800 p-3 rounded-lg border-l-2 border-l-amber-500">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block">Medium Priority</span>
+                            <h2 id="medCounter" class="text-xl font-bold text-white font-hud mt-0.5">0</h2>
+                        </div>
+                        <div class="bg-[#050713] border border-slate-800 p-3 rounded-lg border-l-2 border-l-emerald-500">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block">Low Priority</span>
+                            <h2 id="lowCounter" class="text-xl font-bold text-white font-hud mt-0.5">0</h2>
+                        </div>
+                        <div class="bg-[#050713] border border-slate-800 p-3 rounded-lg border-l-2 border-l-cyan-500">
+                            <span class="text-[10px] text-slate-500 font-bold uppercase block">Completion Rate</span>
+                            <h2 class="text-xl font-bold text-cyan-400 font-hud mt-0.5">84%</h2>
+                        </div>
                     </div>
                 </div>
 
-                <div id="tasksContainer" class="space-y-3">
+                <div class="bg-[#090d20]/60 border border-slate-800/80 p-5 rounded-xl backdrop-blur-md space-y-4 shadow-lg">
+                    <h3 class="text-white font-hud text-xs font-bold tracking-widest text-slate-400 border-b border-slate-800/80 pb-2">DATA INJECTOR PANEL</h3>
+                    <form id="proForm" class="space-y-3 text-xs">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Objective Name</label>
+                            <input type="text" id="pTitle" required placeholder="Ex: Compile Starfield Engine Core" 
+                                   class="w-full bg-[#040612] border border-slate-800/80 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Project Association</label>
+                            <select id="pProject" class="w-full bg-[#040612] border border-slate-800/80 rounded-lg px-3 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                                <option value="Galaxy Quiz">🌌 Galaxy Space Quiz</option>
+                                <option value="Golden Fork">🍴 The Golden Fork Restaurant</option>
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Priority Matrix</label>
+                                <select id="pPriority" class="w-full bg-[#040612] border border-slate-800/80 rounded-lg px-2 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1">
+                                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Complexity Index</label>
+                                <select id="pComplexity" class="w-full bg-[#040612] border border-slate-800/80 rounded-lg px-2 py-2.5 text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                                    <option value="⭐⭐⭐">3 Stars (Normal)</option>
+                                    <option value="⭐⭐⭐⭐">4 Stars (Advanced)</option>
+                                    <option value="⭐⭐⭐⭐⭐">5 Stars (Critical)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Target Timeline</label>
+                            <input type="date" id="pDate" required class="w-full bg-[#040612] border border-slate-800/80 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 font-hud text-slate-950 font-black py-3 rounded-lg transition duration-300 text-[11px] tracking-widest uppercase hover:shadow-[0_0_20px_rgba(6,182,212,0.3)]">
+                            COMMIT VECTOR INJECTION +
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="space-y-4 lg:col-span-2">
+                <div class="bg-[#090d20]/40 border border-slate-800/80 p-4 rounded-xl flex flex-col sm:flex-row gap-3 backdrop-blur-sm">
+                    <input type="text" id="pSearch" oninput="renderEngine()" placeholder="🔍 Query specific node titles..." 
+                           class="flex-1 bg-[#040612] border border-slate-800/80 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                    
+                    <div class="flex bg-[#040612] p-1 rounded-xl border border-slate-800/80">
+                        <button onclick="switchCategory('All')" id="tabAll" class="px-3 py-1.5 rounded-lg text-[10px] font-hud font-bold tracking-wider uppercase transition-all bg-cyan-500 text-slate-950">All</button>
+                        <button onclick="switchCategory('Galaxy Quiz')" id="tabQuiz" class="px-3 py-1.5 rounded-lg text-[10px] font-hud font-bold tracking-wider uppercase transition-all text-slate-400 hover:text-white">Quiz</button>
+                        <button onclick="switchCategory('Golden Fork')" id="tabFork" class="px-3 py-1.5 rounded-lg text-[10px] font-hud font-bold tracking-wider uppercase transition-all text-slate-400 hover:text-white">Fork</button>
                     </div>
+                </div>
+
+                <div class="flex items-center justify-between px-2">
+                    <span class="text-xs uppercase font-hud font-bold tracking-widest text-slate-400">Active Objective Vectors</span>
+                    <button onclick="wipeDatabase()" class="text-[10px] text-rose-400 hover:underline font-mono">Wipe Cache Memory</button>
+                </div>
+
+                <div id="streamDestination" class="space-y-3 max-h-[640px] overflow-y-auto pr-1">
+                    </div>
+            </div>
+
+            <div class="space-y-6 lg:col-span-1">
+                <div class="bg-[#090d20]/60 border border-slate-800/80 p-5 rounded-xl backdrop-blur-md h-full min-h-[600px] flex flex-col justify-between shadow-lg">
+                    <div class="space-y-4">
+                        <h3 class="text-white font-hud text-xs font-bold tracking-widest text-slate-400 border-b border-slate-800/80 pb-2">RECENT SYSTEM ACTIVITY</h3>
+                        
+                        <div id="logsWrapper" class="space-y-4 font-mono text-[11px] leading-relaxed">
+                            </div>
+                    </div>
+
+                    <div class="border-t border-slate-800/80 pt-4 space-y-3">
+                        <span class="text-[10px] font-hud font-bold tracking-widest text-slate-400 block uppercase">Operational Node Team</span>
+                        <div class="space-y-2 text-xs">
+                            <div class="flex items-center justify-between bg-[#040612] p-2.5 rounded-lg border border-slate-800/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-cyan-400"></div>
+                                    <span class="font-bold text-white">Rohma Noor</span>
+                                </div>
+                                <span class="text-[10px] font-mono text-slate-500">Lead Dev</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-[#040612] p-2.5 rounded-lg border border-slate-800/60">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    <span class="font-bold text-white">Gemini Core AI</span>
+                                </div>
+                                <span class="text-[10px] font-mono text-slate-500">Sync Pilot</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -100,114 +186,156 @@
     </div>
 
     <script>
-        const taskForm = document.getElementById('taskForm');
-        const tasksContainer = document.getElementById('tasksContainer');
-        const searchBar = document.getElementById('searchBar');
-        let currentFilter = 'All';
+        let currentProjectTab = 'All';
 
-        // Core Life-cycle View Layer Render Engine
-        function loadTasks() {
-            tasksContainer.innerHTML = '';
-            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
+        // Core System Master Rendering Engine 
+        function renderEngine() {
+            const dest = document.getElementById('streamDestination');
+            const logsDest = document.getElementById('logsWrapper');
+            dest.innerHTML = '';
             
-            // Analytics Counter Logic Execution
-            document.getElementById('statTotal').innerText = tasks.length;
-            document.getElementById('statHigh').innerText = tasks.filter(t => t.priority === 'High').length;
-            document.getElementById('statMedium').innerText = tasks.filter(t => t.priority === 'Medium').length;
-            document.getElementById('statLow').innerText = tasks.filter(t => t.priority === 'Low').length;
+            let data = JSON.parse(localStorage.getItem('nexus_ultra_v3')) || [];
+            
+            // Set Counters 
+            document.getElementById('circleCount').innerText = data.length;
+            document.getElementById('highCounter').innerText = data.filter(x => x.priority === 'High').length;
+            document.getElementById('medCounter').innerText = data.filter(x => x.priority === 'Medium').length;
+            document.getElementById('lowCounter').innerText = data.filter(x => x.priority === 'Low').length;
 
-            // Apply Search Filtering Parameter
-            let searchQuery = searchBar.value.toLowerCase();
-            let filteredTasks = tasks.filter(task => task.title.toLowerCase().includes(searchQuery));
+            // Apply Advanced Queries Filters
+            let query = document.getElementById('pSearch').value.toLowerCase();
+            let processData = data.filter(item => item.title.toLowerCase().includes(query));
 
-            // Apply Priority Segment Filtering Parameter
-            if(currentFilter !== 'All') {
-                filteredTasks = filteredTasks.filter(task => task.priority === currentFilter);
+            if(currentProjectTab !== 'All') {
+                processData = processData.filter(item => item.project === currentProjectTab);
             }
 
-            if(filteredTasks.length === 0) {
-                tasksContainer.innerHTML = `<div class="text-center py-16 border border-dashed border-slate-800 rounded-2xl text-slate-500 text-xs font-mono">No matching records found in database arrays.</div>`;
+            // Empty Pipeline Handling View 
+            if(processData.length === 0) {
+                dest.innerHTML = `
+                    <div class="text-center py-24 border border-dashed border-cyan-500/10 rounded-2xl bg-[#090d20]/20 text-slate-500 font-mono text-xs">
+                        Pipeline channel empty. Inject data vectors via input command center.
+                    </div>`;
                 return;
             }
 
-            // Loop and Create Nodes
-            filteredTasks.forEach((task) => {
-                let badgeColor = "bg-green-500/10 text-green-400 border-green-500/20";
-                if(task.priority === "High") badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
-                if(task.priority === "Medium") badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
+            // Loop Matrix to Generate Cards
+            processData.forEach(item => {
+                let badgeClass = "bg-green-500/10 text-green-400 border-green-500/20";
+                if(item.priority === 'High') badgeClass = "bg-rose-500/10 text-rose-400 border-rose-500/20";
+                if(item.priority === 'Medium') badgeClass = "bg-amber-500/10 text-amber-400 border-amber-500/20";
 
-                // Formatting timestamp strings cleanly
-                const dateParts = task.date.split('-');
-                const formattedDate = dateParts.length === 3 ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}` : task.date;
+                let projectEmoji = item.project === 'Galaxy Quiz' ? '🌌' : '🍴';
 
-                const card = document.createElement('div');
-                card.className = "bg-slate-900/40 border border-slate-800/50 p-4 rounded-xl flex justify-between items-center hover:border-slate-700 transition duration-200 group";
-                card.innerHTML = `
-                    <div class="space-y-1.5 pr-4">
-                        <h4 class="text-white font-medium text-sm group-hover:text-cyan-400 transition duration-200 break-all leading-snug">${task.title}</h4>
+                const block = document.createElement('div');
+                block.className = "bg-[#090d20]/40 border border-slate-800/80 p-4 rounded-xl flex justify-between items-center hover:border-cyan-500/30 hover:shadow-[0_0_15px_rgba(6,182,212,0.05)] transition duration-200 group";
+                block.innerHTML = `
+                    <div class="space-y-2 pr-2">
                         <div class="flex flex-wrap items-center gap-2">
-                            <span class="text-[9px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-wider ${badgeColor}">${task.priority}</span>
-                            <span class="text-[10px] text-slate-500 font-mono">📅 Due: ${formattedDate}</span>
+                            <span class="text-xs bg-slate-800 border border-slate-700 font-mono px-2 py-0.5 rounded text-slate-400">${projectEmoji} ${item.project}</span>
+                            <span class="text-[9px] font-hud font-bold px-2 py-0.5 rounded border uppercase tracking-wider ${badgeClass}">${item.priority} Priority</span>
+                        </div>
+                        <h4 class="text-white font-semibold text-sm group-hover:text-cyan-400 transition duration-150 break-all leading-snug">${item.title}</h4>
+                        <div class="flex items-center gap-3 text-[10px] text-slate-500 font-mono">
+                            <span>Complexity: <span class="text-yellow-500 tracking-tighter">${item.complexity}</span></span>
+                            <span>• Target: ${item.date}</span>
                         </div>
                     </div>
-                    <button onclick="deleteTask('${task.id}')" class="text-[11px] bg-slate-900/80 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/30 text-slate-400 hover:text-rose-400 px-3 py-2 rounded-lg transition duration-150 shrink-0">
-                        Delete 🗑️
+                    <button onclick="purgeNode('${item.id}', '${item.title.replace(/'/g, "\\'")}')" class="text-[10px] font-hud border border-slate-800 bg-[#050713] hover:bg-rose-500/20 hover:text-rose-400 hover:border-rose-500/30 px-3 py-2 rounded-lg transition duration-150 shrink-0 uppercase tracking-wider">
+                        Deauth ⚙️
                     </button>
                 `;
-                tasksContainer.appendChild(card);
+                dest.appendChild(block);
             });
         }
 
-        // Form Submit Record Push Handler
-        taskForm.addEventListener('submit', (e) => {
+        // Form Submit Actions Injection
+        document.getElementById('proForm').addEventListener('submit', (e) => {
             e.preventDefault();
-            const title = document.getElementById('taskTitle').value;
-            const priority = document.getElementById('taskPriority').value;
-            const date = document.getElementById('taskDate').value;
-            const id = Date.now().toString(); // Generate unique node identification token
+            const title = document.getElementById('pTitle').value;
+            const project = document.getElementById('pProject').value;
+            const priority = document.getElementById('pPriority').value;
+            const complexity = document.getElementById('pComplexity').value;
+            const date = document.getElementById('pDate').value;
+            const id = Date.now().toString();
 
-            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
-            tasks.push({ id, title, priority, date });
+            let data = JSON.parse(localStorage.getItem('nexus_ultra_v3')) || [];
+            data.unshift({ id, title, project, priority, complexity, date }); // Adds new element at front
 
-            localStorage.setItem('nexus_pro_tasks', JSON.stringify(tasks));
-            taskForm.reset();
-            loadTasks();
+            localStorage.setItem('nexus_ultra_v3', JSON.stringify(data));
+            
+            // Push Dynamic Activity Log Entry
+            pushLog(`Vector initialized: "${title.substring(0,20)}..." injected into channel.`, 'cyan');
+            
+            document.getElementById('pTitle').value = '';
+            renderEngine();
         });
 
-        // Single Task Item Vector Purging
-        function deleteTask(id) {
-            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
-            tasks = tasks.filter(task => task.id !== id);
-            localStorage.setItem('nexus_pro_tasks', JSON.stringify(tasks));
-            loadTasks();
+        // Single Node Deauthorization
+        function purgeNode(id, title) {
+            let data = JSON.parse(localStorage.getItem('nexus_ultra_v3')) || [];
+            data = data.filter(x => x.id !== id);
+            localStorage.setItem('nexus_ultra_v3', JSON.stringify(data));
+            
+            pushLog(`Node deauthorized: "${title.substring(0,20)}..." wiped from stream.`, 'rose');
+            renderEngine();
         }
 
-        // Full Database Hard Purge
-        function clearAllTasks() {
-            if(confirm("Are you sure you want to hard-wipe the local dashboard database arrays?")) {
-                localStorage.removeItem('nexus_pro_tasks');
-                loadTasks();
+        // Hard Database Reset
+        function wipeDatabase() {
+            if(confirm("Confirm hard purge sequence? All cached memory records will compile down to zero.")) {
+                localStorage.removeItem('nexus_ultra_v3');
+                pushLog("GLOBAL CORE PURGE: Database arrays reset to base zero parameters.", 'purple');
+                renderEngine();
             }
         }
 
-        // Filter Controller Tab Interface Highlights Switcher
-        function filterPriority(type) {
-            currentFilter = type;
-            const filters = ['All', 'High', 'Medium', 'Low'];
+        // Category Tab Switch Control
+        function switchCategory(tab) {
+            currentProjectTab = tab;
+            const tabs = { 'All': 'tabAll', 'Galaxy Quiz': 'tabQuiz', 'Golden Fork': 'tabFork' };
             
-            filters.forEach(f => {
-                const btn = document.getElementById(`btnFilter${f}`);
-                if(f === type) {
-                    btn.className = "px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 bg-cyan-500 text-slate-950";
+            Object.keys(tabs).forEach(k => {
+                const element = document.getElementById(tabs[k]);
+                if(k === tab) {
+                    element.className = "px-3 py-1.5 rounded-lg text-[10px] font-hud font-bold tracking-wider uppercase transition-all bg-cyan-500 text-slate-950";
                 } else {
-                    btn.className = "px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white";
+                    element.className = "px-3 py-1.5 rounded-lg text-[10px] font-hud font-bold tracking-wider uppercase transition-all text-slate-400 hover:text-white";
                 }
             });
-            loadTasks();
+            renderEngine();
         }
 
-        // Boot system dashboard engine on setup sequence initialization
-        loadTasks();
+        // System Log Event Stream Push Engine
+        function pushLog(message, colorCode) {
+            const logsWrapper = document.getElementById('logsWrapper');
+            const timestamp = new Date().toLocaleTimeString();
+            
+            let textColor = "text-cyan-400";
+            if(colorCode === 'rose') textColor = "text-rose-400";
+            if(colorCode === 'purple') textColor = "text-purple-400";
+
+            const item = document.createElement('div');
+            item.className = "p-2 bg-[#050713]/80 border border-slate-900 rounded border-l-2 border-l-slate-700 flex items-start gap-2 animate-fadeIn";
+            item.innerHTML = `
+                <span class="text-slate-600 shrink-0">[${timestamp}]</span>
+                <span class="${textColor}">${message}</span>
+            `;
+            
+            logsWrapper.insertBefore(item, logsWrapper.firstChild); // Prepend latest log
+            
+            // Keep maximum 7 elements in timeline logs view to prevent lag
+            if(logsWrapper.children.length > 7) {
+                logsWrapper.removeChild(logsWrapper.lastChild);
+            }
+        }
+
+        // Initialize Base Sample Data Logs on Boot
+        pushLog("System configuration handshake completed safely.", "cyan");
+        pushLog("Local cluster database arrays online.", "purple");
+        
+        // Final Boot Initializer Execution Trigger
+        renderEngine();
     </script>
 </body>
 </html>
