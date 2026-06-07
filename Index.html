@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohma Noor | Professional Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Navbar Styling */
+        nav {
+            background-color: #1e293b;
+            padding: 20px 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #334155;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .nav-links li a:hover, .nav-links li a.active {
+            color: #38bdf8;
+        }
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Home Section */
+        .hero {
+            text-align: center;
+            padding: 60px 0;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        .hero h1 span {
+            color: #38bdf8;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+        .btn {
+            background-color: #38bdf8;
+            color: #0f172a;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #7dd3fc;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+        /* About Section */
+        .about-grid {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .about-text h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #38bdf8;
+        }
+        .about-text p {
+            color: #94a3b8;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .skill-tag {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #e2e8f0;
+        }
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .project-card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 25px;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+        .project-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #f1f5f9;
+        }
+        .project-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        /* Contact Section */
+        .contact-box {
+            background: #1e293b;
+            border: 1px solid #334155;
+            padding: 40px;
+            border-radius: 16px;
+            max-width: 550px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-box h2 {
+            margin-bottom: 15px;
+            color: #38bdf8;
+        }
+        .contact-box p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+        .contact-info {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #e2e8f0;
+        }
+        /* Footer */
+        footer {
+            background: #1e293b;
+            text-align: center;
+            padding: 20px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #334155;
+            margin-top: auto;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <nav>
+        <div class="logo">Rohma.Dev</div>
+        <ul class="nav-links">
+            <li><a onclick="switchTab('home')" id="link-home" class="active">Home</a></li>
+            <li><a onclick="switchTab('about')" id="link-about">About</a></li>
+            <li><a onclick="switchTab('projects')" id="link-projects">Projects</a></li>
+            <li><a onclick="switchTab('contact')" id="link-contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <div class="container">
+        
+        <!-- HOME TAB -->
+        <div id="home" class="tab-content active">
+            <div class="hero">
+                <h1>Hi, I am <span>Rohma Noor</span></h1>
+                <p>A professional Front-End Web Developer dedicated to building clean, high-performance, and beautiful interactive web applications.</p>
+                <button class="btn" onclick="switchTab('projects')">View My Work</button>
+            </div>
+        </div>
+
+        <!-- ABOUT TAB -->
+        <div id="about" class="tab-content">
+            <div class="about-grid">
+                <div class="about-text">
+                    <h2>About Me</h2>
+                    <p>I am a computer science student and a passionate web developer. I specialize in building responsive user interfaces, dynamic logic tools, and highly optimized web experiences using modern design principles.</p>
+                    <p>My goal is to provide world-class web solutions for global clients on freelancing marketplaces like Fiverr and Upwork.</p>
+                    <h3 style="margin-bottom: 15px; color: #f1f5f9;">My Tech Stack</h3>
+                    <div class="skills-container">
+                        <div class="skill-tag">HTML5</div>
+                        <div class="skill-tag">CSS3 / Grid / Flexbox</div>
+                        <div class="skill-tag">JavaScript (ES6+)</div>
+                        <div class="skill-tag">Git & GitHub</div>
+                        <div class="skill-tag">Responsive Web Design</div>
+                        <div class="skill-tag">Browser Audio API</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJECTS TAB -->
+        <div id="projects" class="tab-content">
+            <h2 style="font-size: 2rem; margin-bottom: 10px; color: #38bdf8;">My Live Projects</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px;">A selection of creative and technical web systems built from scratch.</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Focus Ambient Dashboard</h3>
+                    <p>A scientific productivity timer built with low-pass filter algorithms using the Browser Audio API to synthesize focus noise dynamically.</p>
+                    <a href="focus.html" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Professional Weather App</h3>
+                    <p>A sleek, glassmorphic UI application displaying structured weather information, metrics, and wind vectors via user queries.</p>
+                    <a href="weather.html" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Virtual Drum Kit</h3>
+                    <p>An interactive audio matrix tool that responds to active keyboard keydown events to play drum synthesized harmonics live.</p>
+                    <a href="drums.html" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Interactive Todo System</h3>
+                    <p>A responsive daily tracker that performs dynamic DOM manipulation to add, update, and manage core objective data lists.</p>
+                    <a href="todo.html" class="btn" style="padding: 8px 20px; font-size: 0.9rem;">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTACT TAB -->
+        <div id="contact" class="tab-content">
+            <div class="contact-box">
+                <h2>Let's Work Together</h2>
+                <p>Available for freelance contracts, full-time engineering internships, and website development services.</p>
+                <div class="contact-info"><strong>Email:</strong> rohmanoor@email.com</div>
+                <div class="contact-info"><strong>Location:</strong> Punjab, Pakistan</div>
+                <div class="contact-info" style="margin-bottom: 25px;"><strong>GitHub:</strong> github.com/RohmaNoor</div>
+                <button class="btn" onclick="alert('Thank you! This feature can be connected to a real backend email later.')">Send Message</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Rohma Noor. All Rights Reserved. Designed with precision.
+    </footer>
+
+    <!-- JavaScript for Tab Switching -->
+    <script>
+        function switchTab(tabId) {
+            // Remove active class from all contents
+            let contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // Remove active class from all links
+            let links = document.querySelectorAll('.nav-links a');
+            links.forEach(link => link.classList.remove('active'));
+            
+            // Activate current tab content and link
+            document.getElementById(tabId).classList.add('active');
+            document.getElementById('link-' + tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
