@@ -3,52 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tribute Page</title>
+    <title>A Tribute to Quaid-e-Azam</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #212529;
+            padding: 40px 20px;
+        }
+        .main-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        header {
             text-align: center;
-            padding: 20px;
+            margin-bottom: 40px;
         }
-        .container {
-            background-color: white;
-            padding: 30px;
-            max-width: 800px;
-            margin: auto;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        header h1 {
+            font-size: 2.8rem;
+            color: #0c2340;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
-        img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
+        header p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            font-style: italic;
         }
-        ul {
-            text-align: left;
+        .hero-image-box {
+            background: #e9ecef;
+            height: 350px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            border: 1px dashed #dee2e6;
+        }
+        .hero-image-box span {
+            font-size: 1.2rem;
+            color: #495057;
+            font-weight: 500;
+        }
+        .biography-section {
+            margin-bottom: 40px;
+        }
+        .biography-section h2 {
+            font-size: 1.8rem;
+            color: #0c2340;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #198754;
+            padding-bottom: 8px;
             display: inline-block;
+        }
+        .timeline {
+            list-style: none;
+        }
+        .timeline li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid #dee2e6;
+            position: relative;
+        }
+        .timeline li::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 11px;
+            height: 11px;
+            background: #198754;
+            border-radius: 50%;
+        }
+        .timeline .date {
+            font-weight: 700;
+            color: #198754;
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .quote-box {
+            background-color: #f1f8f5;
+            border-left: 5px solid #198754;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 0 12px 12px 0;
+            text-align: center;
+        }
+        .quote-box p {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: #0c2340;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+        .quote-box span {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+            font-size: 0.95rem;
+            color: #6c757d;
+        }
+        footer a {
+            color: #198754;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Tribute to My Favorite Personality</h1>
-        <p>A great human being and an inspiration</p>
+    <div class="main-container">
+        <header>
+            <h1>Muhammad Ali Jinnah</h1>
+            <p>The Father of the Nation (Quaid-e-Azam)</p>
+        </header>
 
-        <div style="background: #ddd; padding: 50px; margin: 20px 0; border-radius: 5px;">
-            [ Image Space ]
+        <div class="hero-image-box">
+            <span>[ Placeholder for Quaid-e-Azam's Professional Image ]</span>
         </div>
 
-        <h3>Timeline of Their Life:</h3>
-        <ul>
-            <li><strong>Year 1:</strong> Description of an early milestone.</li>
-            <li><strong>Year 2:</strong> Description of a major achievement.</li>
-            <li><strong>Year 3:</strong> Continuously inspiring the world.</li>
-        </ul>
+        <section class="biography-section">
+            <h2>Timeline of an Iconic Leader</h2>
+            <ul class="timeline">
+                <li>
+                    <span class="date">December 25, 1876</span>
+                    <p>Born in Karachi, Pakistan (then British India). He showed immense potential and dedication toward education from his early days.</p>
+                </li>
+                <li>
+                    <span class="date">1896</span>
+                    <p>Qualified as a barrister from Lincoln's Inn in London at a very young age, becoming a successful and respected lawyer.</p>
+                </li>
+                <li>
+                    <span class="date">1913</span>
+                    <p>Joined the All-India Muslim League, dedicating his sharp political mind to advocating for the rights of Muslims in the subcontinent.</p>
+                </li>
+                <li>
+                    <span class="date">March 23, 1940</span>
+                    <p>Presided over the Lahore Resolution, where the official demand for a separate homeland, Pakistan, was formally made.</p>
+                </li>
+                <li>
+                    <span class="date">August 14, 1947</span>
+                    <p>Successfully led the nation to independence, becoming the first Governor-General of Pakistan through sheer political brilliance and resolve.</p>
+                </li>
+            </ul>
+        </section>
 
-        <p style="margin-top: 30px;">"This is a placeholder for a great quote by this person."</p>
+        <div class="quote-box">
+            <p>"With faith, discipline and selfless devotion to duty, there is nothing worthwhile that you cannot achieve."</p>
+            <span>— Quaid-e-Azam Muhammad Ali Jinnah</span>
+        </div>
+
+        <footer>
+            <p>Designed with professional layouts by RohmaNoor. Read more about his life on <a href="https://en.wikipedia.org/wiki/Muhammad_Ali_Jinnah" target="_blank">Wikipedia</a>.</p>
+        </footer>
     </div>
 
 </body>
