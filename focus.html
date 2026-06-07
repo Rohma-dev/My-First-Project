@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Ambient Focus Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background: #0d0e15;
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .dashboard {
+            background: #161925;
+            border: 1px solid #23283b;
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 30px;
+            color: #94a3b8;
+        }
+        .timer-display {
+            font-size: 5rem;
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 20px;
+            font-variant-numeric: tabular-nums;
+        }
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        button {
+            padding: 12px 30px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .btn-start {
+            background: #38bdf8;
+            color: #0d0e15;
+        }
+        .btn-start:hover {
+            background: #7dd3fc;
+        }
+        .btn-reset {
+            background: #23283b;
+            color: #94a3b8;
+        }
+        .btn-reset:hover {
+            background: #2e354f;
+        }
+        .sound-section {
+            border-top: 1px solid #23283b;
+            padding-top: 30px;
+        }
+        h2 {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+        .sound-card {
+            background: #1f2438;
+            padding: 15px 20px;
+            border-radius: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border: 1px solid transparent;
+            transition: 0.2s;
+        }
+        .sound-card.active {
+            border-color: #38bdf8;
+            background: #1e293b;
+        }
+        .sound-info {
+            text-align: left;
+        }
+        .sound-name {
+            font-weight: 600;
+            color: #f1f5f9;
+        }
+        .sound-btn {
+            background: #23283b;
+            color: #e2e8f0;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+        .sound-card.active .sound-btn {
+            background: #38bdf8;
+            color: #0d0e15;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="dashboard">
+        <h1>Focus Dashboard</h1>
+        
+        <div class="timer-display" id="timer">25:00</div>
+        
+        <div class="controls">
+            <button class="btn-start" id="startBtn" onclick="toggleTimer()">Start</button>
+            <button class="btn-reset" onclick="resetTimer()">Reset</button>
+        </div>
+
+        <div class="sound-section">
+            <h2>Ambient Sounds</h2>
+            
+            <div class="sound-card" id="card-noise">
+                <div class="sound-info">
+                    <div class="sound-name">White Noise</div>
+                </div>
+                <button class="sound-btn" onclick="toggleSound()">Play</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 25 * 60;
+        let timerId = null;
+        let audioCtx = null;
+        let noiseNode = null;
+        let isPlayingSound = false;
+
+        function updateTimerDisplay() {
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            document.getElementById('timer').innerHTML = 
+                (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        }
+
+        function toggleTimer() {
+            let btn = document.getElementById('startBtn');
+            if (timerId === null) {
+                btn.innerHTML = "Pause";
+                btn.style.background = "#fbbf24";
+                timerId = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerId);
+                        alert("Focus Session Complete!");
+                        resetTimer();
+                    }
+                }, 1000);
+            } else {
+                clearInterval(timerId);
+                timerId = null;
+                btn.innerHTML = "Start";
+                btn.style.background = "#38bdf8";
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerId);
+            timerId = null;
+            timeLeft = 25 * 60;
+            updateTimerDisplay();
+            let btn = document.getElementById('startBtn');
+            btn.innerHTML = "Start";
+            btn.style.background = "#38bdf8";
+        }
+
+        function toggleSound() {
+            let card = document.getElementById('card-noise');
+            let btn = card.querySelector('.sound-btn');
+
+            if (!isPlayingSound) {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+
+                let bufferSize = 2 * audioCtx.sampleRate;
+                let noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+                let output = noiseBuffer.getChannelData(0);
+                
+                for (let i = 0; i < bufferSize; i++) {
+                    output[i] = Math.random() * 2 - 1;
+                }
+
+                noiseNode = audioCtx.createBufferSource();
+                noiseNode.buffer = noiseBuffer;
+                noiseNode.loop = true;
+
+                let filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 800;
+
+                noiseNode.connect(filter);
+                filter.connect(audioCtx.destination);
+                
+                noiseNode.start();
+                card.classList.add('active');
+                btn.innerHTML = "Stop";
+                isPlayingSound = true;
+            } else {
+                if (noiseNode) {
+                    noiseNode.stop();
+                    noiseNode.disconnect();
+                }
+                card.classList.remove('active');
+                btn.innerHTML = "Play";
+                isPlayingSound = false;
+            }
+        }
+    </script>
+</body>
+</html>
