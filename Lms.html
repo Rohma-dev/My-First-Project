@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aura LMS Enterprise | Premium Academic Core</title>
+    <title>Rohma Dev | Premium LMS Enterprise</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <style>
@@ -14,6 +14,8 @@
         ::-webkit-scrollbar-track { background: #fce7f3; }
         ::-webkit-scrollbar-thumb { background: #bfdbfe; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
     </style>
 </head>
 <body class="text-blue-950 min-h-screen flex flex-col xl:flex-row antialiased">
@@ -22,11 +24,11 @@
         <div class="space-y-8">
             <div class="flex items-center gap-3 border-b border-pink-100 pb-5">
                 <div class="w-10 h-10 bg-gradient-to-tr from-blue-600 via-indigo-600 to-blue-400 rounded-xl flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-blue-500/20">
-                    Α
+                    R
                 </div>
                 <div>
-                    <h2 class="text-blue-900 font-extrabold text-base tracking-wide leading-none">AURA CORE</h2>
-                    <span class="text-[10px] text-blue-600 tracking-widest font-mono uppercase block mt-1 font-bold">LMS NODE v5.2</span>
+                    <h2 class="text-blue-900 font-extrabold text-base tracking-wide leading-none uppercase">ROHMA DEV</h2>
+                    <span class="text-[10px] text-blue-600 tracking-widest font-mono uppercase block mt-1 font-bold">LMS CORE PLATFORM</span>
                 </div>
             </div>
 
@@ -40,26 +42,26 @@
 
             <div class="space-y-1">
                 <span class="text-[10px] font-bold tracking-widest text-blue-500/70 uppercase block pl-1 mb-2">Academic Modules</span>
-                <nav class="space-y-1 text-sm font-semibold">
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 shadow-2xs group">
-                        <span class="text-base group-hover:scale-110 transition">💎</span> Control Dashboard
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition group">
-                        <span class="text-base group-hover:scale-110 transition">📚</span> Course Curriculum
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition group">
-                        <span class="text-base group-hover:scale-110 transition">📅</span> Exam Transcript
-                    </a>
-                    <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition group">
-                        <span class="text-base group-hover:scale-110 transition">💳</span> Finance Accounts
-                    </a>
+                <nav class="space-y-1 text-sm font-semibold" id="sidebarNavigationMenu">
+                    <button onclick="switchTabModule('dashboard-view', this)" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 shadow-2xs nav-btn-item">
+                        <span class="text-base">💎</span> Control Dashboard
+                    </button>
+                    <button onclick="switchTabModule('curriculum-view', this)" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition nav-btn-item">
+                        <span class="text-base">📚</span> Course Curriculum
+                    </button>
+                    <button onclick="switchTabModule('transcript-view', this)" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition nav-btn-item">
+                        <span class="text-base">📅</span> Exam Transcript
+                    </button>
+                    <button onclick="switchTabModule('finance-view', this)" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition nav-btn-item">
+                        <span class="text-base">💳</span> Finance Accounts
+                    </button>
                 </nav>
             </div>
         </div>
 
         <div class="border-t border-pink-100 pt-5 mt-8 flex items-center gap-3">
             <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-sm font-mono shadow-md">
-                RN
+                RD
             </div>
             <div class="min-w-0 flex-1">
                 <h4 id="panelProfileName" class="text-blue-900 font-extrabold text-sm truncate">Rohma Noor</h4>
@@ -72,24 +74,24 @@
         
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/70 border border-pink-200/60 p-5 rounded-2xl shadow-xs backdrop-blur-md">
             <div>
-                <h1 id="hudMainGreeting" class="text-xl md:text-2xl font-black text-blue-900 tracking-tight">System Core Matrix Enabled</h1>
-                <p class="text-xs text-blue-700/70 font-medium mt-0.5">Session Scope: Academic Spring Semester 2026 • Campus Main Distributed Cloud</p>
+                <h1 id="hudMainGreeting" class="text-xl md:text-2xl font-black text-blue-900 tracking-tight">Rohma Dev Engine Synchronized</h1>
+                <p id="hudSubText" class="text-xs text-blue-700/70 font-medium mt-0.5">Active Section: Control Dashboard Hub • Secure Cloud Node Network</p>
             </div>
             <div class="flex items-center gap-2.5 bg-blue-50 text-blue-700 border border-blue-100 px-4 py-2 rounded-xl text-xs font-bold font-mono shadow-2xs">
-                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span> PORTAL LINK SYNCED
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 animate-pulse"></span> RD SYSTEM ONLINE
             </div>
         </header>
 
-        <div id="studentConsoleWrapper" class="space-y-6 block">
+        <div id="dashboard-view" class="tab-content active space-y-6">
             
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            <div id="studentDashboardWidgets" class="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="bg-white/80 border border-pink-200/60 p-4 rounded-xl shadow-2xs">
                     <span class="text-[10px] font-bold text-blue-600/70 uppercase tracking-wider block">Cumulative CGPA</span>
-                    <h2 class="text-2xl font-black text-blue-900 mt-1 font-mono tracking-tight">3.91 <span class="text-xs text-blue-500 font-sans">/ 4.00</span></h2>
+                    <h2 class="text-2xl font-black text-blue-900 mt-1 font-mono tracking-tight">3.91 <span class="text-xs text-blue-500">/ 4.00</span></h2>
                 </div>
                 <div class="bg-white/80 border border-pink-200/60 p-4 rounded-xl shadow-2xs">
                     <span class="text-[10px] font-bold text-blue-600/70 uppercase tracking-wider block">Registered Credits</span>
-                    <h2 class="text-2xl font-black text-blue-900 mt-1 font-mono tracking-tight">18 <span class="text-xs text-blue-500 font-sans">Cr. Hrs</span></h2>
+                    <h2 class="text-2xl font-black text-blue-900 mt-1 font-mono tracking-tight">18 <span class="text-xs text-blue-500">Cr. Hrs</span></h2>
                 </div>
                 <div class="bg-white/80 border border-pink-200/60 p-4 rounded-xl shadow-2xs border-l-2 border-l-blue-600">
                     <span class="text-[10px] font-bold text-blue-600 uppercase tracking-wider block">Attendance Index</span>
@@ -101,46 +103,38 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div id="studentMainInterfaceGrid" class="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div class="xl:col-span-2 bg-white/80 border border-pink-200/60 p-5 rounded-2xl space-y-4 shadow-sm">
                     <div class="border-b border-pink-100 pb-3 flex items-center justify-between">
                         <h3 class="text-blue-900 font-extrabold text-sm uppercase tracking-wider">Active Enrolled Course Pipelines</h3>
-                        <span id="coursesCounterHUD" class="text-[10px] bg-blue-50 border border-blue-100 font-mono px-2.5 py-1 rounded-lg text-blue-700 font-bold">3 Modules Synchronized</span>
+                        <span id="coursesCounterHUD" class="text-[10px] bg-blue-50 border border-blue-100 font-mono px-2.5 py-1 rounded-lg text-blue-700 font-bold">3 Modules Synced</span>
                     </div>
-                    <div id="studentCourseStreamContainer" class="space-y-3">
-                        </div>
+                    <div id="studentCourseStreamContainer" class="space-y-3"></div>
                 </div>
 
                 <div class="space-y-6">
                     <div class="bg-white/80 border border-pink-200/60 p-5 rounded-2xl space-y-4 shadow-sm">
                         <h3 class="text-blue-900 font-extrabold text-sm uppercase tracking-wider border-b border-pink-100 pb-3">Deliverables Evaluation Queue</h3>
-                        <div id="studentAssignmentSubmissionContainer" class="space-y-3 max-h-[250px] overflow-y-auto pr-1">
-                            </div>
+                        <div id="studentAssignmentSubmissionContainer" class="space-y-3 max-h-[250px] overflow-y-auto pr-1"></div>
                     </div>
-
                     <div class="bg-white/80 border border-pink-200/60 p-5 rounded-2xl space-y-3 shadow-sm">
                         <h3 class="text-blue-900 font-extrabold text-xs uppercase tracking-wider border-b border-pink-100 pb-2">Target Grade Roadmap Predictor</h3>
                         <div class="space-y-2 text-xs">
-                            <p class="text-blue-800/80 font-medium">Set expected grade pointer parameter to forecast session output spectrum vectors:</p>
                             <div class="flex gap-2 items-center">
                                 <select id="predictorGradeInp" class="bg-pink-50 border border-pink-200 rounded-lg p-2 font-mono text-blue-900 font-bold focus:outline-none">
                                     <option value="4.00">A (4.00)</option>
                                     <option value="3.67">A- (3.67)</option>
                                     <option value="3.33">B+ (3.33)</option>
                                 </select>
-                                <button onclick="calculatePredictedGPAMetrics()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg transition text-[11px] uppercase tracking-wider">
-                                    Forecast Path Matrix 🎯
-                                </button>
+                                <button onclick="calculatePredictedGPAMetrics()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded-lg transition text-[11px] uppercase tracking-wider">Forecast Path Matrix 🎯</button>
                             </div>
                             <div id="predictorResultHUD" class="hidden p-2.5 bg-blue-50 border border-blue-100 text-blue-800 font-mono text-[11px] rounded-lg font-medium"></div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div id="facultyConsoleWrapper" class="space-y-6 hidden">
-            <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+            <div id="facultyMainInterfaceGrid" class="hidden grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div class="bg-white/80 border border-pink-200/60 p-6 rounded-2xl space-y-4 shadow-sm h-fit">
                     <h3 class="text-blue-900 font-extrabold text-sm uppercase tracking-wider border-b border-pink-100 pb-3 font-mono">Vector Task Dispatcher Unit</h3>
                     <form id="facultyDispatchForm" class="space-y-4 text-xs">
@@ -154,8 +148,7 @@
                         </div>
                         <div class="space-y-1.5">
                             <label class="text-[10px] font-bold uppercase tracking-wider text-blue-700/70">Task Title / Objective Descriptor</label>
-                            <input type="text" id="fInpTitle" required placeholder="Ex: Compile Thread Cache Synchronization Logic" 
-                                   class="w-full bg-pink-50/50 border border-pink-200 rounded-xl px-3 py-3 text-blue-900 focus:outline-none focus:border-blue-500 transition font-medium">
+                            <input type="text" id="fInpTitle" required placeholder="Ex: Compile Thread Cache Synchronization Logic" class="w-full bg-pink-50/50 border border-pink-200 rounded-xl px-3 py-3 text-blue-900 focus:outline-none focus:border-blue-500 transition font-medium">
                         </div>
                         <div class="grid grid-cols-2 gap-3">
                             <div class="space-y-1.5">
@@ -167,24 +160,94 @@
                                 <input type="date" id="fInpDate" required class="w-full bg-pink-50/50 border border-pink-200 rounded-xl px-3 py-2.5 text-blue-800 focus:outline-none focus:border-blue-500">
                             </div>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white font-black py-3.5 rounded-xl uppercase tracking-widest text-[11px] shadow-md hover:shadow-blue-500/20 transition duration-200">
-                            DISPATCH DELIVERABLE PAYLOAD +
-                        </button>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-500 text-white font-black py-3.5 rounded-xl uppercase tracking-widest text-[11px] shadow-md transition duration-200">DISPATCH DELIVERABLE PAYLOAD +</button>
                     </form>
                 </div>
-
-                <div class="xl:col-span-2 bg-white/80 border border-pink-200/60 p-6 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between min-h-[500px]">
+                <div class="xl:col-span-2 bg-white/80 border border-pink-200/60 p-6 rounded-2xl space-y-4 shadow-sm flex flex-col justify-between min-h-[460px]">
                     <div class="space-y-4">
                         <h3 class="text-blue-900 font-extrabold text-sm uppercase tracking-wider border-b border-pink-100 pb-3">Central Registry Activity Stream</h3>
-                        <div id="centralSystemAuditLogsWrapper" class="space-y-3 font-mono text-xs text-blue-800/80 leading-relaxed">
-                            </div>
+                        <div id="centralSystemAuditLogsWrapper" class="space-y-3 font-mono text-xs text-blue-800/80 leading-relaxed"></div>
                     </div>
                     <div class="border-t border-pink-100 pt-4 flex justify-between items-center text-xs font-medium">
-                        <p class="text-[11px] text-blue-600/70 font-mono">Engine Caching Diagnostics: Processing Streams Isolated & Stable</p>
-                        <button onclick="hardFlushLMSDataCache()" class="text-[10px] text-red-600 hover:text-red-700 font-bold tracking-widest uppercase bg-red-50 border border-red-100 px-3 py-1.5 rounded-lg hover:bg-red-100 transition font-mono">
-                            Purge Global Cache Data ⚠️
-                        </button>
+                        <p class="text-[11px] text-blue-600/70 font-mono">Engine Diagnostics Stack: Active and Isolated</p>
+                        <button onclick="hardFlushLMSDataCache()" class="text-[10px] text-red-600 hover:text-red-700 font-bold tracking-widest uppercase bg-red-50 border border-red-100 px-3 py-1.5 rounded-lg transition font-mono">Purge Global Cache Data ⚠️</button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="curriculum-view" class="tab-content space-y-6">
+            <div class="bg-white/80 border border-pink-200/60 p-6 rounded-2xl shadow-sm space-y-6">
+                <div class="border-b border-pink-100 pb-3">
+                    <h3 class="text-blue-900 font-extrabold text-lg uppercase tracking-wider">Registered Syllabi & Course Material Download Hub</h3>
+                    <p class="text-xs text-blue-700/60">Access core structural curriculum documentation indices instantly.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-pink-50/50 border border-pink-100 rounded-xl flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-blue-950 text-sm">Advanced Software Engineering Frameworks</h4>
+                            <p class="text-xs text-blue-600 font-mono mt-1">Lec_Notes_Week_1-6.pdf (14.2 MB)</p>
+                        </div>
+                        <button onclick="alert('Downloading lecture documentation archive stream...')" class="bg-blue-600 text-white font-bold text-xs px-3 py-2 rounded-lg hover:bg-blue-700 transition">Download 📥</button>
+                    </div>
+                    <div class="p-4 bg-pink-50/50 border border-pink-100 rounded-xl flex justify-between items-center">
+                        <div>
+                            <h4 class="font-bold text-blue-950 text-sm">Distributed Cloud Databases Systems</h4>
+                            <p class="text-xs text-blue-600 font-mono mt-1">Sharding_Architecture_Guide.pdf (8.7 MB)</p>
+                        </div>
+                        <button onclick="alert('Downloading partition guidelines data file...')" class="bg-blue-600 text-white font-bold text-xs px-3 py-2 rounded-lg hover:bg-blue-700 transition">Download 📥</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="transcript-view" class="tab-content space-y-6">
+            <div class="bg-white/80 border border-pink-200/60 p-6 rounded-2xl shadow-sm space-y-4">
+                <div class="border-b border-pink-100 pb-3">
+                    <h3 class="text-blue-900 font-extrabold text-lg uppercase tracking-wider">Official Academic Performance Transcript</h3>
+                    <p class="text-xs text-blue-700/60">Verified grading vectors records ledger index.</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs font-medium border-collapse">
+                        <thead>
+                            <tr class="border-b border-pink-200 text-blue-600 uppercase font-bold text-[10px] tracking-wider">
+                                <th class="pb-3">Course Code</th>
+                                <th class="pb-3">Title Module Description</th>
+                                <th class="pb-3">Credit Hours</th>
+                                <th class="pb-3 text-center">Grade Spectrum</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-pink-100/60 text-blue-950">
+                            <tr>
+                                <td class="py-3.5 font-mono text-blue-600 font-bold">SE-401</td>
+                                <td class="py-3.5 font-semibold">Advanced Software Engineering Frameworks</td>
+                                <td class="py-3.5 font-mono">3.00</td>
+                                <td class="py-3.5 font-bold font-mono text-center text-blue-600">A</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3.5 font-mono text-blue-600 font-bold">CS-418</td>
+                                <td class="py-3.5 font-semibold">Distributed Cloud Databases Systems</td>
+                                <td class="py-3.5 font-mono">4.00</td>
+                                <td class="py-3.5 font-bold font-mono text-center text-blue-600">A-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="finance-view" class="tab-content space-y-6">
+            <div class="bg-white/80 border border-pink-200/60 p-6 rounded-2xl shadow-sm space-y-4">
+                <div class="border-b border-pink-100 pb-3">
+                    <h3 class="text-blue-900 font-extrabold text-lg uppercase tracking-wider">Fee Ledger Accounts Balance</h3>
+                    <p class="text-xs text-blue-700/60">Realtime account financial invoice processing stream.</p>
+                </div>
+                <div class="p-5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div>
+                        <span class="text-[9px] font-bold uppercase tracking-wider text-emerald-600 block">Current Outstanding Balance Due</span>
+                        <h2 class="text-2xl font-black font-mono mt-0.5">Rs. 0.00 Verified</h2>
+                    </div>
+                    <span class="px-3 py-1 bg-white border border-emerald-300 rounded-full font-bold text-[10px] tracking-wider uppercase text-emerald-700">Account Clear ✅</span>
                 </div>
             </div>
         </div>
@@ -192,7 +255,6 @@
     </main>
 
     <script>
-        // High-Tier Mock Mock Base Storage Arrays Seed Schema Data
         const baseStaticCoursesSchema = [
             { id: "SE-401", title: "Advanced Software Engineering Frameworks", professor: "Dr. Asim Farooq", credit: 3, trackingIndex: 96, currentScoreAlpha: "A" },
             { id: "CS-418", title: "Distributed Cloud Databases Systems", professor: "Prof. Maria Qureshi", credit: 4, trackingIndex: 92, currentScoreAlpha: "A-" },
@@ -204,18 +266,30 @@
             { uid: 1012, course: "Distributed Cloud Databases Systems", title: "Map Sharding Distributed Partitions over NoSQL Nodes Clusters Configuration", scoreMax: 25, targetTimestamp: "2026-06-25" }
         ];
 
-        // Engine Persistence Layer Check & Initial Seed Drops Hook
-        if (!localStorage.getItem('aura_lms_courses_v5')) {
-            localStorage.setItem('aura_lms_courses_v5', JSON.stringify(baseStaticCoursesSchema));
-        }
-        if (!localStorage.getItem('aura_lms_deliverables_v5')) {
-            localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(baseStaticAssignmentsSchema));
+        if (!localStorage.getItem('aura_lms_courses_v5')) localStorage.setItem('aura_lms_courses_v5', JSON.stringify(baseStaticCoursesSchema));
+        if (!localStorage.getItem('aura_lms_deliverables_v5')) localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(baseStaticAssignmentsSchema));
+
+        function switchTabModule(targetViewId, clickButtonTarget) {
+            const viewsList = document.querySelectorAll('.tab-content');
+            viewsList.forEach(view => view.classList.remove('active'));
+
+            const navButtons = document.querySelectorAll('.nav-btn-item');
+            navButtons.forEach(btn => {
+                btn.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl text-blue-800/70 hover:bg-pink-50 hover:text-blue-900 transition nav-btn-item";
+            });
+
+            document.getElementById(targetViewId).classList.add('active');
+            clickButtonTarget.className = "w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-50 text-blue-700 border border-blue-100 shadow-2xs nav-btn-item";
+            
+            let textLabel = targetViewId.replace('-view', '').toUpperCase();
+            document.getElementById('hudSubText').innerText = `Active Section: ${textLabel} Module Infrastructure Node Core`;
         }
 
-        // Master Viewport Virtual Synchronization Core Engine Grid Render Call
         function syncLMSDataMatrixLayers() {
             const courseTargetBox = document.getElementById('studentCourseStreamContainer');
             const assignTargetBox = document.getElementById('studentAssignmentSubmissionContainer');
+
+            if(!courseTargetBox || !assignTargetBox) return;
 
             courseTargetBox.innerHTML = '';
             assignTargetBox.innerHTML = '';
@@ -225,7 +299,6 @@
 
             document.getElementById('coursesCounterHUD').innerText = `${coursesArray.length} Vectors Loaded`;
 
-            // 1. Loop Map Render Enrolled Active Courses Block Modules Grid
             coursesArray.forEach(node => {
                 const row = document.createElement('div');
                 row.className = "p-5 bg-white border border-pink-100 rounded-2xl flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 hover:border-blue-300 transition duration-150 group shadow-2xs";
@@ -233,7 +306,7 @@
                     <div class="space-y-1">
                         <span class="text-[10px] font-mono font-bold px-2.5 py-0.5 bg-blue-50 border border-blue-100 text-blue-700 rounded uppercase tracking-wider">${node.id}</span>
                         <h4 class="text-blue-950 font-extrabold text-base mt-2 group-hover:text-blue-600 transition duration-150">${node.title}</h4>
-                        <p class="text-xs text-blue-900/60 font-medium">Lead Academic Chair: ${node.professor} • (${node.credit} Credit Metrics Mapping)</p>
+                        <p class="text-xs text-blue-900/60 font-medium">Lead Academic Chair: ${node.professor}</p>
                         <div class="w-48 bg-pink-100 h-1.5 rounded-full mt-3 overflow-hidden">
                             <div class="bg-gradient-to-r from-blue-600 to-indigo-600 h-full rounded-full" style="width: ${node.trackingIndex}%"></div>
                         </div>
@@ -247,68 +320,47 @@
                             <span class="text-[9px] text-blue-900/40 font-bold uppercase tracking-wider block">Midterm</span>
                             <span class="text-blue-700 font-black font-mono text-base">${node.currentScoreAlpha}</span>
                         </div>
-                    </div>
-                `;
+                    </div>`;
                 courseTargetBox.appendChild(row);
             });
 
-            // 2. Loop Map Render Deliverables Submissions Cards Terminal Pipeline
             if (deliverablesArray.length === 0) {
-                assignTargetBox.innerHTML = `
-                    <div class="text-center py-10 text-blue-900/40 text-xs border border-dashed border-pink-200 bg-pink-50/30 rounded-xl font-mono">
-                        Pipeline Clear. No pending deliverables items found inside array index stack.
-                    </div>`;
+                assignTargetBox.innerHTML = `<div class="text-center py-10 text-blue-900/40 text-xs border border-dashed border-pink-200 bg-pink-50/30 rounded-xl font-mono">Pipeline Clear.</div>`;
             } else {
                 deliverablesArray.forEach(item => {
                     const block = document.createElement('div');
                     block.className = "p-4 bg-white border border-pink-100 rounded-xl space-y-3 hover:border-blue-400 transition group shadow-2xs";
                     block.innerHTML = `
                         <div>
-                            <span class="text-[9px] text-blue-600 font-bold font-mono tracking-tight uppercase block truncate">${item.course}</span>
-                            <h4 class="text-xs font-bold text-blue-950 mt-1 group-hover:text-blue-600 transition leading-snug break-all">${item.title}</h4>
+                            <span class="text-[9px] text-blue-600 font-bold font-mono uppercase block truncate">${item.course}</span>
+                            <h4 class="text-xs font-bold text-blue-950 mt-1 leading-snug break-all">${item.title}</h4>
                         </div>
-                        <div class="flex justify-between items-center text-[10px] font-mono border-t border-pink-50 pt-2 text-blue-900/50">
-                            <span class="text-red-500 font-bold">📅 Target: ${item.targetTimestamp}</span>
-                            <span>Max Scale: ${item.scoreMax}</span>
-                        </div>
-                        <button onclick="executeSubmissionDispatchTrigger(${item.uid})" class="w-full py-2 bg-pink-50 hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 text-blue-700 hover:text-white rounded-lg font-bold text-[10px] uppercase tracking-widest border border-pink-200 hover:border-blue-600 shadow-2xs transition duration-150">
-                            Upload Document solution 📤
-                        </button>
-                    `;
+                        <button onclick="executeSubmissionDispatchTrigger(${item.uid})" class="w-full py-2 bg-pink-50 hover:bg-gradient-to-r hover:from-blue-600 hover:to-indigo-600 text-blue-700 hover:text-white rounded-lg font-bold text-[10px] uppercase tracking-widest border border-pink-200 hover:border-blue-600 transition duration-150">Upload Document Solution 📤</button>`;
                     assignTargetBox.appendChild(block);
                 });
             }
         }
 
-        // Student Deliverables Payload Submission Event Tracker Trigger Controller
         function executeSubmissionDispatchTrigger(uid) {
             let dataList = JSON.parse(localStorage.getItem('aura_lms_deliverables_v5'));
             let matchNode = dataList.find(x => x.uid === uid);
-
             if (confirm(`Authorize secure transmission protocols for deliverables file pack: "${matchNode.title}"?`)) {
                 dataList = dataList.filter(x => x.uid !== uid);
                 localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(dataList));
-
-                injectSystemAuditRegistryLog(`Student node dispatched validated data architecture pack for vector mapping: "${matchNode.title.substring(0,25)}..."`, "emerald");
+                injectSystemAuditRegistryLog("Student node transmitted data package successfully.", "emerald");
                 syncLMSDataMatrixLayers();
             }
         }
 
-        // NAYI UNIQUE CHEEZ: Mathematical Target GPA Estimator Forecast Logic System Module
         function calculatePredictedGPAMetrics() {
             const selectVal = parseFloat(document.getElementById('predictorGradeInp').value);
             const currentCGPA = 3.91; 
             const resultantForecast = ((currentCGPA * 3) + selectVal) / 4; 
-
             const targetHUD = document.getElementById('predictorResultHUD');
             targetHUD.classList.remove('hidden');
-            targetHUD.innerHTML = `
-                <span class="text-blue-600 block font-bold mb-1">⚡ FORECAST ESTIMATION ANALYSIS:</span>
-                Next Session Estimated Spectrum Shift: <span class="font-bold text-blue-950 underline">${resultantForecast.toFixed(3)} CGPA</span> based over current baseline configuration vector index.
-            `;
+            targetHUD.innerHTML = `Estimated Forecast Spectrum Shift: <span class="font-bold text-blue-950 underline">${resultantForecast.toFixed(3)} CGPA</span>`;
         }
 
-        // Faculty Input Command Form Interceptor Data Dispatch Array Deployer
         document.getElementById('facultyDispatchForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const course = document.getElementById('fInpCourse').value;
@@ -319,82 +371,70 @@
 
             let dataList = JSON.parse(localStorage.getItem('aura_lms_deliverables_v5')) || [];
             dataList.unshift({ uid, course, title, scoreMax, targetTimestamp });
-
             localStorage.setItem('aura_lms_deliverables_v5', JSON.stringify(dataList));
 
-            injectSystemAuditRegistryLog(`Faculty supervisor node dispatched new assignment structure map index: [${title.substring(0,20)}...] deadline set to: ${targetTimestamp}.`, "blue");
-            
+            injectSystemAuditRegistryLog(`Faculty dispatched task successfully.`, "blue");
             document.getElementById('fInpTitle').value = '';
             document.getElementById('fInpMarks').value = '';
-            
             syncLMSDataMatrixLayers();
-            alert("Success! Assignment array injected into core dashboard nodes stream channel.");
+            alert("Success! Assignment array injected into core channels.");
         });
 
-        // Real-time Event Stream Audit Logger Generator Engine
         function injectSystemAuditRegistryLog(logTextContent, statusBadgeColorClass) {
             const logsBox = document.getElementById('centralSystemAuditLogsWrapper');
+            if(!logsBox) return;
             const timeToken = new Date().toLocaleTimeString();
-
             let designStyleTheme = "text-blue-700 bg-blue-50 border-blue-100";
             if (statusBadgeColorClass === "emerald") designStyleTheme = "text-emerald-700 bg-emerald-50 border-emerald-100";
 
             const logRowNode = document.createElement('div');
             logRowNode.className = `p-3 rounded-xl border flex items-start gap-2 border-l-2 border-l-blue-600 shadow-2xs ${designStyleTheme}`;
-            logRowNode.innerHTML = `
-                <span class="opacity-50 shrink-0 font-bold">[${timeToken}]</span>
-                <span class="font-medium">${logTextContent}</span>
-            `;
+            logRowNode.innerHTML = `<span class="opacity-50 shrink-0 font-bold">[${timeToken}]</span><span class="font-medium">${logTextContent}</span>`;
             logsBox.insertBefore(logRowNode, logsBox.firstChild);
-
-            if (logsBox.children.length > 5) {
-                logsBox.removeChild(logsBox.lastChild);
-            }
+            if (logsBox.children.length > 5) logsBox.removeChild(logsBox.lastChild);
         }
 
-        // Storage Database Hard Evacuation Purge Cache Engine Logic
         function hardFlushLMSDataCache() {
-            if (confirm("Execute core runtime layout memory repair routine? Data arrays drop to defaults structural definitions rows.")) {
+            if (confirm("Purge memory rows?")) {
                 localStorage.removeItem('aura_lms_deliverables_v5');
-                injectSystemAuditRegistryLog("SYSTEM HARD MEMORY REPAIR SCRUB TRACE ROUTINE EXECUTED.", "blue");
+                injectSystemAuditRegistryLog("SYSTEM HARD CACHE SCRUB INITIALIZED.", "blue");
                 syncLMSDataMatrixLayers();
             }
         }
 
-        // Global Switching Nav Dynamic Portal Context Routing Core System
         function switchContext(targetContextMode) {
             const stuBtn = document.getElementById('contextStudentBtn');
             const facBtn = document.getElementById('contextFacultyBtn');
-            const stuPanel = document.getElementById('studentConsoleWrapper');
-            const facPanel = document.getElementById('facultyConsoleWrapper');
+            const stuWidgets = document.getElementById('studentDashboardWidgets');
+            const stuMainGrid = document.getElementById('studentMainInterfaceGrid');
+            const facMainGrid = document.getElementById('facultyMainInterfaceGrid');
 
             if (targetContextMode === 'student') {
                 stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md";
                 facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-blue-700 hover:text-blue-900 font-medium";
-                stuPanel.classList.replace('hidden', 'block');
-                facPanel.classList.replace('block', 'hidden');
+                if(stuWidgets) stuWidgets.classList.remove('hidden');
+                if(stuMainGrid) stuMainGrid.classList.remove('hidden');
+                if(facMainGrid) facMainGrid.classList.add('hidden');
 
-                document.getElementById('hudMainGreeting').innerText = "Welcome Back, Rohma Noor! 👋";
+                document.getElementById('hudMainGreeting').innerText = "Rohma Dev Engine Synchronized";
                 document.getElementById('panelProfileName').innerText = "Rohma Noor";
                 document.getElementById('panelProfileId').innerText = "UID: 2026-SE-442";
             } else {
                 facBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold shadow-md";
                 stuBtn.className = "flex-1 py-2 rounded-lg text-center transition duration-150 text-blue-700 hover:text-blue-900 font-medium";
-                facPanel.classList.replace('hidden', 'block');
-                stuPanel.classList.replace('block', 'hidden');
+                if(stuWidgets) stuWidgets.classList.add('hidden');
+                if(stuMainGrid) stuMainGrid.classList.add('hidden');
+                if(facMainGrid) facMainGrid.classList.remove('hidden');
 
-                document.getElementById('hudMainGreeting').innerText = "Faculty Controller Terminal Engine Console 🖥️";
+                document.getElementById('hudMainGreeting').innerText = "Faculty Administrative Core Console 🖥️";
                 document.getElementById('panelProfileName').innerText = "Dr. Asim Farooq";
-                document.getElementById('panelProfileId').innerText = "Role: Senior Professor Chair";
+                document.getElementById('panelProfileId').innerText = "Role: Department Chair Senior";
             }
         }
 
-        // Framework Lifecycle Starter Initial Handshake Handlers Setup
-        document.getElementById('hudMainGreeting').innerText = "Welcome Back, Rohma Noor! 👋";
-        injectSystemAuditRegistryLog("LMS network infrastructure initial link validation handshake verified.", "blue");
-        injectSystemAuditRegistryLog("Dynamic persistent local caching matrix instances mounted.", "blue");
-        
-        syncLMSDataMatrixLayers();
+        window.onload = function() {
+            syncLMSDataMatrixLayers();
+        }
     </script>
 </body>
 </html>
