@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Professional Drum Kit</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: #0f172a;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+            color: #38bdf8;
+        }
+        p {
+            color: #94a3b8;
+            margin-bottom: 40px;
+            font-size: 1rem;
+        }
+        .drum-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .drum-pad {
+            background: #1e293b;
+            border: 3px solid #334155;
+            border-radius: 16px;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+        }
+        .drum-pad:active, .drum-pad.playing {
+            transform: scale(0.95);
+            border-color: #38bdf8;
+            box-shadow: 0 0 20px #38bdf8;
+            background: #0284c7;
+        }
+        .key {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #f1f5f9;
+        }
+        .sound-name {
+            font-size: 0.8rem;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+        }
+        .drum-pad.playing .sound-name {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Virtual Drum Kit</h1>
+    <p>Screen par click karein ya apne Keyboard se A, S, D, F dabayein!</p>
+
+    <div class="drum-container">
+        <div class="drum-pad" id="keyA" onclick="playDrum('kick')">
+            <span class="key">A</span>
+            <span class="sound-name">Kick</span>
+        </div>
+        <div class="drum-pad" id="keyS" onclick="playDrum('snare')">
+            <span class="key">S</span>
+            <span class="sound-name">Snare</span>
+        </div>
+        <div class="drum-pad" id="keyD" onclick="playDrum('hihat')">
+            <span class="key">D</span>
+            <span class="sound-name">Hi-Hat</span>
+        </div>
+        <div class="drum-pad" id="keyF" onclick="playDrum('synth')">
+            <span class="key">F</span>
+            <span class="sound-name">Synth</span>
+        </div>
+    </div>
+
+    <script>
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playDrum(type) {
+            initAudio();
+            
+            let osc = audioCtx.createOscillator();
+            let gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            let now = audioCtx.currentTime;
+
+            if (type === 'kick') {
+                osc.frequency.setValueAtTime(150, now);
+                osc.frequency.exponentialRampToValueAtTime(0.01, now + 0.3);
+                gain.gain.setValueAtTime(1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+                animatePad('keyA');
+            } 
+            else if (type === 'snare') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180, now);
+                gain.gain.setValueAtTime(0.7, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                osc.start(now);
+                osc.stop(now + 0.2);
+                animatePad('keyS');
+            } 
+            else if (type === 'hihat') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(1000, now);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now);
+                osc.stop(now + 0.05);
+                animatePad('keyD');
+            } 
+            else if (type === 'synth') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.linearRampToValueAtTime(600, now + 0.4);
+                gain.gain.setValueAtTime(0.4, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+                animatePad('keyF');
+            }
+        }
+
+        function animatePad(id) {
+            let pad = document.getElementById(id);
+            pad.classList.add('playing');
+            setTimeout(() => {
+                pad.classList.remove('playing');
+            }, 100);
+        }
+
+        window.addEventListener('keydown', function(e) {
+            let key = e.key.toLowerCase();
+            if (key === 'a') playDrum('kick');
+            if (key === 's') playDrum('snare');
+            if (key === 'd') playDrum('hihat');
+            if (key === 'f') playDrum('synth');
+        });
+    </script>
+</body>
+</html>
