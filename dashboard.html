@@ -3,58 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus | Advanced Task Dashboard</title>
+    <title>Nexus | Pro Enterprise Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-[#090d16] text-slate-300 min-h-screen p-4 md:p-12 relative overflow-x-hidden">
+<body class="bg-[#060814] text-slate-300 min-h-screen p-4 md:p-10 relative overflow-x-hidden">
 
-    <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[150px] pointer-events-none"></div>
 
-    <div class="max-w-4xl mx-auto space-y-8 relative z-10">
+    <div class="max-w-6xl mx-auto space-y-6 relative z-10">
         
-        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 border border-slate-800/80 p-6 rounded-2xl backdrop-blur-md">
+        <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-900/40 border border-slate-800/60 p-6 rounded-2xl backdrop-blur-md">
             <div>
-                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight">NEXUS COMMAND</h1>
-                <p class="text-sm text-slate-400">Local Storage Synced Live Frontend Database Matrix</p>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-white tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-500">NEXUS ENTERPRISE</h1>
+                <p class="text-xs text-slate-400 font-mono mt-1">v2.4 • Advanced Local Engine Core Matrix</p>
             </div>
-            <div class="flex items-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-4 py-1.5 rounded-full text-xs font-mono font-bold">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> SYSTEM ACTIVE
-            </div>
+            <button onclick="clearAllTasks()" class="bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white border border-rose-500/20 px-4 py-2 rounded-xl text-xs font-semibold transition duration-300">
+                Wipe Database ⚠️
+            </button>
         </header>
 
-        <div class="grid md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm">
+                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Vectors</p>
+                <h2 id="statTotal" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-rose-500/40">
+                <p class="text-xs font-semibold text-rose-400 uppercase tracking-wider">🔴 High Priority</p>
+                <h2 id="statHigh" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-amber-500/40">
+                <p class="text-xs font-semibold text-amber-400 uppercase tracking-wider">🟡 Medium</p>
+                <h2 id="statMedium" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
+            </div>
+            <div class="bg-slate-900/40 border border-slate-800/80 p-5 rounded-xl backdrop-blur-sm border-l-green-500/40">
+                <p class="text-xs font-semibold text-green-400 uppercase tracking-wider">🟢 Low Priority</p>
+                <h2 id="statLow" class="text-2xl md:text-3xl font-extrabold text-white mt-1">0</h2>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
             
-            <div class="bg-slate-900/60 border border-slate-800/80 p-6 rounded-2xl h-fit space-y-5 backdrop-blur-md">
-                <h3 class="text-white font-bold text-lg tracking-wide border-b border-slate-800 pb-2">CREATE TASK</h3>
+            <div class="bg-slate-900/60 border border-slate-800/60 p-6 rounded-2xl h-fit space-y-4 backdrop-blur-md shadow-xl">
+                <h3 class="text-white font-bold text-base tracking-wide border-b border-slate-800 pb-2">DATA INPUT NODE</h3>
                 <form id="taskForm" class="space-y-4">
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Task Title</label>
-                        <input type="text" id="taskTitle" required placeholder="Ex: Deploy Cloud Infrastructure" 
-                               class="w-full bg-[#05070c] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                    <div class="space-y-1.5">
+                        <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Task Objective</label>
+                        <input type="text" id="taskTitle" required placeholder="Ex: Audit system database codes" 
+                               class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition duration-200">
                     </div>
-                    <div class="space-y-2">
-                        <label class="text-xs font-bold uppercase tracking-wider text-slate-400">Priority Vector</label>
-                        <select id="taskPriority" class="w-full bg-[#05070c] border border-slate-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-cyan-500 transition duration-200">
-                            <option value="High">🔴 High Priority</option>
-                            <option value="Medium">🟡 Medium Priority</option>
-                            <option value="Low">🟢 Low Priority</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Priority</label>
+                            <select id="taskPriority" class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-3 py-3 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                                <option value="High">High</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Low">Low</option>
+                            </select>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Timeline</label>
+                            <input type="date" id="taskDate" required
+                                   class="w-full bg-[#03050a] border border-slate-800 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                        </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:shadow-[0_0_25px_rgba(6,182,212,0.3)] text-slate-950 font-extrabold py-3.5 rounded-xl transition duration-300 text-sm tracking-wider uppercase">
-                        Save To Database +
+                    <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-slate-950 font-extrabold py-3.5 rounded-xl transition duration-300 text-xs tracking-wider uppercase shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/20">
+                        Commit Matrix +
                     </button>
                 </form>
             </div>
 
-            <div class="md:grid-cols-1 md:col-span-2 space-y-4">
-                <div class="flex justify-between items-center bg-slate-900/20 p-2 px-4 rounded-xl border border-slate-800/30">
-                    <h3 class="text-white font-bold tracking-wide text-sm uppercase text-slate-400">Live Engine Stream</h3>
-                    <span id="taskCount" class="text-xs bg-slate-800 px-2.5 py-1 rounded-md text-cyan-400 font-mono">0 Tasks Loaded</span>
+            <div class="md:col-span-2 space-y-4">
+                
+                <div class="flex flex-col sm:flex-row gap-3 bg-slate-900/30 p-3 rounded-xl border border-slate-800/40 backdrop-blur-sm">
+                    <input type="text" id="searchBar" oninput="loadTasks()" placeholder="🔍 Query task titles..." 
+                           class="flex-1 bg-[#03050a] border border-slate-800 rounded-lg px-4 py-2 text-xs text-white focus:outline-none focus:border-cyan-500 transition duration-200">
+                    
+                    <div class="flex gap-1 bg-[#03050a] p-1 rounded-lg border border-slate-800">
+                        <button onclick="filterPriority('All')" id="btnFilterAll" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 bg-cyan-500 text-slate-950">All</button>
+                        <button onclick="filterPriority('High')" id="btnFilterHigh" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">High</button>
+                        <button onclick="filterPriority('Medium')" id="btnFilterMedium" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">Med</button>
+                        <button onclick="filterPriority('Low')" id="btnFilterLow" class="px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white">Low</button>
+                    </div>
                 </div>
 
                 <div id="tasksContainer" class="space-y-3">
@@ -68,68 +102,111 @@
     <script>
         const taskForm = document.getElementById('taskForm');
         const tasksContainer = document.getElementById('tasksContainer');
-        const taskCount = document.getElementById('taskCount');
+        const searchBar = document.getElementById('searchBar');
+        let currentFilter = 'All';
 
-        // LocalStorage se data load karne ka function
+        // Core Life-cycle View Layer Render Engine
         function loadTasks() {
             tasksContainer.innerHTML = '';
+            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
             
-            // Database se items nikalna, agar khali ho to empty array [] dena
-            let tasks = JSON.parse(localStorage.getItem('nexus_tasks')) || [];
-            
-            taskCount.innerText = `${tasks.length} Tasks Loaded`;
-            
-            if(tasks.length === 0) {
-                tasksContainer.innerHTML = `<div class="text-center py-12 border border-dashed border-slate-800 rounded-2xl text-slate-500 text-sm">Database Matrix is empty. Create a task!</div>`;
+            // Analytics Counter Logic Execution
+            document.getElementById('statTotal').innerText = tasks.length;
+            document.getElementById('statHigh').innerText = tasks.filter(t => t.priority === 'High').length;
+            document.getElementById('statMedium').innerText = tasks.filter(t => t.priority === 'Medium').length;
+            document.getElementById('statLow').innerText = tasks.filter(t => t.priority === 'Low').length;
+
+            // Apply Search Filtering Parameter
+            let searchQuery = searchBar.value.toLowerCase();
+            let filteredTasks = tasks.filter(task => task.title.toLowerCase().includes(searchQuery));
+
+            // Apply Priority Segment Filtering Parameter
+            if(currentFilter !== 'All') {
+                filteredTasks = filteredTasks.filter(task => task.priority === currentFilter);
+            }
+
+            if(filteredTasks.length === 0) {
+                tasksContainer.innerHTML = `<div class="text-center py-16 border border-dashed border-slate-800 rounded-2xl text-slate-500 text-xs font-mono">No matching records found in database arrays.</div>`;
                 return;
             }
 
-            tasks.forEach((task, index) => {
+            // Loop and Create Nodes
+            filteredTasks.forEach((task) => {
                 let badgeColor = "bg-green-500/10 text-green-400 border-green-500/20";
                 if(task.priority === "High") badgeColor = "bg-rose-500/10 text-rose-400 border-rose-500/20";
                 if(task.priority === "Medium") badgeColor = "bg-amber-500/10 text-amber-400 border-amber-500/20";
 
-                const taskRow = document.createElement('div');
-                taskRow.className = "bg-slate-900/40 border border-slate-800/60 p-5 rounded-xl flex justify-between items-center hover:border-slate-700/80 transition duration-200 group";
-                taskRow.innerHTML = `
-                    <div class="space-y-2">
-                        <h4 class="text-white font-semibold text-base group-hover:text-cyan-400 transition duration-200">${task.title}</h4>
-                        <span class="inline-block text-[10px] font-bold px-2.5 py-0.5 rounded border uppercase tracking-wider ${badgeColor}">${task.priority}</span>
+                // Formatting timestamp strings cleanly
+                const dateParts = task.date.split('-');
+                const formattedDate = dateParts.length === 3 ? `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}` : task.date;
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900/40 border border-slate-800/50 p-4 rounded-xl flex justify-between items-center hover:border-slate-700 transition duration-200 group";
+                card.innerHTML = `
+                    <div class="space-y-1.5 pr-4">
+                        <h4 class="text-white font-medium text-sm group-hover:text-cyan-400 transition duration-200 break-all leading-snug">${task.title}</h4>
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="text-[9px] font-extrabold px-2 py-0.5 rounded border uppercase tracking-wider ${badgeColor}">${task.priority}</span>
+                            <span class="text-[10px] text-slate-500 font-mono">📅 Due: ${formattedDate}</span>
+                        </div>
                     </div>
-                    <button onclick="deleteTask(${index})" class="text-xs bg-slate-800/50 hover:bg-rose-500/20 border border-slate-700/60 hover:border-rose-500/40 text-slate-400 hover:text-rose-400 px-3 py-2 rounded-lg transition duration-200 font-medium">
+                    <button onclick="deleteTask('${task.id}')" class="text-[11px] bg-slate-900/80 hover:bg-rose-500/10 border border-slate-800 hover:border-rose-500/30 text-slate-400 hover:text-rose-400 px-3 py-2 rounded-lg transition duration-150 shrink-0">
                         Delete 🗑️
                     </button>
                 `;
-                tasksContainer.appendChild(taskRow);
+                tasksContainer.appendChild(card);
             });
         }
 
-        // Naya task save karne ka function
+        // Form Submit Record Push Handler
         taskForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const title = document.getElementById('taskTitle').value;
             const priority = document.getElementById('taskPriority').value;
+            const date = document.getElementById('taskDate').value;
+            const id = Date.now().toString(); // Generate unique node identification token
 
-            let tasks = JSON.parse(localStorage.getItem('nexus_tasks')) || [];
-            tasks.push({ title, priority });
+            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
+            tasks.push({ id, title, priority, date });
 
-            // Updated list ko wapas database (LocalStorage) mein bhej dena
-            localStorage.setItem('nexus_tasks', JSON.stringify(tasks));
-            
-            document.getElementById('taskTitle').value = ''; // Input clear karein
-            loadTasks(); // UI refresh
+            localStorage.setItem('nexus_pro_tasks', JSON.stringify(tasks));
+            taskForm.reset();
+            loadTasks();
         });
 
-        // Task delete karne ka function
-        function deleteTask(index) {
-            let tasks = JSON.parse(localStorage.getItem('nexus_tasks')) || [];
-            tasks.splice(index, 1); // Specific index wala task remove karein
-            
-            localStorage.setItem('nexus_tasks', JSON.stringify(tasks));
-            loadTasks(); // UI refresh
+        // Single Task Item Vector Purging
+        function deleteTask(id) {
+            let tasks = JSON.parse(localStorage.getItem('nexus_pro_tasks')) || [];
+            tasks = tasks.filter(task => task.id !== id);
+            localStorage.setItem('nexus_pro_tasks', JSON.stringify(tasks));
+            loadTasks();
         }
 
-        // Initially load storage components on start
+        // Full Database Hard Purge
+        function clearAllTasks() {
+            if(confirm("Are you sure you want to hard-wipe the local dashboard database arrays?")) {
+                localStorage.removeItem('nexus_pro_tasks');
+                loadTasks();
+            }
+        }
+
+        // Filter Controller Tab Interface Highlights Switcher
+        function filterPriority(type) {
+            currentFilter = type;
+            const filters = ['All', 'High', 'Medium', 'Low'];
+            
+            filters.forEach(f => {
+                const btn = document.getElementById(`btnFilter${f}`);
+                if(f === type) {
+                    btn.className = "px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 bg-cyan-500 text-slate-950";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-md text-[10px] font-bold tracking-wider uppercase transition duration-150 text-slate-400 hover:text-white";
+                }
+            });
+            loadTasks();
+        }
+
+        // Boot system dashboard engine on setup sequence initialization
         loadTasks();
     </script>
 </body>
