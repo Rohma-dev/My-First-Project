@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Golden Fork | Luxury Restaurant</title>
+    <title>The Golden Fork | Luxury Fine Dining</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Playfair Display', 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         body {
             background-color: #0b0c10;
@@ -18,7 +18,7 @@
         }
         /* Navbar */
         nav {
-            background: rgba(11, 12, 16, 0.95);
+            background: rgba(11, 12, 16, 0.98);
             padding: 20px 10%;
             display: flex;
             justify-content: space-between;
@@ -29,10 +29,10 @@
             z-index: 100;
         }
         .logo {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 700;
             color: #66fcf1;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
         .nav-links {
             display: flex;
@@ -42,17 +42,16 @@
         .nav-links li a {
             color: #c5c6c7;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: 0.3s;
-            cursor: pointer;
         }
         .nav-links li a:hover {
             color: #66fcf1;
         }
         /* Hero Section */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -61,65 +60,90 @@
             padding: 0 20px;
         }
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.8rem;
             color: #fff;
             margin-bottom: 15px;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
         .hero p {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             color: #45f3ff;
-            margin-bottom: 30px;
-            font-style: italic;
+            margin-bottom: 35px;
+            letter-spacing: 1px;
         }
         .btn {
             background: #66fcf1;
             color: #0b0c10;
-            padding: 12px 35px;
+            padding: 14px 40px;
             border-radius: 4px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 1rem;
+            font-size: 0.95rem;
             border: none;
             cursor: pointer;
             transition: 0.3s;
+            text-transform: uppercase;
         }
         .btn:hover {
             background: #45f3ff;
-            box-shadow: 0 0 15px rgba(102, 252, 241, 0.4);
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.5);
         }
-        /* Menu Section */
+        /* Sections Shared Styling */
         .section {
-            padding: 80px 10%;
+            padding: 90px 10%;
             text-align: center;
         }
         .section-title {
-            font-size: 2.5rem;
+            font-size: 2.4rem;
             color: #fff;
             margin-bottom: 10px;
+            letter-spacing: 1px;
         }
         .section-subtitle {
             color: #66fcf1;
-            margin-bottom: 50px;
+            margin-bottom: 45px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            font-size: 0.85rem;
+        }
+        /* Menu Filters */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .tab-btn {
+            background: transparent;
+            color: #c5c6c7;
+            border: 1px solid #1f2833;
+            padding: 8px 24px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
             font-size: 0.9rem;
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: #66fcf1;
+            color: #0b0c10;
+            border-color: #66fcf1;
         }
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            gap: 25px;
         }
         .menu-item {
             background: #1f2833;
             padding: 25px;
-            border-radius: 8px;
+            border-radius: 6px;
             text-align: left;
-            border-left: 3px solid #66fcf1;
+            border-top: 2px solid transparent;
             transition: 0.3s;
         }
         .menu-item:hover {
             transform: translateY(-5px);
+            border-top-color: #66fcf1;
         }
         .menu-header {
             display: flex;
@@ -127,28 +151,51 @@
             margin-bottom: 10px;
         }
         .menu-name {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.15rem;
+            font-weight: 600;
             color: #fff;
         }
         .menu-price {
             color: #66fcf1;
             font-weight: bold;
-            font-size: 1.2rem;
+            font-size: 1.15rem;
         }
         .menu-desc {
-            font-size: 0.95rem;
-            color: #a9a9a9;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            color: #94a3b8;
+            line-height: 1.6;
         }
-        /* Booking Form Section */
+        /* Reviews Section */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .review-card {
+            background: #11141a;
+            border: 1px solid #1f2833;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: left;
+        }
+        .review-text {
+            font-style: italic;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .review-author {
+            color: #66fcf1;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        /* Booking Section */
         .booking-box {
             background: #1f2833;
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
             padding: 40px;
             border-radius: 8px;
-            border: 1px solid #333;
         }
         .form-group {
             margin-bottom: 20px;
@@ -158,60 +205,93 @@
             display: block;
             color: #fff;
             margin-bottom: 8px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px;
             background: #0b0c10;
-            border: 1px solid #45f3ff;
+            border: 1px solid #1f2833;
             color: #fff;
             border-radius: 4px;
             outline: none;
+            transition: 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #66fcf1;
+        }
+        /* Contact/Info Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            background: #11141a;
+            padding: 50px 10%;
+            border-top: 1px solid #1f2833;
+        }
+        .info-col h3 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+        .info-col p {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #94a3b8;
         }
         /* Footer */
         footer {
-            background: #111;
+            background: #0b0c10;
             text-align: center;
-            padding: 30px;
-            color: #666;
-            font-size: 0.9rem;
+            padding: 25px;
+            color: #455a64;
+            font-size: 0.85rem;
             border-top: 1px solid #1f2833;
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
+    <!-- Navigation -->
     <nav>
         <div class="logo">THE GOLDEN FORK</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#menu">Menu</a></li>
-            <li><a href="#booking">Book A Table</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#booking">Reservations</a></li>
         </ul>
     </nav>
 
+    <!-- Home/Hero -->
     <div id="home" class="hero">
-        <h1>Experience Luxury Dining</h1>
-        <p>Where taste meets perfection, crafted by elite chefs.</p>
-        <a href="#booking" class="btn">Reservation</a>
+        <h1>The Art Of Fine Dining</h1>
+        <p>Crafting Culinary Masterpieces Since 2018</p>
+        <a href="#booking" class="btn">Book A Table</a>
     </div>
 
+    <!-- Menu Section with Live Filters -->
     <div id="menu" class="section">
-        <h2 class="section-title">Our Sacred Menu</h2>
-        <p class="section-subtitle">Fresh & Organic Ingredients Only</p>
+        <h2 class="section-title">Our Menu</h2>
+        <p class="section-subtitle">Select Category To Filter Items</p>
+        
+        <div class="menu-tabs">
+            <button class="tab-btn active" onclick="filterMenu('all')">All</button>
+            <button class="tab-btn" onclick="filterMenu('mains')">Main Course</button>
+            <button class="tab-btn" onclick="filterMenu('desserts')">Desserts</button>
+        </div>
         
         <div class="menu-grid">
-            <div class="menu-item">
+            <div class="menu-item" data-category="mains">
                 <div class="menu-header">
                     <span class="menu-name">Truffle Glazed Burger</span>
                     <span class="menu-price">$18</span>
                 </div>
-                <p class="menu-desc">Prime beef patty, black truffle aioli, smoked cheddar, and caramelized onions served with artisan fries.</p>
+                <p class="menu-desc">Prime beef patty, black truffle aioli, smoked cheddar, and caramelized onions served with fries.</p>
             </div>
 
-            <div class="menu-item">
+            <div class="menu-item" data-category="mains">
                 <div class="menu-header">
                     <span class="menu-name">Fiery Pepperoni Pizza</span>
                     <span class="menu-price">$22</span>
@@ -219,27 +299,45 @@
                 <p class="menu-desc">Neapolitan sourdough base, spicy Italian pepperoni, fresh mozzarella, and hot honey drizzle.</p>
             </div>
 
-            <div class="menu-item">
+            <div class="menu-item" data-category="desserts">
                 <div class="menu-header">
-                    <span class="menu-name">Smoked Salmon Steak</span>
-                    <span class="menu-price">$29</span>
+                    <span class="menu-name">Molten Chocolate Lava</span>
+                    <span class="menu-price">$12</span>
                 </div>
-                <p class="menu-desc">Wild-caught Atlantic salmon, pan-seared with lemon herb butter, served with asparagus cream.</p>
+                <p class="menu-desc">Rich Belgian chocolate cake with a liquid core, served with premium Madagascar vanilla gelato.</p>
             </div>
 
-            <div class="menu-item">
+            <div class="menu-item" data-category="desserts">
                 <div class="menu-header">
-                    <span class="menu-name">Wild Mushroom Risotto</span>
-                    <span class="menu-price">$16</span>
+                    <span class="menu-name">Gold Leaf Saffron Cheesecake</span>
+                    <span class="menu-price">$15</span>
                 </div>
-                <p class="menu-desc">Arborio rice slowly simmered in rich forest mushroom broth, finished with aged parmesan gold leaves.</p>
+                <p class="menu-desc">Creamy New York style cheesecake infused with organic saffron threads, topped with pure edible gold.</p>
             </div>
         </div>
     </div>
 
-    <div id="booking" class="section" style="background-color: #0c0e12;">
-        <h2 class="section-title">Book A Table</h2>
-        <p class="section-subtitle">Secure your premium dining slot instantly</p>
+    <!-- Reviews Section -->
+    <div id="reviews" class="section" style="background-color: #0c0e12;">
+        <h2 class="section-title">Guest Reviews</h2>
+        <p class="section-subtitle">What Our Elite Clients Say</p>
+        
+        <div class="reviews-grid">
+            <div class="review-card">
+                <p class="review-text">"The truffle glazed burger was an absolute explosion of flavors. The ambience is sophisticated and private. Highly recommended."</p>
+                <div class="review-author">- Sophia Loren</div>
+            </div>
+            <div class="review-card">
+                <p class="review-text">"Flawless reservation system. The table was ready exactly on time and the saffron cheesecake is a work of pure art."</p>
+                <div class="review-author">- Marcus Vance</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Section -->
+    <div id="booking" class="section">
+        <h2 class="section-title">Table Reservation</h2>
+        <p class="section-subtitle">Instant Digital Allocation</p>
         
         <div class="booking-box">
             <form id="resForm" onsubmit="confirmBooking(event)">
@@ -248,35 +346,72 @@
                     <input type="text" id="custName" required placeholder="Enter your name">
                 </div>
                 <div class="form-group">
-                    <label>Number of Guests</label>
+                    <label>Guests Count</label>
                     <select id="guests">
-                        <option>1 Person</option>
-                        <option>2 Persons</option>
-                        <option>4 Persons</option>
-                        <option>Family (6+ Persons)</option>
+                        <option>1 Member</option>
+                        <option>2 Members</option>
+                        <option>4 Members</option>
+                        <option>Executive Suite (6+)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Reservation Time</label>
+                    <label>Preferred Time Slot</label>
                     <input type="time" id="resTime" required>
                 </div>
-                <button type="submit" class="btn" style="width: 100%;">Confirm Table</button>
+                <button type="submit" class="btn" style="width: 100%;">Confirm Secure Booking</button>
             </form>
         </div>
     </div>
 
+    <!-- Commercial Info Grid -->
+    <div class="info-grid">
+        <div class="info-col">
+            <h3>Operating Hours</h3>
+            <p>Monday - Friday: 12:00 PM - 11:00 PM</p>
+            <p>Saturday - Sunday: 01:00 PM - Midnight</p>
+        </div>
+        <div class="info-col">
+            <h3>Location & Contact</h3>
+            <p>Main Boulevard, Phase 5, DHA</p>
+            <p>Email: contact@goldenfork.com</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        &copy; 2026 The Golden Fork Restaurant. Elegance in every bite.
+        &copy; 2026 The Golden Fork Restaurant. Executive Digital Solution.
     </footer>
 
+    <!-- JavaScript Controls -->
     <script>
+        // Menu Filter Functionality
+        function filterMenu(category) {
+            // Update Active Tab Button Color
+            let buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            // Filter Logic
+            let items = document.querySelectorAll('.menu-item');
+            items.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else if (item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Form Validation System
         function confirmBooking(event) {
             event.preventDefault();
             let name = document.getElementById('custName').value;
             let guests = document.getElementById('guests').value;
             let time = document.getElementById('resTime').value;
             
-            alert(`Thank you ${name}! Your table for ${guests} at ${time} has been reserved successfully.`);
+            alert(`Reservation Confirmed!\nName: ${name}\nAllocation: ${guests}\nSchedule: ${time}`);
             document.getElementById('resForm').reset();
         }
     </script>
