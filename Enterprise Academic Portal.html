@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎓 Beacon Analytics | Enterprise Academic Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#f8f9fa] text-slate-700 min-h-screen antialiased">
+
+    <header class="sticky top-0 z-40 bg-white border-b border-gray-200/80 backdrop-blur-md bg-white/90 shadow-2xs">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl bg-pink-600 flex items-center justify-center text-white text-xl font-bold shadow-md shadow-pink-600/20 heading-font">
+                    BA
+                </div>
+                <div>
+                    <h1 class="text-slate-900 font-extrabold text-base md:text-lg tracking-tight heading-font">BEACON INTERNATIONAL</h1>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest block">Enterprise Grading & Analytics Node</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="hidden md:inline-block text-xs font-mono bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200">Terminal Server: Verified</span>
+                <span class="bg-pink-50 border border-pink-100 text-pink-700 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-pink-600 animate-pulse"></span>
+                    AY 2026 Live
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 space-y-8">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Cohort Pass Index</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-3xl font-bold text-slate-900 heading-font">94.8%</span>
+                    <span class="text-xs text-emerald-600 font-bold">↑ 1.2%</span>
+                </div>
+                <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden mt-3">
+                    <div class="bg-pink-600 h-full w-[94.8%]"></div>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Average Class GPA</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-3xl font-bold text-slate-900 heading-font">3.64</span>
+                    <span class="text-xs text-slate-400 font-mono">Out of 4.0</span>
+                </div>
+                <div class="w-full bg-gray-100 h-1.5 rounded-full overflow-hidden mt-3">
+                    <div class="bg-slate-700 h-full w-[85%]"></div>
+                </div>
+            </div>
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Highest Board Score</span>
+                <div class="flex items-baseline gap-2 mt-2">
+                    <span class="text-3xl font-bold text-slate-900 heading-font">482</span>
+                    <span class="text-xs text-pink-600 font-mono font-bold">Rank #1</span>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-3 truncate">Held by Roll Node: 10241</p>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-sm text-white flex flex-col justify-between">
+                <div>
+                    <span class="text-[9px] bg-pink-600 px-2 py-0.5 rounded text-white font-mono uppercase tracking-widest">System Broadcast</span>
+                    <p class="text-[11px] text-slate-300 mt-2 leading-relaxed">Re-checking matrix requests remain operational till June 25.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 p-4 rounded-2xl shadow-2xs flex flex-col lg:flex-row gap-4 items-center justify-between">
+            <div class="w-full lg:max-w-md relative">
+                <input type="text" id="systemSearchInput" onkeyup="executeLiveLedgerSearch()" placeholder="Search by Student Name, Rank, or Roll ID..." 
+                    class="w-full bg-slate-50 border border-gray-200 focus:border-pink-500 focus:bg-white rounded-xl pl-4 pr-10 py-3 text-sm focus:outline-none transition-all placeholder:text-slate-400 font-medium">
+                <span class="absolute right-4 top-3.5 text-slate-400 text-sm">🔍</span>
+            </div>
+            <div class="flex gap-2 w-full lg:w-auto overflow-x-auto">
+                <button onclick="filterRecordsState('all')" id="tab-all" class="px-4 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl shadow-2xs transition-all whitespace-nowrap">All Scholars</button>
+                <button onclick="filterRecordsState('A+')" id="tab-aplus" class="px-4 py-2.5 bg-white border border-gray-200 text-slate-600 text-xs font-bold rounded-xl hover:text-slate-900 transition-all whitespace-nowrap">Distinction (A+)</button>
+                <button onclick="filterRecordsState('Pass')" id="tab-pass" class="px-4 py-2.5 bg-white border border-gray-200 text-slate-600 text-xs font-bold rounded-xl hover:text-slate-900 transition-all whitespace-nowrap">Passed</button>
+                <button onclick="filterRecordsState('Fail')" id="tab-fail" class="px-4 py-2.5 bg-white border border-gray-200 text-slate-600 text-xs font-bold rounded-xl hover:text-slate-900 transition-all whitespace-nowrap">Detained</button>
+            </div>
+        </div>
+
+        <div class="bg-white border border-gray-200 rounded-2xl shadow-2xs overflow-hidden">
+            <div class="p-5 border-b border-gray-100 bg-gray-50/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                <div>
+                    <h3 class="text-slate-900 font-bold text-sm uppercase tracking-wider heading-font">Verified Examination Output Grid</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Click rows anywhere to access granular subject analytics distribution.</p>
+                </div>
+                <span id="systemCounterBadge" class="text-xs bg-pink-50 border border-pink-100 text-pink-700 font-bold px-3 py-1 rounded-md">7 Records Loaded</span>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-gray-200 bg-gray-50 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                            <th class="py-4 px-6">Rank Index</th>
+                            <th class="py-4 px-6">Roll ID</th>
+                            <th class="py-4 px-6">Scholar Name</th>
+                            <th class="py-4 px-6">Aggregate Marks</th>
+                            <th class="py-4 px-6">GPA Metric</th>
+                            <th class="py-4 px-6">Grade</th>
+                            <th class="py-4 px-6 text-center">Outcome</th>
+                            <th class="py-4 px-6 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="enterpriseTableBodyGrid" class="text-xs font-medium text-slate-600 divide-y divide-gray-100">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 md:px-8 py-8 border-t border-gray-200 mt-12 text-center text-xs text-slate-400 font-semibold">
+        <p>© 2026 Beacon Academy Systems Ltd. Operations Audit Interface: Rohma Noor.</p>
+    </footer>
+
+    <script>
+        // Highly granular enterprise student model database
+        const academicMasterRepository = [
+            { rank: 1, badge: "🥇 Gold", roll: "10241", name: "Ayesha Malik", marks: "482/500", percentage: "96.4%", gpa: "4.00", grade: "A+", status: "Pass", breakdown: { Math: 98, Science: 95, English: 94 } },
+            { rank: 2, badge: "🥈 Silver", roll: "10246", name: "Meerab Yousuf", marks: "468/500", percentage: "93.6%", gpa: "3.95", grade: "A+", status: "Pass", breakdown: { Math: 92, Science: 96, English: 93 } },
+            { rank: 3, badge: "🥉 Bronze", roll: "10242", name: "Zain Ahmed", marks: "451/500", percentage: "90.2%", gpa: "3.85", grade: "A+", status: "Pass", breakdown: { Math: 95, Science: 88, English: 91 } },
+            { rank: 4, badge: "🎖️ Scholar", roll: "10244", name: "Sana Fatima", marks: "412/500", percentage: "82.4%", gpa: "3.50", grade: "A", status: "Pass", breakdown: { Math: 84, Science: 81, English: 87 } },
+            { rank: 5, badge: "🎖️ Scholar", roll: "10243", name: "Hamza Shah", marks: "389/500", percentage: "77.8%", gpa: "3.20", grade: "B", status: "Pass", breakdown: { Math: 76, Science: 79, English: 78 } },
+            { rank: 6, badge: "❌ Detained", roll: "10245", name: "Bilal Khan", marks: "210/500", percentage: "42.0%", gpa: "1.50", grade: "E", status: "Fail", breakdown: { Math: 35, Science: 45, English: 46 } },
+            { rank: 7, badge: "❌ Detained", roll: "10247", name: "Ali Raza", marks: "185/500", percentage: "37.0%", gpa: "1.00", grade: "F", status: "Fail", breakdown: { Math: 30, Science: 32, English: 41 } }
+        ];
+
+        let currentActiveTabRoute = "all";
+
+        // Main rendering grid generator function
+        function compileCoreLedgerView(filterKey = "all") {
+            currentActiveTabRoute = filterKey;
+            const targetGrid = document.getElementById("enterpriseTableBodyGrid");
+            const counter = document.getElementById("systemCounterBadge");
+            if(!targetGrid) return;
+
+            targetGrid.innerHTML = "";
+
+            // Dynamic algorithmic row matching filtration rules
+            let dataSubset = academicMasterRepository;
+            if(filterKey === "Pass" || filterKey === "Fail") dataSubset = academicMasterRepository.filter(s => s.status === filterKey);
+            else if(filterKey === "A+") dataSubset = academicMasterRepository.filter(s => s.grade === "A+");
+
+            counter.innerText = `${dataSubset.length} Records Calculated`;
+
+            dataSubset.forEach(student => {
+                const outcomeBadgeStyle = student.status === "Pass" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-rose-50 text-rose-700 border-rose-100";
+                const rankColor = student.rank <= 3 ? "text-pink-600 font-extrabold" : "text-slate-400 font-medium";
+
+                targetGrid.innerHTML += `
+                    <tr onclick="toggleDataDrawerDropdown('${student.roll}')" class="hover:bg-slate-50/80 transition-all cursor-pointer">
+                        <td class="py-4 px-6 ${rankColor}">${student.badge}</td>
+                        <td class="py-4 px-6 font-mono font-bold text-slate-900">${student.roll}</td>
+                        <td class="py-4 px-6 font-extrabold text-slate-900">${student.name}</td>
+                        <td class="py-4 px-6 font-medium">${student.marks} <span class="text-[10px] text-slate-400 font-bold">(${student.percentage})</span></td>
+                        <td class="py-4 px-6 font-mono font-bold text-slate-800">${student.gpa}</td>
+                        <td class="py-4 px-6"><span class="font-black text-slate-900 text-sm">${student.grade}</span></td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="px-2.5 py-1 rounded-md border text-[9px] font-black uppercase tracking-wider ${outcomeBadgeStyle}">${student.status}</span>
+                        </td>
+                        <td class="py-4 px-6 text-right" onclick="event.stopPropagation();">
+                            <button onclick="window.print()" class="text-[10px] bg-white border border-gray-200 hover:border-pink-500 font-bold px-3 py-1.5 rounded-lg text-slate-600 hover:text-pink-600 shadow-3xs transition-all">Report Card 🖨️</button>
+                        </td>
+                    </tr>
+                    <tr id="drawer-node-${student.roll}" class="hidden bg-slate-50/50">
+                        <td colspan="8" class="p-6">
+                            <div class="bg-white border border-gray-200/80 rounded-xl p-4 max-w-xl shadow-3xs space-y-3">
+                                <h5 class="text-slate-900 font-bold text-xs uppercase tracking-wide heading-font">Subject Marks Segment Breakdown</h5>
+                                <div class="grid grid-cols-3 gap-4 text-center">
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">Mathematics</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.Math}/100</span>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">Core Science</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.Science}/100</span>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">English Lit.</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.English}/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
+
+            // Adjust Tab Visual Highlights
+            const routesList = { all: "tab-all", "A+": "tab-aplus", Pass: "tab-pass", Fail: "tab-fail" };
+            Object.keys(routesList).forEach(key => {
+                const element = document.getElementById(routesList[key]);
+                if(key === filterKey) {
+                    element.className = "px-4 py-2.5 bg-slate-900 text-white text-xs font-bold rounded-xl shadow-2xs transition-all whitespace-nowrap";
+                } else {
+                    element.className = "px-4 py-2.5 bg-white border border-gray-200 text-slate-600 text-xs font-bold rounded-xl hover:text-slate-900 transition-all whitespace-nowrap";
+                }
+            });
+        }
+
+        // Dropdown toggle system routine
+        function toggleDataDrawerDropdown(rollID) {
+            const targetNode = document.getElementById(`drawer-node-${rollID}`);
+            if(targetNode.classList.contains("hidden")) {
+                targetNode.classList.remove("hidden");
+            } else {
+                targetNode.classList.add("hidden");
+            }
+        }
+
+        // Live string ledger dynamic pipeline search controller
+        function executeLiveLedgerSearch() {
+            const searchStr = document.getElementById("systemSearchInput").value.toLowerCase();
+            const targetGrid = document.getElementById("enterpriseTableBodyGrid");
+            if(!targetGrid) return;
+
+            targetGrid.innerHTML = "";
+
+            // Base filtered set array matrix computation lines
+            let baseArray = currentActiveTabRoute === "all" ? academicMasterRepository : academicMasterRepository.filter(s => s.status === currentActiveTabRoute);
+            if(currentActiveTabRoute === "A+") baseArray = academicMasterRepository.filter(s => s.grade === "A+");
+
+            const finalSearchedSet = baseArray.filter(s => s.name.toLowerCase().includes(searchStr) || s.roll.includes(searchStr));
+            document.getElementById("systemCounterBadge").innerText = `${finalSearchedSet.length} Records Found`;
+
+            finalSearchedSet.forEach(student => {
+                const outcomeBadgeStyle = student.status === "Pass" ? "bg-emerald-50 text-emerald-700 border-emerald-100" : "bg-rose-50 text-rose-700 border-rose-100";
+                
+                targetGrid.innerHTML += `
+                    <tr onclick="toggleDataDrawerDropdown('${student.roll}')" class="hover:bg-slate-50/80 transition-all cursor-pointer">
+                        <td class="py-4 px-6 text-slate-400 font-medium">${student.badge}</td>
+                        <td class="py-4 px-6 font-mono font-bold text-slate-900">${student.roll}</td>
+                        <td class="py-4 px-6 font-extrabold text-slate-900">${student.name}</td>
+                        <td class="py-4 px-6 font-medium">${student.marks} <span class="text-[10px] text-slate-400 font-bold">(${student.percentage})</span></td>
+                        <td class="py-4 px-6 font-mono font-bold text-slate-800">${student.gpa}</td>
+                        <td class="py-4 px-6"><span class="font-black text-slate-900 text-sm">${student.grade}</span></td>
+                        <td class="py-4 px-6 text-center">
+                            <span class="px-2.5 py-1 rounded-md border text-[9px] font-black uppercase tracking-wider ${outcomeBadgeStyle}">${student.status}</span>
+                        </td>
+                        <td class="py-4 px-6 text-right" onclick="event.stopPropagation();">
+                            <button onclick="window.print()" class="text-[10px] bg-white border border-gray-200 hover:border-pink-500 font-bold px-3 py-1.5 rounded-lg text-slate-600 hover:text-pink-600 shadow-3xs transition-all">Report Card 🖨️</button>
+                        </td>
+                    </tr>
+                    <tr id="drawer-node-${student.roll}" class="hidden bg-slate-50/50">
+                        <td colspan="8" class="p-6">
+                            <div class="bg-white border border-gray-200/80 rounded-xl p-4 max-w-xl shadow-3xs space-y-3">
+                                <h5 class="text-slate-900 font-bold text-xs uppercase tracking-wide heading-font">Subject Marks Segment Breakdown</h5>
+                                <div class="grid grid-cols-3 gap-4 text-center">
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">Mathematics</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.Math}/100</span>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">Core Science</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.Science}/100</span>
+                                    </div>
+                                    <div class="bg-gray-50 border border-gray-100 p-2 rounded-lg">
+                                        <span class="text-[9px] text-slate-400 uppercase font-bold block">English Lit.</span>
+                                        <span class="text-sm font-black text-slate-800">${student.breakdown.English}/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>`;
+            });
+        }
+
+        // Standard event loop pipeline trigger on setup mount load
+        window.onload = function() {
+            compileCoreLedgerView('all');
+        }
+    </script>
+</body>
+</html>
