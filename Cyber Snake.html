@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Cyber Snake Neon Pro v2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
+        }
+        .cyber-font { font-family: 'Orbitron', sans-serif; }
+        canvas {
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.2);
+            background-color: #020617;
+        }
+    </style>
+</head>
+<body class="text-slate-200 min-h-screen flex flex-col items-center justify-center p-4 overflow-x-hidden antialiased">
+
+    <div class="w-full max-w-lg bg-slate-900/90 backdrop-blur-md border border-pink-500/30 p-5 md:p-6 rounded-3xl shadow-2xl shadow-pink-500/5 flex flex-col gap-5">
+        
+        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+            <div>
+                <h1 class="text-xl md:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 cyber-font tracking-wider">CYBER SNAKE</h1>
+                <span class="text-[9px] font-mono tracking-widest text-cyan-400 font-bold uppercase block mt-0.5">ROHMA MATRIX EDITION v2.0</span>
+            </div>
+            
+            <div class="flex gap-2 text-right">
+                <div class="bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 min-w-[70px]">
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400 block font-bold">Score</span>
+                    <span id="currentScoreLabel" class="text-base font-bold text-pink-500 cyber-font">00</span>
+                </div>
+                <div class="bg-slate-950/80 px-3 py-1.5 rounded-xl border border-slate-800 min-w-[70px]">
+                    <span class="text-[8px] uppercase tracking-wider text-slate-400 block font-bold">Best</span>
+                    <span id="highScoreLabel" class="text-base font-bold text-cyan-400 cyber-font">00</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="relative flex justify-center items-center rounded-2xl overflow-hidden border border-slate-800 bg-slate-950">
+            <canvas id="gameGridStage" width="400" height="400" class="w-full aspect-square max-w-[400px]"></canvas>
+            
+            <div id="gameOverlayPanel" class="absolute inset-0 bg-slate-950/80 backdrop-blur-xs flex flex-col items-center justify-center text-center p-6 space-y-4 transition-all duration-300">
+                <div class="w-14 h-14 bg-pink-500/10 border border-pink-500/40 rounded-full flex items-center justify-center animate-bounce text-2xl">🕹️</div>
+                <h2 id="overlayMainHeading" class="text-lg font-bold text-white cyber-font tracking-wide">SYSTEM READY</h2>
+                <p id="overlaySubtext" class="text-xs text-slate-400 max-w-xs leading-relaxed">Press spacebar, arrow keys, or any touch control button below to override the core grid stream.</p>
+                <button onclick="bootGameMatrix()" class="bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider shadow-md shadow-pink-500/20 transition-all">Start Grid Stream 🚀</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 max-w-[210px] mx-auto w-full pt-1">
+            <div></div>
+            <button onclick="triggerDirectionShift('UP')" class="bg-slate-950 hover:bg-slate-800 border border-slate-800 active:border-pink-500 text-sm font-bold p-3.5 rounded-xl text-center transition-all shadow-sm">🔺</button>
+            <div></div>
+            <button onclick="triggerDirectionShift('LEFT')" class="bg-slate-950 hover:bg-slate-800 border border-slate-800 active:border-pink-500 text-sm font-bold p-3.5 rounded-xl text-center transition-all shadow-sm">◀️</button>
+            <div class="bg-slate-950/40 border border-slate-900 rounded-xl flex items-center justify-center text-[10px] font-bold text-slate-600 tracking-tighter uppercase font-mono">PAD</div>
+            <button onclick="triggerDirectionShift('RIGHT')" class="bg-slate-950 hover:bg-slate-800 border border-slate-800 active:border-pink-500 text-sm font-bold p-3.5 rounded-xl text-center transition-all shadow-sm">▶️</button>
+            <div></div>
+            <button onclick="triggerDirectionShift('DOWN')" class="bg-slate-950 hover:bg-slate-800 border border-slate-800 active:border-pink-500 text-sm font-bold p-3.5 rounded-xl text-center transition-all shadow-sm">🔻</button>
+            <div></div>
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById("gameGridStage");
+        const ctx = canvas.getContext("2d");
+
+        const gridScaleUnit = 20;
+        const matrixBlockCount = canvas.width / gridScaleUnit;
+
+        let snakeBodyCoordinates = [];
+        let snakeVelocityVector = { x: 0, y: 0 };
+        let activeFoodLocation = { x: 0, y: 0 };
+        
+        let scoreAccumulator = 0;
+        let persistentHighScore = localStorage.getItem("cybersnake_high") || 0;
+        document.getElementById("highScoreLabel").innerText = String(persistentHighScore).padStart(2, '0');
+
+        let coreGameLoopTimer = null;
+        let isSystemProcessingActive = false;
+        let currentTargetSpeedMs = 110;
+        let blastParticlesArray = [];
+
+        // Audio synthesizer using Web Audio API (No files needed!)
+        const audioEngineContext = new (window.AudioContext || window.webkitAudioContext)();
+        function playSynthBeepTone(freq, duration, type="square") {
+            try {
+                const osc = audioEngineContext.createOscillator();
+                const gain = audioEngineContext.createGain();
+                osc.type = type;
+                osc.frequency.value = freq;
+                gain.gain.setValueAtTime(0.1, audioEngineContext.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.00001, audioEngineContext.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioEngineContext.destination);
+                osc.start();
+                osc.stop(audioEngineContext.currentTime + duration);
+            } catch(e) {}
+        }
+
+        function bootGameMatrix() {
+            snakeBodyCoordinates = [
+                { x: 10, y: 10 },
+                { x: 10, y: 11 },
+                { x: 10, y: 12 }
+            ];
+            snakeVelocityVector = { x: 0, y: -1 };
+            scoreAccumulator = 0;
+            currentTargetSpeedMs = 110;
+            blastParticlesArray = [];
+            
+            document.getElementById("currentScoreLabel").innerText = "00";
+            document.getElementById("gameOverlayPanel").classList.add("hidden");
+            
+            generateTargetFoodNode();
+            if(coreGameLoopTimer) clearInterval(coreGameLoopTimer);
+            coreGameLoopTimer = setInterval(processSystemTickFrame, currentTargetSpeedMs);
+            isSystemProcessingActive = true;
+            playSynthBeepTone(440, 0.15, "triangle");
+        }
+
+        function generateTargetFoodNode() {
+            activeFoodLocation = {
+                x: Math.floor(Math.random() * matrixBlockCount),
+                y: Math.floor(Math.random() * matrixBlockCount)
+            };
+            // Avoid spawning inside the snake body
+            snakeBodyCoordinates.forEach(segment => {
+                if(segment.x === activeFoodLocation.x && segment.y === activeFoodLocation.y) {
+                    generateTargetFoodNode();
+                }
+            });
+        }
+
+        function processSystemTickFrame() {
+            // Compute Next Coordinates Head Position
+            const headSegment = { 
+                x: snakeBodyCoordinates[0].x + snakeVelocityVector.x, 
+                y: snakeBodyCoordinates[0].y + snakeVelocityVector.y 
+            };
+
+            // Grid Boundary Collision Vector Checks
+            if (headSegment.x < 0 || headSegment.x >= matrixBlockCount || headSegment.y < 0 || headSegment.y >= matrixBlockCount) {
+                return executeCrashSequence();
+            }
+
+            // Self Bite Collision Check
+            for (let i = 0; i < snakeBodyCoordinates.length; i++) {
+                if (snakeBodyCoordinates[i].x === headSegment.x && snakeBodyCoordinates[i].y === headSegment.y) {
+                    return executeCrashSequence();
+                }
+            }
+
+            // Prepend Head Segment
+            snakeBodyCoordinates.unshift(headSegment);
+
+            // Food Node Capture Check
+            if (headSegment.x === activeFoodLocation.x && headSegment.y === activeFoodLocation.y) {
+                scoreAccumulator += 10;
+                document.getElementById("currentScoreLabel").innerText = String(scoreAccumulator).padStart(2, '0');
+                playSynthBeepTone(880, 0.1, "sine");
+                
+                // Spawn explosion particles
+                for(let p=0; p<12; p++) {
+                    blastParticlesArray.push({
+                        x: activeFoodLocation.x * gridScaleUnit + gridScaleUnit/2,
+                        y: activeFoodLocation.y * gridScaleUnit + gridScaleUnit/2,
+                        vx: (Math.random() - 0.5) * 6,
+                        vy: (Math.random() - 0.5) * 6,
+                        alpha: 1,
+                        color: Math.random() > 0.5 ? '#ec4899' : '#06b6d4'
+                    });
+                }
+
+                generateTargetFoodNode();
+                
+                // Increase difficulty speed index step dynamically
+                if (scoreAccumulator % 30 === 0 && currentTargetSpeedMs > 60) {
+                    currentTargetSpeedMs -= 8;
+                    clearInterval(coreGameLoopTimer);
+                    coreGameLoopTimer = setInterval(processSystemTickFrame, currentTargetSpeedMs);
+                }
+            } else {
+                snakeBodyCoordinates.pop();
+            }
+
+            renderGraphicsFrame();
+        }
+
+        function renderGraphicsFrame() {
+            // Clear Frame Buffer Canvas Area
+            ctx.fillStyle = "#020617";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw Digital Grid Matrix Lines
+            ctx.strokeStyle = "rgba(30, 41, 59, 0.3)";
+            ctx.lineWidth = 0.5;
+            for(let i=0; i<matrixBlockCount; i++) {
+                ctx.beginPath(); ctx.moveTo(i*gridScaleUnit, 0); ctx.lineTo(i*gridScaleUnit, canvas.height); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i*gridScaleUnit); ctx.lineTo(canvas.width, i*gridScaleUnit); ctx.stroke();
+            }
+
+            // Render Target Food Node (Neon Glow Ring Particle)
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = "#ec4899";
+            ctx.fillStyle = "#ec4899";
+            ctx.beginPath();
+            ctx.arc(activeFoodLocation.x * gridScaleUnit + gridScaleUnit/2, activeFoodLocation.y * gridScaleUnit + gridScaleUnit/2, gridScaleUnit/2 - 2, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Render Snake Segment Array Nodes
+            snakeBodyCoordinates.forEach((segment, idx) => {
+                ctx.shadowBlur = idx === 0 ? 12 : 4;
+                ctx.shadowColor = idx === 0 ? "#22d3ee" : "#a855f7";
+                ctx.fillStyle = idx === 0 ? "#22d3ee" : `rgba(168, 85, 247, ${1 - (idx / snakeBodyCoordinates.length) * 0.6})`;
+                
+                // Draw smooth rounded square nodes
+                const offsetPadding = 1.5;
+                ctx.fillRect(
+                    segment.x * gridScaleUnit + offsetPadding, 
+                    segment.y * gridScaleUnit + offsetPadding, 
+                    gridScaleUnit - offsetPadding * 2, 
+                    gridScaleUnit - offsetPadding * 2
+                );
+            });
+            ctx.shadowBlur = 0; // Reset Shadow Canvas State
+
+            // Render/Animate Explosion Blast Particles Trail
+            blastParticlesArray.forEach((p, index) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.alpha -= 0.04;
+                if(p.alpha <= 0) {
+                    blastParticlesArray.splice(index, 1);
+                } else {
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = p.color;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, Math.PI*2); ctx.fill();
+                    ctx.restore();
+                }
+            });
+        }
+
+        function executeCrashSequence() {
+            isSystemProcessingActive = false;
+            clearInterval(coreGameLoopTimer);
+            playSynthBeepTone(150, 0.4, "sawtooth");
+
+            if (scoreAccumulator > persistentHighScore) {
+                persistentHighScore = scoreAccumulator;
+                localStorage.setItem("cybersnake_high", persistentHighScore);
+                document.getElementById("highScoreLabel").innerText = String(persistentHighScore).padStart(2, '0');
+            }
+
+            document.getElementById("overlayMainHeading").innerText = "CORE OVERLOAD";
+            document.getElementById("overlaySubtext").innerHTML = `💥 Grid link broken! You terminated at <span class="text-pink-500 font-bold font-mono">${scoreAccumulator} points</span>.`;
+            document.getElementById("gameOverlayPanel").classList.remove("hidden");
+        }
+
+        function triggerDirectionShift(dir) {
+            if(!isSystemProcessingActive) return;
+            if (dir === "UP" && snakeVelocityVector.y !== 1) { snakeVelocityVector = { x: 0, y: -1 }; }
+            else if (dir === "DOWN" && snakeVelocityVector.y !== -1) { snakeVelocityVector = { x: 0, y: 1 }; }
+            else if (dir === "LEFT" && snakeVelocityVector.x !== 1) { snakeVelocityVector = { x: -1, y: 0 }; }
+            else if (dir === "RIGHT" && snakeVelocityVector.x !== -1) { snakeVelocityVector = { x: 1, y: 0 }; }
+        }
+
+        // Computer Keyboard Event Router Mapping
+        window.addEventListener("keydown", e => {
+            if(!isSystemProcessingActive && e.code === "Space") {
+                bootGameMatrix();
+                return;
+            }
+            switch (e.key) {
+                case "ArrowUp": triggerDirectionShift("UP"); e.preventDefault(); break;
+                case "ArrowDown": triggerDirectionShift("DOWN"); e.preventDefault(); break;
+                case "ArrowLeft": triggerDirectionShift("LEFT"); e.preventDefault(); break;
+                case "ArrowRight": triggerDirectionShift("RIGHT"); e.preventDefault(); break;
+            }
+        });
+    </script>
+</body>
+</html>
