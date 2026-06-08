@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛍️ AuraMart | Premium Shopping Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen antialiased">
+
+    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+            <a href="#" class="heading-font font-bold text-xl md:text-2xl tracking-tight text-slate-900 flex items-center gap-2">
+                <span class="w-10 h-10 rounded-xl bg-gradient-to-tr from-orange-500 to-pink-600 flex items-center justify-center text-white text-base shadow-md shadow-orange-500/20">AM</span>
+                Aura<span class="text-orange-500">Mart.</span>
+            </a>
+
+            <div class="hidden md:flex flex-1 max-w-md mx-8">
+                <input type="text" placeholder="Search premium tech, fashion, essentials..." class="w-full bg-slate-100 border border-transparent focus:border-orange-500 focus:bg-white rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-all placeholder:text-slate-400">
+            </div>
+
+            <button onclick="toggleShoppingCartDrawer()" class="relative p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition flex items-center gap-2">
+                <span class="text-lg">🛒</span>
+                <span class="text-xs font-bold hidden sm:inline">My Cart</span>
+                <span id="cartCountBadge" class="absolute -top-1.5 -right-1.5 bg-orange-500 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">0</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 md:px-6 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <aside class="lg:col-span-3 space-y-6">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="text-slate-900 font-bold text-sm uppercase tracking-wider border-b border-slate-100 pb-2">Categories</h3>
+                <div class="space-y-1 text-sm font-medium text-slate-600">
+                    <button onclick="filterShopItems('all')" class="w-full text-left px-3 py-2 rounded-xl bg-orange-50 text-orange-600 font-bold transition flex items-center justify-between group">
+                        <span>✨ All Products</span>
+                    </button>
+                    <button onclick="filterShopItems('tech')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition flex items-center justify-between group">
+                        <span>💻 Electronics</span>
+                    </button>
+                    <button onclick="filterShopItems('fashion')" class="w-full text-left px-3 py-2 rounded-xl hover:bg-slate-50 hover:text-slate-900 transition flex items-center justify-between group">
+                        <span>👟 Apparel & Shoes</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-purple-600 to-indigo-700 p-6 rounded-2xl text-white shadow-md shadow-purple-600/10 space-y-3 relative overflow-hidden">
+                <div class="absolute -right-6 -bottom-6 w-24 h-24 bg-white/10 rounded-full blur-xl"></div>
+                <span class="bg-white/20 text-white px-2.5 py-0.5 rounded-md text-[10px] font-bold tracking-wider uppercase">ROHMA SPECIAL</span>
+                <h4 class="font-bold text-base leading-tight">Get Free Delivery this week!</h4>
+                <p class="text-[11px] text-purple-200 leading-relaxed">Use code <span class="font-mono font-bold text-white bg-slate-900/40 px-1 rounded">AURA2026</span> on checkout matrix.</p>
+            </div>
+        </aside>
+
+        <section class="lg:col-span-9 space-y-6">
+            <div class="bg-gradient-to-r from-orange-500 to-pink-500 rounded-2xl p-6 md:p-8 text-white shadow-lg shadow-orange-500/10 flex flex-col justify-center min-h-[160px]">
+                <h2 class="text-xl md:text-3xl font-extrabold heading-font tracking-tight">Upgrade Your Daily Dynamic Setup</h2>
+                <p class="text-xs md:text-sm text-orange-50 mt-2 max-w-md opacity-90">Explore authentic tech widgets and luxury wearables premium items carefully curated for excellence.</p>
+            </div>
+
+            <div id="storeCatalogItemsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
+                </div>
+        </section>
+    </main>
+
+    <div id="shoppingCartDrawerOverlay" class="fixed inset-0 bg-slate-950/40 backdrop-blur-xs z-50 pointer-events-none opacity-0 transition-all duration-300 flex justify-end">
+        <div id="shoppingCartDrawerBody" class="w-full max-w-md bg-white h-full shadow-2xl translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between">
+            
+            <div>
+                <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-xl">🛍️</span>
+                        <h3 class="text-slate-900 font-bold text-base">Selected Items Bag</h3>
+                    </div>
+                    <button onclick="toggleShoppingCartDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 font-bold flex items-center justify-center hover:bg-slate-200 transition">✕</button>
+                </div>
+
+                <div id="cartItemsStackList" class="space-y-4 py-4 overflow-y-auto max-h-[60vh]">
+                    </div>
+            </div>
+
+            <div class="border-t border-slate-100 pt-4 space-y-4">
+                <div class="flex items-center justify-between text-sm font-medium">
+                    <span class="text-slate-500">Order Subtotal:</span>
+                    <span id="cartSubtotalValueText" class="text-lg font-black text-slate-900">$0.00</span>
+                </div>
+                <p class="text-[10px] text-slate-400 leading-normal">Shipping, tax data variables, and promotion voucher codes are computed instantly on step checkout matrix validation routes.</p>
+                <button onclick="alert('🎉 Order successfully generated into AuraMart database pipeline!')" class="w-full bg-gradient-to-r from-orange-500 to-pink-600 hover:from-orange-600 hover:to-pink-700 text-white font-bold py-3.5 rounded-xl text-center text-xs uppercase tracking-wider shadow-md shadow-orange-500/20 transition-all">Proceed to Secure Checkout 🚀</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Master Products Catalog Mock Database
+        const catalogProductsDatabase = [
+            { id: 101, category: "tech", name: "Aura Pods Neon Max", price: 129.00, icon: "🎧", desc: "Wireless active sound canceling audio pods node stream." },
+            { id: 102, category: "tech", name: "Quantum Fit Smartwatch", price: 245.00, icon: "⌚", desc: "AMOLED biometric heart monitor active tracker sync matrix." },
+            { id: 103, category: "fashion", name: "Cyber Pulse Retro Sneakers", price: 89.00, icon: "👟", desc: "Ultra comfort breathable performance mesh sports apparel." },
+            { id: 104, category: "tech", name: "Apex Pro mechanical Keyboard", price: 159.00, icon: "⌨️", desc: "Hot-swappable RGB custom linear switch dynamic keyboard." },
+            { id: 105, category: "fashion", name: "Vanguard Tech Backpack", price: 75.00, icon: "🎒", desc: "Waterproof secure compartmental layout utility travel bag." },
+            { id: 106, category: "fashion", name: "Classic Cobalt Leather Wallet", price: 42.00, icon: "💼", desc: "Genuine secure minimal pocket card holder cluster storage." }
+        ];
+
+        let activelySelectedCartItems = [];
+
+        // Generate Grid UI Cards Product Display Node
+        function renderStorefrontCatalog(filterKey = "all") {
+            const gridContainer = document.getElementById("storeCatalogItemsGrid");
+            if(!gridContainer) return;
+
+            gridContainer.innerHTML = "";
+            const filteredSet = filterKey === "all" ? catalogProductsDatabase : catalogProductsDatabase.filter(p => p.category === filterKey);
+
+            filteredSet.forEach(product => {
+                gridContainer.innerHTML += `
+                    <div class="bg-white border border-slate-200 p-5 rounded-2xl shadow-xs hover:shadow-md hover:border-orange-500/30 transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="w-12 h-12 bg-slate-100 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300 mb-4">${product.icon}</div>
+                            <h4 class="text-slate-900 font-bold text-base tracking-tight">${product.name}</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">${product.desc}</p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                            <span class="text-slate-900 font-extrabold text-lg">$${product.price.toFixed(2)}</span>
+                            <button onclick="addProductToShoppingCartBag(${product.id})" class="bg-slate-900 hover:bg-orange-500 text-white font-bold px-3.5 py-2 rounded-xl text-xs transition-all uppercase tracking-wide">Add 🛒</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // Add Product node to local Array memory stack
+        function addProductToShoppingCartBag(id) {
+            const matchProduct = catalogProductsDatabase.find(p => p.id === id);
+            if(!matchProduct) return;
+
+            // Check if item exists to increment, or push fresh structural block
+            const existingCartItem = activelySelectedCartItems.find(item => item.product.id === id);
+            if (existingCartItem) {
+                existingCartItem.quantity += 1;
+            } else {
+                activelySelectedCartItems.push({ product: matchProduct, quantity: 1 });
+            }
+
+            synchronizeShoppingCartStateUI();
+        }
+
+        // Remove item row node block execution
+        function dropProductFromShoppingCartBag(id) {
+            activelySelectedCartItems = activelySelectedCartItems.filter(item => item.product.id !== id);
+            synchronizeShoppingCartStateUI();
+        }
+
+        // Synchronize counters, total text prices, and list rows inside structural drawer layout
+        function synchronizeShoppingCartStateUI() {
+            const listContainer = document.getElementById("cartItemsStackList");
+            const badgeCount = document.getElementById("cartCountBadge");
+            const totalText = document.getElementById("cartSubtotalValueText");
+
+            if(!listContainer) return;
+            listContainer.innerHTML = "";
+
+            let computedTotalSum = 0;
+            let totalQuantityCounter = 0;
+
+            if (activelySelectedCartItems.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-12 text-slate-400 space-y-2">
+                        <span class="text-4xl block">🧺</span>
+                        <p class="text-xs font-medium">Your shopping cart bag node is currently empty.</p>
+                    </div>`;
+            } else {
+                activelySelectedCartItems.forEach(item => {
+                    const rowPriceSum = item.product.price * item.quantity;
+                    computedTotalSum += rowPriceSum;
+                    totalQuantityCounter += item.quantity;
+
+                    listContainer.innerHTML += `
+                        <div class="flex items-center justify-between gap-4 p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium">
+                            <div class="flex items-center gap-3 truncate">
+                                <span class="text-xl bg-white w-9 h-9 rounded-lg border border-slate-200 flex items-center justify-center shrink-0">${item.product.icon}</span>
+                                <div class="truncate">
+                                    <h5 class="text-slate-900 font-bold truncate">${item.product.name}</h5>
+                                    <span class="text-[10px] text-slate-500 font-mono">Qty: ${item.quantity} • $${item.product.price.toFixed(2)} each</span>
+                                </div>
+                            </div>
+                            <div class="text-right shrink-0 flex items-center gap-3">
+                                <span class="text-slate-900 font-extrabold">$${rowPriceSum.toFixed(2)}</span>
+                                <button onclick="dropProductFromShoppingCartBag(${item.product.id})" class="text-slate-400 hover:text-red-500 font-bold px-1 text-sm">✕</button>
+                            </div>
+                        </div>`;
+                });
+            }
+
+            badgeCount.innerText = totalQuantityCounter;
+            totalText.innerText = `$${computedTotalSum.toFixed(2)}`;
+        }
+
+        // Filter handler categories trigger shift action route selection
+        function filterShopItems(categoryKey) {
+            renderStorefrontCatalog(categoryKey);
+            
+            // Adjust basic button active stylings for visual feedback loop
+            const buttons = document.querySelectorAll("aside button");
+            buttons.forEach(btn => {
+                btn.className = "w-full text-left px-3 py-2 rounded-xl hover:bg-slate-50 hover:text-slate
