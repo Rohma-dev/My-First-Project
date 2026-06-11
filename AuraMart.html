@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🛍️ AuraMart | Premium Luxury Hub</title>
+    <title>🛍️ AuraMart | Premium Cyber Mint Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -13,78 +13,78 @@
         .cart-drawer { transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
     </style>
 </head>
-<body class="bg-[#0f172a] text-slate-200 min-h-screen antialiased overflow-x-hidden">
+<body class="bg-[#0b1315] text-slate-200 min-h-screen antialiased overflow-x-hidden">
 
-    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-slate-800 text-amber-400 border border-amber-500/30 px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
-        <span class="text-amber-400 font-bold">✓</span>
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 bg-[#122226] text-[#10b981] border border-[#10b981]/30 px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <span class="text-[#10b981] font-bold">✓</span>
         <span id="toastMessage" class="text-xs font-semibold text-slate-100">Item added to bag</span>
     </div>
 
-    <header class="sticky top-0 z-40 bg-slate-900/80 backdrop-blur-md shadow-lg border-b border-slate-800">
+    <header class="sticky top-0 z-40 bg-[#0b1315]/80 backdrop-blur-md shadow-lg border-b border-[#16272c]">
         <div class="max-w-6xl mx-auto px-4 md:px-6 h-20 flex items-center justify-between gap-4">
             <a href="#" onclick="navigateToPage('all')" class="heading-font font-bold text-xl md:text-2xl tracking-tight text-white flex items-center gap-2 shrink-0">
-                <span class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-slate-950 text-base font-extrabold shadow-md shadow-amber-500/20">AM</span>
-                Aura<span class="text-amber-400">Mart.</span>
+                <span class="w-10 h-10 rounded-xl bg-[#10b981] flex items-center justify-center text-[#0b1315] text-base font-extrabold shadow-md shadow-[#10b981]/20">AM</span>
+                Aura<span class="text-[#10b981]">Mart.</span>
             </a>
 
-            <div class="bg-slate-950 p-1 rounded-xl hidden md:flex gap-1 text-sm font-bold text-slate-400 border border-slate-800">
-                <button id="tab-all" onclick="navigateToPage('all')" class="px-4 py-2 bg-slate-800 text-amber-400 rounded-lg shadow-sm transition-all border border-slate-700/50">✨ All Products</button>
+            <div class="bg-[#060c0d] p-1 rounded-xl hidden md:flex gap-1 text-sm font-bold text-slate-400 border border-[#16272c]">
+                <button id="tab-all" onclick="navigateToPage('all')" class="px-4 py-2 bg-[#122226] text-[#10b981] rounded-lg shadow-sm transition-all border border-[#1a3138]">✨ All Products</button>
                 <button id="tab-tech" onclick="navigateToPage('tech')" class="px-4 py-2 hover:text-slate-200 rounded-lg transition-all text-slate-400">💻 Electronics</button>
                 <button id="tab-fashion" onclick="navigateToPage('fashion')" class="px-4 py-2 hover:text-slate-200 rounded-lg transition-all text-slate-400">👟 Apparel</button>
             </div>
 
             <div class="flex items-center gap-3 w-full md:w-auto justify-end">
                 <div class="relative max-w-xs w-full hidden sm:block">
-                    <input type="text" id="productSearchInput" oninput="handleSearchFilter()" placeholder="Search catalog..." class="w-full bg-slate-950 border border-slate-800 text-xs rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-amber-500 focus:bg-slate-900 transition-all">
+                    <input type="text" id="productSearchInput" oninput="handleSearchFilter()" placeholder="Search catalog..." class="w-full bg-[#060c0d] border border-[#16272c] text-xs rounded-xl px-4 py-2.5 text-slate-200 outline-none focus:border-[#10b981] focus:bg-[#0b1315] transition-all">
                 </div>
                 
-                <button onclick="toggleCartDrawer(true)" class="p-2.5 bg-slate-900 border border-slate-800 text-slate-300 rounded-xl font-bold text-sm flex items-center gap-2 shadow-sm hover:bg-slate-800 hover:text-white transition-all cursor-pointer shrink-0">
+                <button onclick="toggleCartDrawer(true)" class="p-2.5 bg-[#0b1315] border border-[#16272c] text-slate-300 rounded-xl font-bold text-sm flex items-center gap-2 shadow-sm hover:bg-[#122226] hover:text-white transition-all cursor-pointer shrink-0">
                     <span>🛒</span>
-                    <span id="globalBagCount" class="bg-amber-500 text-slate-950 text-xs px-2 py-0.5 rounded-md font-extrabold">0</span>
+                    <span id="globalBagCount" class="bg-[#10b981] text-[#0b1315] text-xs px-2 py-0.5 rounded-md font-extrabold">0</span>
                 </button>
             </div>
         </div>
         
-        <div class="max-w-6xl mx-auto px-4 pb-3 flex md:hidden gap-1 justify-center border-t border-slate-800 pt-2">
-            <button id="mob-tab-all" onclick="navigateToPage('all')" class="text-xs font-bold px-4 py-2 rounded-lg bg-amber-500 text-slate-950">All</button>
+        <div class="max-w-6xl mx-auto px-4 pb-3 flex md:hidden gap-1 justify-center border-t border-[#16272c] pt-2">
+            <button id="mob-tab-all" onclick="navigateToPage('all')" class="text-xs font-bold px-4 py-2 rounded-lg bg-[#10b981] text-[#0b1315]">All</button>
             <button id="mob-tab-tech" onclick="navigateToPage('tech')" class="text-xs font-bold px-4 py-2 rounded-lg text-slate-400">Electronics</button>
             <button id="mob-tab-fashion" onclick="navigateToPage('fashion')" class="text-xs font-bold px-4 py-2 rounded-lg text-slate-400">Apparel</button>
         </div>
     </header>
 
     <div id="cartDrawerOverlay" onclick="toggleCartDrawer(false)" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
-    <div id="cartDrawer" class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[400px] bg-slate-900 z-50 shadow-2xl translate-x-full flex flex-col justify-between border-l border-slate-800">
-        <div class="p-6 border-b border-slate-800 flex items-center justify-between">
+    <div id="cartDrawer" class="cart-drawer fixed top-0 right-0 h-full w-full sm:w-[400px] bg-[#0b1315] z-50 shadow-2xl translate-x-full flex flex-col justify-between border-l border-[#16272c]">
+        <div class="p-6 border-b border-[#16272c] flex items-center justify-between">
             <h3 class="heading-font font-bold text-lg text-white">Your Vault Bag</h3>
-            <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-amber-400 font-bold text-lg p-1 cursor-pointer">✕</button>
+            <button onclick="toggleCartDrawer(false)" class="text-slate-400 hover:text-[#10b981] font-bold text-lg p-1 cursor-pointer">✕</button>
         </div>
         
         <div id="cartItemsContainer" class="p-6 overflow-y-auto flex-1 space-y-4">
             <div class="text-center py-12 text-slate-500 text-xs font-medium">Your shopping bag is completely empty.</div>
         </div>
 
-        <div class="p-6 border-t border-slate-800 bg-slate-950">
+        <div class="p-6 border-t border-[#16272c] bg-[#060c0d]">
             <div class="flex items-center justify-between mb-4">
                 <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Subtotal Summary</span>
-                <span id="cartSubtotalLabel" class="text-xl font-extrabold text-amber-400">$0.00</span>
+                <span id="cartSubtotalLabel" class="text-xl font-extrabold text-[#10b981]">$0.00</span>
             </div>
-            <button onclick="alert('Proceeding to secure checkout node...')" class="w-full bg-amber-500 hover:bg-amber-600 text-slate-950 text-xs font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-amber-500/10">Secure Checkout 💳</button>
+            <button onclick="alert('Proceeding to secure checkout node...')" class="w-full bg-[#10b981] hover:bg-[#059669] text-[#0b1315] text-xs font-bold py-3.5 rounded-xl uppercase tracking-wider transition-all shadow-md shadow-[#10b981]/10">Secure Checkout 💳</button>
         </div>
     </div>
 
     <main class="max-w-6xl mx-auto px-4 md:px-6 py-8 space-y-8">
         
-        <div id="dynamicHeroBanner" class="bg-gradient-to-br from-slate-900 to-slate-850 border border-slate-800 rounded-2xl p-6 md:p-8 text-slate-200 shadow-xl relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
-            <span class="text-[10px] font-bold tracking-widest text-amber-500 uppercase block mb-2">Premium Curation</span>
+        <div id="dynamicHeroBanner" class="bg-gradient-to-br from-[#0e1e22] to-[#0b1315] border border-[#16272c] rounded-2xl p-6 md:p-8 text-slate-200 shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-[#10b981]/5 rounded-full blur-3xl pointer-events-none"></div>
+            <span class="text-[10px] font-bold tracking-widest text-[#10b981] uppercase block mb-2">Premium Curation</span>
             <h2 id="bannerHeading" class="text-xl md:text-3xl font-extrabold heading-font tracking-tight text-white">Upgrade Your Daily Dynamic Setup</h2>
             <p id="bannerSubtext" class="text-xs md:text-sm text-slate-400 mt-2 max-w-md opacity-90 leading-relaxed">Explore authentic tech widgets and luxury wearables premium items carefully curated for excellence.</p>
         </div>
 
         <div>
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-slate-800 pb-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 border-b border-[#16272c] pb-4">
                 <h3 id="sectionTitleLabel" class="text-white font-extrabold text-lg md:text-xl heading-font tracking-tight">Viewing All Master Products</h3>
-                <span id="productCounterBadge" class="w-fit text-xs bg-slate-900 border border-slate-800 text-amber-400 font-bold px-3 py-1 rounded-full">6 Items Available</span>
+                <span id="productCounterBadge" class="w-fit text-xs bg-[#0b1315] border border-[#16272c] text-[#10b981] font-bold px-3 py-1 rounded-full">6 Items Available</span>
             </div>
             
             <div id="productsDisplayGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
@@ -92,7 +92,7 @@
 
     </main>
 
-    <footer class="max-w-6xl mx-auto px-4 md:px-6 py-8 border-t border-slate-800 mt-12 text-center text-xs text-slate-500 font-medium">
+    <footer class="max-w-6xl mx-auto px-4 md:px-6 py-8 border-t border-[#16272c] mt-12 text-center text-xs text-slate-600 font-medium">
         <p>© 2026 AuraMart Secure Grid Platform. Powered by Rohma Noor. All Rights Reserved.</p>
     </footer>
 
@@ -153,18 +153,18 @@
                 return;
             }
 
-            // Loop inject components UI (Premium Dark Luxury Cards)
+            // Loop inject components UI (Premium Cyber Mint Cards)
             filteredSet.forEach(product => {
                 gridContainer.innerHTML += `
-                    <div class="bg-slate-900 border border-slate-800/80 p-5 rounded-2xl shadow-md hover:shadow-xl hover:border-amber-500/50 transition-all flex flex-col justify-between group">
+                    <div class="bg-[#122226]/40 border border-[#16272c] p-5 rounded-2xl shadow-md hover:shadow-xl hover:border-[#10b981]/50 transition-all flex flex-col justify-between group">
                         <div>
-                            <div class="w-12 h-12 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-center text-2xl group-hover:bg-slate-800 transition-all duration-300 mb-4">${product.icon}</div>
-                            <h4 class="text-white font-bold text-base tracking-tight group-hover:text-amber-400 transition-colors">${product.name}</h4>
+                            <div class="w-12 h-12 bg-[#060c0d] border border-[#16272c] rounded-xl flex items-center justify-center text-2xl group-hover:bg-[#122226] transition-all duration-300 mb-4">${product.icon}</div>
+                            <h4 class="text-white font-bold text-base tracking-tight group-hover:text-[#10b981] transition-colors">${product.name}</h4>
                             <p class="text-xs text-slate-400 mt-1 leading-relaxed">${product.desc}</p>
                         </div>
-                        <div class="mt-6 pt-4 border-t border-slate-800/60 flex items-center justify-between">
-                            <span class="text-amber-400 font-extrabold text-lg">$${product.price.toFixed(2)}</span>
-                            <button onclick="addProductToShoppingBag(${product.id})" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-extrabold px-4 py-2.5 rounded-xl text-xs transition-all uppercase tracking-wide cursor-pointer shadow-sm shadow-amber-500/5">Buy Now 🛒</button>
+                        <div class="mt-6 pt-4 border-t border-[#16272c]/60 flex items-center justify-between">
+                            <span class="text-[#10b981] font-extrabold text-lg">$${product.price.toFixed(2)}</span>
+                            <button onclick="addProductToShoppingBag(${product.id})" class="bg-[#10b981] hover:bg-[#059669] text-[#0b1315] font-extrabold px-4 py-2.5 rounded-xl text-xs transition-all uppercase tracking-wide cursor-pointer shadow-sm shadow-[#10b981]/5">Buy Now 🛒</button>
                         </div>
                     </div>`;
             });
@@ -232,18 +232,18 @@
                 netAccumulatedFinancialSum += financialRowProductTotal;
 
                 itemsContainer.innerHTML += `
-                    <div class="flex items-center justify-between gap-3 border-b border-slate-800 pb-3">
+                    <div class="flex items-center justify-between gap-3 border-b border-[#16272c] pb-3">
                         <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-slate-950 rounded-lg border border-slate-800 flex items-center justify-center text-xl">${item.icon}</div>
+                            <div class="w-10 h-10 bg-[#060c0d] rounded-lg border border-[#16272c] flex items-center justify-center text-xl">${item.icon}</div>
                             <div>
                                 <h5 class="text-xs font-bold text-white max-w-[160px] truncate">${item.name}</h5>
-                                <span class="text-[11px] text-amber-500/80 font-medium">$${item.price.toFixed(2)} each</span>
+                                <span class="text-[11px] text-[#10b981]/80 font-medium">$${item.price.toFixed(2)} each</span>
                             </div>
                         </div>
-                        <div class="flex items-center gap-2 bg-slate-950 p-1 rounded-lg border border-slate-800">
-                            <button onclick="adjustCartItemQuantity(${item.id}, -1)" class="w-5 h-5 flex items-center justify-center text-xs font-bold text-slate-400 hover:text-amber-400 cursor-pointer">-</button>
+                        <div class="flex items-center gap-2 bg-[#060c0d] p-1 rounded-lg border border-[#16272c]">
+                            <button onclick="adjustCartItemQuantity(${item.id}, -1)" class="w-5 h-5 flex items-center justify-center text-xs font-bold text-slate-400 hover:text-[#10b981] cursor-pointer">-</button>
                             <span class="text-xs font-bold px-1 text-slate-200 min-w-[12px] text-center">${item.quantity}</span>
-                            <button onclick="adjustCartItemQuantity(${item.id}, 1)" class="w-5 h-5 flex items-center justify-center text-xs font-bold text-slate-400 hover:text-amber-400 cursor-pointer">+</button>
+                            <button onclick="adjustCartItemQuantity(${item.id}, 1)" class="w-5 h-5 flex items-center justify-center text-xs font-bold text-slate-400 hover:text-[#10b981] cursor-pointer">+</button>
                         </div>
                     </div>`;
             });
@@ -265,7 +265,7 @@
             }
         }
 
-        // Active State Navigation Styling Handler Utility (Dark UI Responsive)
+        // Active State Navigation Styling Handler Utility (Cyber Mint UI Responsive)
         function updateVisualTabHighlights(activeKey) {
             const webTabs = ["all", "tech", "fashion"];
             webTabs.forEach(tab => {
@@ -273,8 +273,8 @@
                 const mobileBtn = document.getElementById(`mob-tab-${tab}`);
                 
                 if(tab === activeKey) {
-                    if(desktopBtn) desktopBtn.className = "px-4 py-2 bg-slate-800 text-amber-400 rounded-lg shadow-sm transition-all border border-slate-700/50";
-                    if(mobileBtn) mobileBtn.className = "text-xs font-bold px-4 py-2 rounded-lg bg-amber-500 text-slate-950";
+                    if(desktopBtn) desktopBtn.className = "px-4 py-2 bg-[#122226] text-[#10b981] rounded-lg shadow-sm transition-all border border-[#1a3138]";
+                    if(mobileBtn) mobileBtn.className = "text-xs font-bold px-4 py-2 rounded-lg bg-[#10b981] text-[#0b1315]";
                 } else {
                     if(desktopBtn) desktopBtn.className = "px-4 py-2 hover:text-slate-200 rounded-lg transition-all text-slate-400";
                     if(mobileBtn) mobileBtn.className = "text-xs font-bold px-4 py-2 rounded-lg text-slate-400 bg-transparent";
