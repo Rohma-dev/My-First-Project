@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛸 Nova Strike | Ultra Arcade Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Plus+Jakarta+Sans:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        .font-arcade { font-family: 'Orbitron', sans-serif; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-black text-white min-h-screen flex flex-col justify-between antialiased overflow-hidden select-none">
+
+    <header class="w-full bg-neutral-950/80 backdrop-blur-md border-b border-cyan-500/20 p-4 z-20">
+        <div class="max-w-5xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full bg-cyan-400 shadow-md shadow-cyan-400/50 animate-pulse"></div>
+                <h1 class="font-arcade font-black text-base md:text-lg tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">NOVA.STRIKE // PRO</h1>
+            </div>
+            
+            <div class="flex gap-6 font-arcade text-xs tracking-widest">
+                <div>CORE_SCORE: <span id="scoreBadge" class="text-cyan-400 font-bold">0000</span></div>
+                <div>WAVE_ID: <span id="waveBadge" class="text-indigo-400 font-bold">01</span></div>
+                <div>SHIELD: <span id="shieldBadge" class="text-rose-500 font-bold">100%</span></div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-1 flex flex-col items-center justify-center p-4 relative">
+        
+        <div class="relative bg-neutral-950 p-1.5 rounded-2xl border border-neutral-800 shadow-2xl shadow-cyan-500/5">
+            <canvas id="mainSystemCanvas" width="700" height="450" class="bg-neutral-950 rounded-xl max-w-full block"></canvas>
+
+            <div id="interfaceOverlay" class="absolute inset-0 bg-black/95 rounded-2xl flex flex-col items-center justify-center p-6 text-center transition-all duration-300 z-10">
+                <span class="text-[9px] font-mono tracking-[0.3em] text-cyan-400 uppercase mb-2">Advanced Vector Grid // Version 2.0</span>
+                <h2 id="overlayTitle" class="font-arcade font-black text-2xl md:text-4xl text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-500 tracking-widest uppercase">CORE OPERATIONAL INTEL</h2>
+                <p id="overlayDesc" class="text-xs text-neutral-400 mt-2 max-w-sm leading-relaxed">Maneuver high-speed plasma interceptors. Press <kbd class="bg-neutral-800 px-1.5 py-0.5 rounded text-[10px]">A</kbd> / <kbd class="bg-neutral-800 px-1.5 py-0.5 rounded text-[10px]">D</kbd> or arrows to fly, and <kbd class="bg-neutral-800 px-3 py-0.5 rounded text-[10px]">SPACEBAR</kbd> to discharge heavy laser arrays.</p>
+                <button onclick="initializeTerminalGameSequence()" id="triggerBtn" class="mt-6 font-arcade bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-indigo-500 text-white text-xs font-black px-8 py-3.5 rounded-xl tracking-widest uppercase shadow-lg shadow-cyan-500/20 active:scale-95 transition-all">BOOT INJECTOR 🕹️</button>
+            </div>
+        </div>
+
+        <div class="flex gap-3 w-full max-w-md mt-4 md:hidden z-20">
+            <button id="leftPad" class="flex-1 bg-neutral-900 border border-neutral-800 py-4 rounded-xl font-bold active:bg-cyan-500/20">◀</button>
+            <button id="firePad" class="flex-2 bg-gradient-to-r from-cyan-600 to-blue-600 py-4 px-8 rounded-xl font-arcade font-bold text-xs tracking-widest active:scale-95 transition-all">FIRE LASER</button>
+            <button id="rightPad" class="flex-1 bg-neutral-900 border border-neutral-800 py-4 rounded-xl font-bold active:bg-cyan-500/20">▶</button>
+        </div>
+    </main>
+
+    <footer class="w-full text-center py-4 text-[9px] text-neutral-600 font-mono tracking-widest border-t border-neutral-950">
+        SYSTEM ENGINE AUTHENTICATED BY INTEL ROUTER LOGS // OPERATIONS BY ROHMA NOOR
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("mainSystemCanvas");
+        const ctx = canvas.getContext("2d");
+
+        // DOM HUD Hooks
+        const scoreLabel = document.getElementById("scoreBadge");
+        const waveLabel = document.getElementById("waveBadge");
+        const shieldLabel = document.getElementById("shieldBadge");
+        const uiOverlay = document.getElementById("interfaceOverlay");
+        const uiHead = document.getElementById("overlayTitle");
+        const uiDesc = document.getElementById("overlayDesc");
+        const triggerBtn = document.getElementById("triggerBtn");
+
+        // Engine Parameters Variables
+        let runtimeScore = 0;
+        let systemWave = 1;
+        let playerShield = 100;
+        let loopStateActive = false;
+
+        // Interactive Key Matrices
+        let keys = { ArrowLeft: false, ArrowRight: false, space: false, KeyA: false, KeyD: false };
+
+        // Event Setup Listeners
+        window.addEventListener("keydown", e => {
+            if(e.code === "Space") keys.space = true;
+            if(e.code in keys) keys[e.code] = true;
+        });
+        window.addEventListener("keyup", e => {
+            if(e.code === "Space") keys.space = false;
+            if(e.code in keys) keys[e.code] = false;
+        });
+
+        // Setup Mobile Pads Mapping Pipelines
+        document.getElementById("leftPad").addEventListener("touchstart", () => keys.ArrowLeft = true);
+        document.getElementById("leftPad").addEventListener("touchend", () => keys.ArrowLeft = false);
+        document.getElementById("rightPad").addEventListener("touchstart", () => keys.ArrowRight = true);
+        document.getElementById("rightPad").addEventListener("touchend", () => keys.ArrowRight = false);
+        document.getElementById("firePad").addEventListener("touchstart", () => {
+            if(loopStateActive) interceptorShip.fireLaserBeam();
+        });
+
+        // --- OBJECT-ORIENTED VECTOR MODEL ENTITIES ---
+
+        // Player Fighter Jet Class Entity Construct
+        class JetInterceptor {
+            constructor() {
+                this.width = 34;
+                this.height = 24;
+                this.x = canvas.width / 2 - this.width / 2;
+                this.y = canvas.height - 50;
+                this.velocity = 6;
+                this.cooldownTicks = 0;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.shadowBlur = 12;
+                ctx.shadowColor = "#22d3ee";
+                
+                // Draw sleek stealth military jet coordinate bounds
+                ctx.fillStyle = "#22d3ee";
+                ctx.beginPath();
+                ctx.moveTo(this.x + this.width / 2, this.y);
+                ctx.lineTo(this.x, this.y + this.height);
+                ctx.lineTo(this.x + this.width, this.y + this.height);
+                ctx.closePath();
+                ctx.fill();
+                
+                // Core Engine thrust reactor
+                ctx.fillStyle = "#3b82f6";
+                ctx.fillRect(this.x + this.width / 2 - 3, this.y + this.height, 6, 4);
+                ctx.restore();
+            }
+
+            update() {
+                if (keys.ArrowLeft || keys.KeyA) this.x -= this.velocity;
+                if (keys.ArrowRight || keys.KeyD) this.x += this.velocity;
+
+                // Screen boundary lock check loops
+                if (this.x < 0) this.x = 0;
+                if (this.x > canvas.width - this.width) this.x = canvas.width - this.width;
+
+                if (this.cooldownTicks > 0) this.cooldownTicks--;
+
+                if (keys.space && this.cooldownTicks === 0) {
+                    this.fireLaserBeam();
+                }
+            }
+
+            fireLaserBeam() {
+                bulletPool.push(new ProjectileLaser(this.x + this.width / 2, this.y, -7, "#22d3ee"));
+                triggerSystemBeepSynth(880, 0.04);
+                this.cooldownTicks = 14; // Internal structural weapon safety fire cycles rate limit
+            }
+        }
+
+        // Projectile Laser Matrix Model Class
+        class ProjectileLaser {
+            constructor(x, y, speedY, colorCode) {
+                this.x = x;
+                this.y = y;
+                this.speedY = speedY;
+                this.width = 3;
+                this.height = 14;
+                this.color = colorCode;
+                this.isMarkedForTrash = false;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x - this.width / 2, this.y, this.width, this.height);
+            }
+
+            update() {
+                this.y += this.speedY;
+                if (this.y < -20 || this.y > canvas.height + 20) this.isMarkedForTrash = true;
+            }
+        }
+
+        // Advanced Swarm Alien Threat Intelligent Artificial Entity
+        class AlienThreatInvader {
+            constructor(x, y, variantType) {
+                this.x = x;
+                this.y = y;
+                this.width = 28;
+                this.height = 20;
+                this.variant = variantType;
+                this.sweepX = 0.8 + (systemWave * 0.2); // Scalable delta movement speeds multiplier index rules
+                this.isMarkedForTrash = false;
+                this.oscillationIndex = Math.random() * Math.PI;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.variant === "elite" ? "#d946ef" : "#818cf8";
+                ctx.fillStyle = this.variant === "elite" ? "#d946ef" : "#818cf8";
+
+                // Complex geometric rendering matrix lines maps
+                ctx.beginPath();
+                ctx.fillRect(this.x, this.y, this.width, this.height - 6);
+                ctx.fillRect(this.x + 4, this.y + this.height - 6, 4, 6);
+                ctx.fillRect(this.x + this.width - 8, this.y + this.height - 6, 4, 6);
+                ctx.restore();
+            }
+
+            update() {
+                this.oscillationIndex += 0.02;
+                this.x += this.sweepX;
+
+                // Edge bounce trajectory shifts loop matrices
+                if (this.x <= 10 || this.x >= canvas.width - this.width - 10) {
+                    this.sweepX = -this.sweepX;
+                    this.y += 15;
+                }
+
+                // AI random weapons dispatch calculation logic blocks
+                if (Math.random() < 0.0012 * systemWave) {
+                    bulletPool.push(new ProjectileLaser(this.x + this.width / 2, this.y + this.height, 4, "#f43f5e"));
+                }
+
+                if (this.y > canvas.height - 60) {
+                    playerShield = 0; // Breach conditions execution pipeline flag configuration sets
+                }
+            }
+        }
+
+        // Particle Burst Cluster Entity
+        class ImpactSparkFX {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.dx = (Math.random() - 0.5) * 6;
+                this.dy = (Math.random() - 0.5) * 6;
+                this.life = 1.0;
+                this.decay = 0.04;
+                this.isMarkedForTrash = false;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = this.life;
+                ctx.fillRect(this.x, this.y, 2, 2);
+                ctx.globalAlpha = 1.0;
+            }
+
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+                this.life -= this.decay;
+                if (this.life <= 0) this.isMarkedForTrash = true;
+            }
+        }
+
+        // Global Structural Array Pools
+        let interceptorShip = new JetInterceptor();
+        let bulletPool = [];
+        let invaderPool = [];
+        let fxPool = [];
+
+        // Generate systematic deployment maps grids routines
+        function generateInvaderSwarmGrid() {
+            invaderPool = [];
+            const rows = 3 + Math.min(systemWave, 3);
+            const cols = 8;
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    const type = (r === 0) ? "elite" : "standard";
+                    invaderPool.push(new AlienThreatInvader(c * 60 + 80, r * 35 + 40, type));
+                }
+            }
+        }
+
+        // Audio Oscillator API Engine Method
+        function triggerSystemBeepSynth(freq, duration) {
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const node = audioCtx.createGain();
+                osc.connect(node);
+                node.connect(audioCtx.destination);
+                osc.frequency.value = freq;
+                node.gain.setValueAtTime(0.08, audioCtx.currentTime);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch(e) {}
+        }
+
+        // Physics Intersection Boundary Math Function
+        function evaluateRectBoundsIntersect(rect1, rect2) {
+            return (rect1.x < rect2.x + rect2.width &&
+                    rect1.x + rect1.width > rect2.x &&
+                    rect1.y < rect2.y + rect2.height &&
+                    rect1.y + rect1.height > rect2.y);
+        }
+
+        // --- ENGINE PIPELINE PROCESS LOOP TICK ---
+        function executeMasterSystemLoopFrame() {
+            if (!loopStateActive) return;
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.25)"; // Starfield trace canvas clear vector lines
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // 1. Process Actor Interceptor Ship Lifecycle
+            interceptorShip.update();
+            interceptorShip.draw();
+
+            // 2. Loop & Clean Vector Lasers Pipeline
+            bulletPool.forEach(b => {
+                b.update();
+                b.draw();
+            });
+
+            // 3. Loop & Clean Enemies Processing Array Matrix
+            invaderPool.forEach(inv => {
+                inv.update();
+                inv.draw();
+
+                // Validation checks for direct collision vectors with structural ship core bounds
+                if (evaluateRectBoundsIntersect(interceptorShip, inv)) {
+                    playerShield = 0;
+                }
+            });
+
+            // 4. Run FX Particle Simulation Engine block 
+            fxPool.forEach(fx => {
+                fx.update();
+                fx.draw();
+            });
+
+            // 5. High Precision Collision Evaluator Matrix System
+            bulletPool.forEach(b => {
+                if (b.speedY < 0) { // Player firing vector laser ray matching blocks
+                    invaderPool.forEach(inv => {
+                        if (!b.isMarkedForTrash && !inv.isMarkedForTrash && evaluateRectBoundsIntersect(b, inv)) {
+                            b.isMarkedForTrash = true;
+                            inv.isMarkedForTrash = true;
+                            runtimeScore += inv.variant === "elite" ? 25 : 10;
+                            scoreLabel.innerText = String(runtimeScore).padStart(4, '0');
+                            
+                            // Emit explosion explosion debris nodes logs arrays
+                            for(let i=0; i<8; i++) fxPool.push(new ImpactSparkFX(inv.x + 14, inv.y + 10, "#818cf8"));
+                            triggerSystemBeepSynth(330, 0.06);
+                        }
+                    });
+                } else { // Enemy weapon ray intersect testing matching sequences loops
+                    if (!b.isMarkedForTrash && evaluateRectBoundsIntersect(b, interceptorShip)) {
+                        b.isMarkedForTrash = true;
+                        playerShield -= 20;
+                        if(playerShield < 0) playerShield = 0;
+                        shieldLabel.innerText = `${playerShield}%`;
+                        
+                        for(let i=0; i<6; i++) fxPool.push(new ImpactSparkFX(interceptorShip.x + 17, interceptorShip.y + 10, "#f43f5e"));
+                        triggerSystemBeepSynth(120, 0.15);
+                    }
+                }
+            });
+
+            // Garbage Collector Filters Allocation Operations Optimization Run
+            bulletPool = bulletPool.filter(b => !b.isMarkedForTrash);
+            invaderPool = invaderPool.filter(inv => !inv.isMarkedForTrash);
+            fxPool = fxPool.filter(fx => !fx.isMarkedForTrash);
+
+            // 6. Check Wave Complete Conditions Loop States
+            if (invaderPool.length === 0) {
+                systemWave++;
+                waveLabel.innerText = String(systemWave).padStart(2, '0');
+                triggerSystemBeepSynth(620, 0.3);
+                generateInvaderSwarmGrid();
+            }
+
+            // 7. Core Termination Trigger Validation Logs
+            if (playerShield <= 0) {
+                terminateOperationsSession(false);
+                return;
+            }
+
+            requestAnimationFrame(executeMasterSystemLoopFrame);
+        }
+
+        // Start Framework Session Function
+        function initializeTerminalGameSequence() {
+            runtimeScore = 0;
+            systemWave = 1;
+            playerShield = 100;
+            bulletPool = [];
+            fxPool = [];
+            loopStateActive = true;
+
+            scoreLabel.innerText = "0000";
+            waveLabel.innerText = "01";
+            shieldLabel.innerText = "100%";
+
+            uiOverlay.classList.add("pointer-events-none", "opacity-0");
+            interceptorShip = new JetInterceptor();
+            generateInvaderSwarmGrid();
+            executeMasterSystemLoopFrame();
+        }
+
+        // Gracefully kill execution routines blocks
+        function terminateOperationsSession(victoryStatus) {
+            loopStateActive = false;
+            uiOverlay.classList.remove("pointer-events-none", "opacity-0");
+
+            uiHead.innerText = "SYSTEM CRITICAL // HALT";
+            uiHead.className = "font-arcade font-black text-2xl md:text-4xl text-rose-500 tracking-widest uppercase animate-pulse";
+            uiDesc.innerText = `Stealth fighter jet core breached. Matrix operation logs terminated inside swarm cycle cluster. Total Calculated Yield: ${runtimeScore} points.`;
+            triggerBtn.innerText = "REBOOT INTERCEPTOR ⚡";
+        }
+    </script>
+</body>
+</html>
