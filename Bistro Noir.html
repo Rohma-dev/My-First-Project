@@ -3,330 +3,375 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🍽️ Bistro Noir | Premium Cloud Kitchen & POS Matrix</title>
+    <title>🍳 Matrix Kitchen | Premium Order & POS Ecosystem</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .serif-font { font-family: 'Playfair Display', serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #14141b; }
+        ::-webkit-scrollbar-thumb { background: #2d2d3d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ffbe33; }
     </style>
 </head>
-<body class="bg-[#111] text-stone-200 min-h-screen antialiased flex flex-col justify-between">
+<body class="bg-[#0c0c12] text-slate-300 min-h-screen flex flex-col justify-between antialiased">
 
-    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-md border-b border-stone-800 shadow-xl">
-        <div class="max-w-7xl mx-auto px-4 md:px-8 h-24 flex items-center justify-between">
+    <header class="sticky top-0 z-50 bg-[#12121a]/90 backdrop-blur-md border-b border-zinc-800/60 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-12 h-12 rounded-full bg-amber-500 flex items-center justify-center text-black text-xl font-black serif-font shadow-lg shadow-amber-500/20">
-                    B
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-black text-xl font-black heading-font shadow-lg shadow-amber-500/20">
+                    M
                 </div>
                 <div>
-                    <h1 class="text-white font-bold text-lg tracking-wider uppercase font-sans">BISTRO NOIR</h1>
-                    <span class="text-[9px] text-amber-500 font-bold uppercase tracking-[0.25em] block">Fine Dining Cloud Mesh</span>
+                    <h1 class="text-white font-extrabold text-sm sm:text-base tracking-wide heading-font">MATRIX KITCHEN</h1>
+                    <span class="text-[9px] text-amber-500 font-mono tracking-widest block uppercase">IndexedDB Engine // Search & Filter Node</span>
                 </div>
             </div>
             
-            <div class="flex items-center gap-4">
-                <span id="cloudConnectionNodeBadge" class="bg-stone-900 border border-stone-800 text-stone-400 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-                    Syncing POS...
-                </span>
+            <div class="bg-[#191924] border border-zinc-800 p-1 rounded-xl flex gap-1">
+                <button id="tabCustomer" onclick="toggleWorkspacePortal('customer')" class="text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all">Customer Menu</button>
+                <button id="tabAdmin" onclick="toggleWorkspacePortal('admin')" class="text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all">Kitchen Admin</button>
             </div>
         </div>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 md:px-8 py-10 w-full flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 flex-1 w-full">
         
-        <section class="lg:col-span-7 space-y-6">
-            <div class="border-b border-stone-800 pb-4">
-                <h2 class="serif-font text-3xl text-white tracking-wide italic">The Culinary Matrix</h2>
-                <p class="text-xs text-stone-400 mt-1">Select items below to configure your instant localized order dispatch array.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="restaurantMenuLayoutGrid">
-                </div>
-        </section>
-
-        <section class="lg:col-span-5 space-y-8 sticky top-28">
+        <div id="portalCustomerSection" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            <div class="bg-stone-950 border border-stone-800 p-6 rounded-2xl shadow-xl space-y-4">
-                <h3 class="text-white font-bold text-sm uppercase tracking-wider flex justify-between items-center">
-                    <span>Active Order Basket</span>
-                    <span id="cartItemsCounterBadge" class="text-xs bg-amber-500/10 text-amber-500 px-2.5 py-0.5 rounded-full border border-amber-500/20 font-mono">0 Items</span>
-                </h3>
-                
-                <div id="activeCartElementsWrapper" class="space-y-2 max-h-48 overflow-y-auto text-xs divide-y divide-stone-900">
-                    <p class="text-stone-500 text-center py-4">Your culinary basket is currently empty.</p>
+            <div class="lg:col-span-7 xl:col-span-8 space-y-6">
+                <div class="border-b border-zinc-800 pb-4">
+                    <h2 class="heading-font text-xl font-bold text-white tracking-tight">The Culinary Ledger</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Filter or search high-end items to mount your instant transactional data payload.</p>
                 </div>
 
-                <div class="pt-4 border-t border-stone-900 flex justify-between items-baseline">
-                    <span class="text-xs font-bold text-stone-400">Total Valuation:</span>
-                    <span id="cartTotalSumLabel" class="text-2xl font-bold text-amber-400 font-mono">$0.00</span>
-                </div>
-
-                <div class="space-y-2 pt-2">
-                    <input type="text" id="customerIdentityNameInput" placeholder="Enter Guest or Table Name..." 
-                        class="w-full bg-stone-900 border border-stone-800 text-white placeholder:text-stone-600 rounded-xl px-4 py-3 text-xs font-medium focus:outline-none focus:border-amber-500 transition-all">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-[#12121a] p-4 rounded-xl border border-zinc-800/60">
+                    <input type="text" id="menuSearchInput" oninput="executeMenuSearchAndFilter()" placeholder="🔍 Search luxury dishes..." 
+                        class="bg-[#181822] border border-zinc-800 text-white rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-amber-500 transition-all font-medium">
                     
-                    <button onclick="transmitOrderPayloadToCloudServer()" class="w-full bg-amber-500 hover:bg-amber-600 text-black font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-lg shadow-amber-500/10 active:scale-98">
-                        Dispatch Order to Kitchen 📡
-                    </button>
+                    <select id="menuCategoryFilter" onchange="executeMenuSearchAndFilter()" 
+                        class="bg-[#181822] border border-zinc-800 text-zinc-400 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-amber-500 transition-all font-medium">
+                        <option value="All">All Categories Matrix</option>
+                        <option value="Delicacy">Delicacies</option>
+                        <option value="Plates">Premium Plates</option>
+                        <option value="Starters">Starters</option>
+                        <option value="Beverages">Beverages</option>
+                    </select>
                 </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="domMenuCardsTarget"></div>
             </div>
 
-            <div class="space-y-4">
-                <div class="flex items-center justify-between border-b border-stone-800 pb-2">
-                    <h3 class="text-white font-bold text-xs uppercase tracking-widest">Live Cloud Kitchen Monitor</h3>
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold px-2 py-0.5 rounded uppercase">PostgreSQL Pipeline</span>
+            <div class="lg:col-span-5 xl:col-span-4 bg-[#12121a] border border-zinc-800 rounded-2xl p-6 space-y-4 shadow-2xl">
+                <div class="flex justify-between items-center border-b border-zinc-900 pb-3">
+                    <h3 class="heading-font text-xs font-bold uppercase tracking-widest text-white">System Basket</h3>
+                    <span id="cartItemsCounter" class="font-mono text-xs text-amber-400 bg-amber-500/5 px-2.5 py-0.5 rounded-full border border-amber-500/10">0 Units</span>
                 </div>
 
-                <div id="cloudActiveKitchenOrdersTrackStream" class="space-y-3 max-h-64 overflow-y-auto">
-                    <p class="text-xs text-stone-600 font-mono text-center py-4">Awaiting server data packet handshake...</p>
+                <div id="cartItemsWrapper" class="space-y-3 max-h-60 overflow-y-auto pr-1 text-xs divide-y divide-zinc-900/60">
+                    <p class="text-zinc-600 text-center py-8">Your culinary basket is unallocated.</p>
+                </div>
+
+                <div class="border-t border-zinc-900 pt-4 space-y-4">
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-xs text-zinc-400 font-medium">Net Value Mapping:</span>
+                        <span id="cartTotalSumLabel" class="text-2xl font-bold font-mono text-amber-400">$0.00</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <input type="text" id="guestIdentifierInput" placeholder="Guest Name / Table Coordinates" 
+                            class="w-full bg-[#181822] border border-zinc-800 text-white rounded-xl px-4 py-3.5 text-xs focus:outline-none focus:border-amber-500 transition-all font-medium placeholder:text-zinc-600">
+                        <button onclick="commitOrderPayloadToDatabase()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-lg shadow-amber-500/10 active:scale-95">
+                            Broadcast to Database 📡
+                        </button>
+                    </div>
                 </div>
             </div>
+        </div>
 
-        </section>
+        <div id="portalAdminSection" class="hidden space-y-6">
+            <div class="border-b border-zinc-800 pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                <div>
+                    <h2 class="heading-font text-xl font-bold text-white tracking-tight">Production Queue Core</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Isolated relational data structures executing directly from local database indexes.</p>
+                </div>
+                <button onclick="wipeEntireDatabaseInstance()" class="text-[10px] font-bold text-rose-400 bg-rose-500/5 border border-rose-500/10 hover:bg-rose-500/10 px-3 py-1.5 rounded-lg transition-all self-start sm:self-center">Purge DB Cluster 🗑️</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="domAdminQueueTarget"></div>
+        </div>
 
     </main>
 
-    <footer class="w-full text-center py-6 border-t border-stone-900 text-xs text-stone-600 font-mono tracking-wider mt-12 bg-black">
-        © 2026 BISTRO NOIR CORP. DEPLOYED NODE MANAGEMENT APPARATUS // AUTHORIZED SYSTEM BY ROHMA NOOR
+    <footer class="border-t border-zinc-900 bg-[#09090d] py-6 text-center text-[10px] font-mono text-zinc-600 tracking-widest uppercase">
+        © 2026 Matrix Kitchen Embedded Systems Core // Authorized Operations Terminal By Rohma Noor
     </footer>
 
     <script>
-        // --- 🔴 BACKEND CREDENTIAL INTERFACE HOOKS ---
-        const SUPABASE_PROJECT_API_URL = "YOUR_SUPABASE_URL"; 
-        const SUPABASE_ANON_PUBLIC_KEY = "YOUR_SUPABASE_KEY"; 
+        const DB_NAME = "MatrixKitchenDB";
+        const DB_VERSION = 1;
+        const STORE_NAME = "orders_stream";
 
-        let supabaseClientEngineInstance = null;
+        let dbInstancePointer = null;
 
-        // Static Master Menu Dataset Matrix Array
-        const FOOD_MENU_REPOSITORY = [
-            { id: "M1", name: "Truffle Wagyu Ribeye", category: "Mains", price: 64.00, desc: "Aged premium beef cuts seared in charcoal butter glaze." },
-            { id: "M2", name: "Smoked Atlantic Salmon", category: "Mains", price: 42.50, desc: "Wood-fired fillet paired with dill caper cream reduction." },
-            { id: "M3", name: "Charred Heirloom Burrata", category: "Starters", price: 21.00, desc: "Creamy cheese heart, basil oil, ancient grain sourdough crisps." },
-            { id: "M4", name: "Saffron Infused Risotto", category: "Mains", price: 34.00, desc: "Arborio rice grain slow simmered with gold leaf extracts." }
+        const PRODUCT_MASTER_INDEX = [
+            { id: "P1", title: "Smoked Wagyu Brisket Platter", price: 78.00, ctg: "Plates", details: "12-hour oakwood slow smoked cut with molasses rub glaze." },
+            { id: "P2", title: "Pan Seared Chilean Sea Bass", price: 62.50, ctg: "Plates", details: "Infused with ginger-lemongrass dashi bouillon fluid broth." },
+            { id: "P3", title: "Black Garlic Truffle Gnocchi", price: 34.00, ctg: "Starters", details: "Handcrafted potato dumplings rolled in aged parmesan foam." },
+            { id: "P4", title: "Artisan Obsidian Matcha Brew", price: 16.00, ctg: "Beverages", details: "Ceremonial grade cold-whipped tea layered with sweet cream syrup." }
         ];
 
-        // Client State Memory Cache
-        let customerActiveCartCache = {};
+        let clientLocalBasketMemory = {};
 
-        // 1. Boot Engine Framework
-        function bootstrapCulinaryApplicationNode() {
-            const nodeBadge = document.getElementById("cloudConnectionNodeBadge");
-            compileFrontEndMenuGridInterface();
+        function initializePersistentDatabaseCluster() {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+            request.onupgradeneeded = function(e) {
+                const db = e.target.result;
+                if (!db.objectStoreNames.contains(STORE_NAME)) {
+                    db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
+                }
+            };
+            request.onsuccess = function(e) {
+                dbInstancePointer = e.target.result;
+                executeMenuSearchAndFilter(); 
+                renderLatestDatabaseQueue();
+            };
+        }
 
-            if (SUPABASE_PROJECT_API_URL === "YOUR_SUPABASE_URL") {
-                nodeBadge.className = "bg-rose-950 border border-rose-900 text-rose-400 text-[11px] font-bold px-3 py-1.5 rounded-full";
-                nodeBadge.innerHTML = "⚠️ Cloud Offline (Paste Keys)";
-                document.getElementById("cloudActiveKitchenOrdersTrackStream").innerHTML = `
-                    <div class='bg-stone-950 border border-stone-800 p-4 rounded-xl text-[11px] text-stone-400 leading-relaxed font-mono'>
-                        [CRITICAL] To make the backend save feature work properly, input your Supabase Cloud Keys on lines 112 & 113.
-                    </div>`;
-                return;
-            }
+        function toggleWorkspacePortal(targetView) {
+            const cSection = document.getElementById("portalCustomerSection");
+            const aSection = document.getElementById("portalAdminSection");
+            const cTab = document.getElementById("tabCustomer");
+            const aTab = document.getElementById("tabAdmin");
 
-            try {
-                supabaseClientEngineInstance = supabase.createClient(SUPABASE_PROJECT_API_URL, SUPABASE_ANON_PUBLIC_KEY);
-                nodeBadge.className = "bg-emerald-950 border border-emerald-900 text-emerald-400 text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-2";
-                nodeBadge.innerHTML = "<span class='w-2 h-2 rounded-full bg-emerald-400 animate-pulse'></span> Cloud Engine Linked";
-                
-                fetchAndRenderKitchenMonitorPipeline();
-                // Long polling network synchronization sequence intervals
-                setInterval(fetchAndRenderKitchenMonitorPipeline, 5000);
-            } catch(e) {
-                console.error(e);
+            if(targetView === "customer") {
+                cSection.classList.remove("hidden");
+                aSection.classList.add("hidden");
+                cTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all";
+                aTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all";
+            } else {
+                cSection.classList.add("hidden");
+                aSection.classList.remove("hidden");
+                aTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all";
+                cTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all";
+                renderLatestDatabaseQueue();
             }
         }
 
-        // 2. Render Static Premium Menu Items
-        function compileFrontEndMenuGridInterface() {
-            const target = document.getElementById("restaurantMenuLayoutGrid");
-            if (!target) return;
-            target.innerHTML = "";
+        // 🔍 NEW FEATURE: Search and Filter Engine Logic
+        function executeMenuSearchAndFilter() {
+            const searchKey = document.getElementById("menuSearchInput").value.toLowerCase();
+            const selectedCategory = document.getElementById("menuCategoryFilter").value;
+            const grid = document.getElementById("domMenuCardsTarget");
+            
+            if (!grid) return;
+            grid.innerHTML = "";
 
-            FOOD_MENU_REPOSITORY.forEach(food => {
-                target.innerHTML += `
-                    <div class="bg-stone-950 border border-stone-800 hover:border-stone-700 p-5 rounded-2xl flex flex-col justify-between gap-4 transition-all group">
+            const filteredMenu = PRODUCT_MASTER_INDEX.filter(product => {
+                const matchesSearch = product.title.toLowerCase().includes(searchKey);
+                const matchesCategory = selectedCategory === "All" || product.ctg === selectedCategory;
+                return matchesSearch && matchesCategory;
+            });
+
+            if(filteredMenu.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-zinc-600 text-xs font-mono text-center py-8">[NO MATCHES] Reset search parameters.</div>`;
+                return;
+            }
+
+            filteredMenu.forEach(product => {
+                grid.innerHTML += `
+                    <div class="bg-[#12121a] border border-zinc-900/80 p-5 rounded-2xl flex flex-col justify-between gap-4 group hover:border-zinc-800 transition-all">
                         <div class="space-y-1">
-                            <div class="flex justify-between items-baseline gap-2">
-                                <h4 class="text-white font-bold text-sm tracking-wide group-hover:text-amber-400 transition-colors">${food.name}</h4>
-                                <span class="text-amber-400 font-mono font-bold text-xs shrink-0">$${food.price.toFixed(2)}</span>
+                            <div class="flex justify-between items-baseline gap-4">
+                                <h4 class="text-white font-bold text-sm tracking-wide group-hover:text-amber-400 transition-all">${product.title}</h4>
+                                <span class="text-amber-400 font-mono font-bold text-xs shrink-0">$${product.price.toFixed(2)}</span>
                             </div>
-                            <p class="text-[11px] text-stone-500 leading-relaxed">${food.desc}</p>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed">${product.details}</p>
                         </div>
-                        <button onclick="injectFoodItemToCart('${food.id}')" class="w-full bg-stone-900 hover:bg-stone-800 border border-stone-800 text-stone-300 font-bold text-[10px] uppercase tracking-wider py-2 rounded-xl transition-all">
-                            Add to Selection +
+                        <button onclick="pushProductToMemoryStream('${product.id}')" class="w-full bg-[#181822] hover:bg-[#1f1f2d] border border-zinc-800/80 text-zinc-300 font-bold text-[10px] uppercase tracking-widest py-3 rounded-xl transition-all">
+                            Allocate Unit +
                         </button>
                     </div>`;
             });
         }
 
-        // 3. Cart Management Controllers
-        function injectFoodItemToCart(itemId) {
-            if (customerActiveCartCache[itemId]) {
-                customerActiveCartCache[itemId].qty++;
+        function pushProductToMemoryStream(productId) {
+            if (clientLocalBasketMemory[productId]) {
+                clientLocalBasketMemory[productId].quantity++;
             } else {
-                const match = FOOD_MENU_REPOSITORY.find(f => f.id === itemId);
-                customerActiveCartCache[itemId] = { ...match, qty: 1 };
+                const schemaMatch = PRODUCT_MASTER_INDEX.find(item => item.id === productId);
+                clientLocalBasketMemory[productId] = { ...schemaMatch, quantity: 1 };
             }
-            syncCartStateAndDomInterface();
+            synchronizeCartDOMInterface();
         }
 
-        function removeFoodItemQtyFromCart(itemId) {
-            if (!customerActiveCartCache[itemId]) return;
-            customerActiveCartCache[itemId].qty--;
-            if (customerActiveCartCache[itemId].qty <= 0) {
-                delete customerActiveCartCache[itemId];
+        function popProductFromMemoryStream(productId) {
+            if (!clientLocalBasketMemory[productId]) return;
+            clientLocalBasketMemory[productId].quantity--;
+            if(clientLocalBasketMemory[productId].quantity <= 0) {
+                delete clientLocalBasketMemory[productId];
             }
-            syncCartStateAndDomInterface();
+            synchronizeCartDOMInterface();
         }
 
-        function syncCartStateAndDomInterface() {
-            const container = document.getElementById("activeCartElementsWrapper");
-            const badge = document.getElementById("cartItemsCounterBadge");
+        function synchronizeCartDOMInterface() {
+            const container = document.getElementById("cartItemsWrapper");
+            const counter = document.getElementById("cartItemsCounter");
             const totalLabel = document.getElementById("cartTotalSumLabel");
 
             container.innerHTML = "";
-            let totalItemsCount = 0;
             let netTotalValuation = 0;
+            let netQuantity = 0;
 
-            const cartKeysArr = Object.keys(customerActiveCartCache);
+            const activeKeys = Object.keys(clientLocalBasketMemory);
 
-            if (cartKeysArr.length === 0) {
-                container.innerHTML = `<p class="text-stone-500 text-center py-4">Your culinary basket is currently empty.</p>`;
-                badge.innerText = "0 Items";
+            if(activeKeys.length === 0) {
+                container.innerHTML = `<p class="text-zinc-600 text-center py-8">Your culinary basket is unallocated.</p>`;
+                counter.innerText = "0 Units";
                 totalLabel.innerText = "$0.00";
                 return;
             }
 
-            cartKeysArr.forEach(key => {
-                const item = customerActiveCartCache[key];
-                totalItemsCount += item.qty;
-                netTotalValuation += item.price * item.qty;
+            activeKeys.forEach(key => {
+                const node = clientLocalBasketMemory[key];
+                netQuantity += node.quantity;
+                netTotalValuation += (node.price * node.quantity);
 
                 container.innerHTML += `
-                    <div class="flex items-center justify-between py-2.5 text-stone-300">
+                    <div class="flex items-center justify-between py-3 text-zinc-300">
                         <div class="min-w-0 pr-2">
-                            <p class="font-bold truncate text-white">${item.name}</p>
-                            <span class="text-[10px] text-stone-500 font-mono">$${item.price.toFixed(2)} x ${item.qty}</span>
+                            <p class="font-bold text-white truncate text-xs">${node.title}</p>
+                            <span class="text-[10px] text-zinc-500 font-mono">$${node.price.toFixed(2)} x ${node.quantity}</span>
                         </div>
-                        <div class="flex items-center gap-2 shrink-0">
-                            <span class="font-mono font-bold text-amber-400">$${(item.price * item.qty).toFixed(2)}</span>
-                            <button onclick="removeFoodItemQtyFromCart('${item.id}')" class="w-6 h-6 bg-stone-900 border border-stone-800 text-stone-500 hover:text-rose-500 rounded-lg font-bold flex items-center justify-center">-</button>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <span class="font-mono font-bold text-amber-400">$${(node.price * node.quantity).toFixed(2)}</span>
+                            <button onclick="popProductFromMemoryStream('${node.id}')" class="w-5 h-5 bg-[#181822] border border-zinc-800 text-zinc-500 hover:text-rose-500 rounded font-bold flex items-center justify-center text-xs">-</button>
                         </div>
                     </div>`;
             });
 
-            badge.innerText = `${totalItemsCount} Items`;
+            counter.innerText = `${netQuantity} Units`;
             totalLabel.innerText = "$" + netTotalValuation.toFixed(2);
         }
 
-        // 4. Submit Order Data Transmissions to Cloud (POST)
-        async function transmitOrderPayloadToCloudServer() {
-            if (!supabaseClientEngineInstance) return;
+        function commitOrderPayloadToDatabase() {
+            if (!dbInstancePointer) return;
 
-            const nameInput = document.getElementById("customerIdentityNameInput");
-            const guestName = nameInput.value.trim();
+            const identityField = document.getElementById("guestIdentifierInput");
+            const identityValue = identityField.value.trim();
 
-            if (!guestName) {
-                alert("Identity Error: Guest configuration name parameter required before server dispatch.");
+            if (!identityValue) {
+                alert("Please provide a Guest Identifier / Table parameter.");
                 return;
             }
 
-            const cartKeys = Object.keys(customerActiveCartCache);
-            if (cartKeys.length === 0) {
-                alert("Operation Rejected: Cart manifest array payload empty.");
+            const activeKeys = Object.keys(clientLocalBasketMemory);
+            if (activeKeys.length === 0) {
+                alert("Target basket buffer is empty.");
                 return;
             }
 
-            // Stringify order items manifest safely
-            const orderManifestString = cartKeys.map(k => `${customerActiveCartCache[k].name} (x${customerActiveCartCache[k].qty})`).join(", ");
-            const aggregateCost = parseFloat(document.getElementById("cartTotalSumLabel").innerText.replace("$", ""));
+            const itemizedSummary = activeKeys.map(k => `${clientLocalBasketMemory[k].title} (x${clientLocalBasketMemory[k].quantity})`).join(", ");
+            const grossCost = parseFloat(document.getElementById("cartTotalSumLabel").innerText.replace("$", ""));
 
-            const SQL_Payload_Row = {
-                customer_name: guestName,
-                items: orderManifestString,
-                total_amount: aggregateCost,
-                status: "Pending"
+            const payload = {
+                customer_name: identityValue,
+                items_summary: itemizedSummary,
+                net_cost: grossCost,
+                processing_status: "Pending",
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
             };
 
-            const { error } = await supabaseClientEngineInstance
-                .from('orders')
-                .insert([SQL_Payload_Row]);
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            const req = store.add(payload);
 
-            if (error) {
-                alert("Cloud transmission packet fault: " + error.message);
-                return;
-            }
-
-            // Clear Cart and Input States upon successful callback
-            customerActiveCartCache = {};
-            nameInput.value = "";
-            syncCartStateAndDomInterface();
-            fetchAndRenderKitchenMonitorPipeline();
+            req.onsuccess = function() {
+                clientLocalBasketMemory = {};
+                identityField.value = "";
+                synchronizeCartDOMInterface();
+                toggleWorkspacePortal('admin');
+            };
         }
 
-        // 5. Query Active Server Status Tables Rows (GET)
-        async function fetchAndRenderKitchenMonitorPipeline() {
-            if (!supabaseClientEngineInstance) return;
+        function renderLatestDatabaseQueue() {
+            if(!dbInstancePointer) return;
 
-            let { data: orders, error } = await supabaseClientEngineInstance
-                .from('orders')
-                .select('*')
-                .order('created_at', { ascending: false })
-                .limit(10);
+            const targetGrid = document.getElementById("domAdminQueueTarget");
+            targetGrid.innerHTML = "<div class='col-span-full font-mono text-xs text-zinc-600 text-center py-6'>Polling system database index...</div>";
 
-            if (error) return;
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readonly");
+            const store = transaction.objectStore(STORE_NAME);
+            const req = store.getAll();
 
-            const queueContainer = document.getElementById("cloudActiveKitchenOrdersTrackStream");
-            queueContainer.innerHTML = "";
+            req.onsuccess = function(e) {
+                const datasets = e.target.result || [];
+                targetGrid.innerHTML = "";
 
-            if (orders.length === 0) {
-                queueContainer.innerHTML = `<p class="text-[11px] text-stone-600 font-mono text-center py-4">No pending order matrices on cloud stack.</p>`;
-                return;
-            }
+                if(datasets.length === 0) {
+                    targetGrid.innerHTML = `<div class="col-span-full border border-dashed border-zinc-900 p-8 text-center text-xs text-zinc-600 font-mono">[PIPELINE EMPTY] No records logged.</div>`;
+                    return;
+                }
 
-            orders.forEach(ord => {
-                const isPending = ord.status === "Pending";
-                const badgeTheme = isPending ? "bg-amber-500/10 border-amber-500/20 text-amber-400" : "bg-stone-900 border-stone-800 text-stone-500";
-                const clickAction = isPending ? `onclick="mutateOrderStatusOnCloud('${ord.id}')"` : "";
-                const strikeStyle = isPending ? "" : "opacity-40 line-through";
+                datasets.reverse().forEach(record => {
+                    const isPending = record.processing_status === "Pending";
+                    const statusBadgeTheme = isPending ? "bg-amber-400 text-black border-amber-400" : "bg-zinc-900 border-zinc-800 text-zinc-500";
+                    const handler = isPending ? `onclick="mutateOrderRowState(${record.id})"` : "";
+                    const layerStyle = isPending ? "" : "opacity-40 line-through";
 
-                queueContainer.innerHTML += `
-                    <div class="bg-stone-950 border border-stone-900 p-3.5 rounded-xl flex items-center justify-between gap-4 group ${strikeStyle}">
-                        <div class="min-w-0 space-y-0.5">
-                            <div class="flex items-center gap-2">
-                                <span class="text-[11px] font-bold text-white">${ord.customer_name}</span>
-                                <span class="text-[9px] text-stone-500 font-mono font-bold">${new Date(ord.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    targetGrid.innerHTML += `
+                        <div class="bg-[#12121a] border border-zinc-900 rounded-2xl p-5 flex flex-col justify-between gap-6 hover:border-zinc-800 transition-all ${layerStyle}">
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-start gap-4">
+                                    <div class="min-w-0">
+                                        <h5 class="text-white font-extrabold text-sm truncate tracking-wide">${record.customer_name}</h5>
+                                        <span class="text-[9px] font-mono font-bold text-zinc-600 block mt-0.5">ROW_ID: #${record.id}</span>
+                                    </div>
+                                    <span class="font-mono font-bold text-sm text-amber-400 shrink-0">$${record.net_cost.toFixed(2)}</span>
+                                </div>
+                                <p class="text-[11px] text-zinc-400 leading-relaxed font-medium bg-[#161622] border border-zinc-900 p-3 rounded-xl">${record.items_summary}</p>
                             </div>
-                            <p class="text-[10px] text-stone-400 truncate">${ord.items}</p>
-                        </div>
-                        <div class="flex items-center gap-3 shrink-0">
-                            <span class="text-xs font-mono font-bold text-white">$${parseFloat(ord.total_amount).toFixed(2)}</span>
-                            <button ${clickAction} class="text-[9px] px-2 py-1 rounded-md border tracking-wider uppercase font-black transition-all ${badgeTheme} active:scale-95">
-                                ${ord.status}
-                            </button>
-                        </div>
-                    </div>`;
-            });
+                            <div class="flex items-center justify-between border-t border-zinc-900/60 pt-3">
+                                <span class="text-[10px] font-mono text-zinc-500 font-bold">${record.timestamp}</span>
+                                <button ${handler} class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 border rounded-lg transition-all active:scale-95 ${statusBadgeTheme}">
+                                    ${record.processing_status}
+                                </button>
+                            </div>
+                        </div>`;
+                });
+            };
         }
 
-        // 6. Mutate / Process Kitchen State Changes (PUT / UPDATE)
-        async function mutateOrderStatusOnCloud(orderId) {
-            if (!supabaseClientEngineInstance) return;
+        function mutateOrderRowState(id) {
+            if (!dbInstancePointer) return;
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            const req = store.get(id);
 
-            const { error } = await supabaseClientEngineInstance
-                .from('orders')
-                .update({ status: 'Served 🍽️' })
-                .eq('id', orderId);
-
-            if (error) return;
-            fetchAndRenderKitchenMonitorPipeline();
+            req.onsuccess = function(e) {
+                const data = e.target.result;
+                if(data) {
+                    data.processing_status = "Dispatched 📦";
+                    const updateReq = store.put(data);
+                    updateReq.onsuccess = function() {
+                        renderLatestDatabaseQueue();
+                    };
+                }
+            };
         }
 
-        // Mount process lifecycle pipeline
-        window.onload = bootstrapCulinaryApplicationNode;
+        function wipeEntireDatabaseInstance() {
+            if (!confirm("Are you sure you want to permanently purge all data rows?")) return;
+            if (!dbInstancePointer) return;
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            store.clear().onsuccess = function() {
+                renderLatestDatabaseQueue();
+            };
+        }
+
+        window.onload = initializePersistentDatabaseCluster;
     </script>
 </body>
 </html>
