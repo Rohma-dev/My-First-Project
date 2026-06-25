@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🍳 Matrix Kitchen | Premium Order & POS Ecosystem</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+        /* Smooth Custom Scrollbar for Premium Feel */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #14141b; }
+        ::-webkit-scrollbar-thumb { background: #2d2d3d; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #ffbe33; }
+    </style>
+</head>
+<body class="bg-[#0c0c12] text-slate-300 min-h-screen flex flex-col justify-between antialiased">
+
+    <header class="sticky top-0 z-50 bg-[#12121a]/90 backdrop-blur-md border-b border-zinc-800/60 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-500 to-orange-600 flex items-center justify-center text-black text-xl font-black heading-font shadow-lg shadow-amber-500/20">
+                    M
+                </div>
+                <div>
+                    <h1 class="text-white font-extrabold text-sm sm:text-base tracking-wide heading-font">MATRIX KITCHEN</h1>
+                    <span class="text-[9px] text-amber-500 font-mono tracking-widest block uppercase">IndexedDB Engine // Advanced POS Infrastructure</span>
+                </div>
+            </div>
+            
+            <div class="bg-[#191924] border border-zinc-800 p-1 rounded-xl flex gap-1">
+                <button id="tabCustomer" onclick="toggleWorkspacePortal('customer')" class="text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all">Customer Menu</button>
+                <button id="tabAdmin" onclick="toggleWorkspacePortal('admin')" class="text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all">Kitchen Admin</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 flex-1 w-full">
+        
+        <div id="portalCustomerSection" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <div class="lg:col-span-7 xl:col-span-8 space-y-6">
+                <div class="border-b border-zinc-800 pb-4">
+                    <h2 class="heading-font text-xl font-bold text-white tracking-tight">The Culinary Ledger</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Select high-end items to mount your instant transactional data payload.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="domMenuCardsTarget">
+                    </div>
+            </div>
+
+            <div class="lg:col-span-5 xl:col-span-4 bg-[#12121a] border border-zinc-800 rounded-2xl p-6 space-y-4 shadow-2xl">
+                <div class="flex justify-between items-center border-b border-zinc-900 pb-3">
+                    <h3 class="heading-font text-xs font-bold uppercase tracking-widest text-white">System Basket</h3>
+                    <span id="cartItemsCounter" class="font-mono text-xs text-amber-400 bg-amber-500/5 px-2.5 py-0.5 rounded-full border border-amber-500/10">0 Units</span>
+                </div>
+
+                <div id="cartItemsWrapper" class="space-y-3 max-h-60 overflow-y-auto pr-1 text-xs divide-y divide-zinc-900/60">
+                    <p class="text-zinc-600 text-center py-8">Your culinary basket is unallocated.</p>
+                </div>
+
+                <div class="border-t border-zinc-900 pt-4 space-y-4">
+                    <div class="flex justify-between items-baseline">
+                        <span class="text-xs text-zinc-400 font-medium">Net Value Mapping:</span>
+                        <span id="cartTotalSumLabel" class="text-2xl font-bold font-mono text-amber-400">$0.00</span>
+                    </div>
+
+                    <div class="space-y-2">
+                        <input type="text" id="guestIdentifierInput" placeholder="Guest Name / Table Coordinates" 
+                            class="w-full bg-[#181822] border border-zinc-800 text-white rounded-xl px-4 py-3.5 text-xs focus:outline-none focus:border-amber-500 transition-all font-medium placeholder:text-zinc-600">
+                        <button onclick="commitOrderPayloadToDatabase()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-black font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-lg shadow-amber-500/10 active:scale-95">
+                            Broadcast to Database 📡
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="portalAdminSection" class="hidden space-y-6">
+            <div class="border-b border-zinc-800 pb-4 flex flex-col sm:flex-row justify-between sm:items-center gap-3">
+                <div>
+                    <h2 class="heading-font text-xl font-bold text-white tracking-tight">Production Queue Core</h2>
+                    <p class="text-xs text-zinc-500 mt-0.5">Isolated relational data structures executing directly from client-side schema indexes.</p>
+                </div>
+                <button onclick="wipeEntireDatabaseInstance()" class="text-[10px] font-bold text-rose-400 bg-rose-500/5 border border-rose-500/10 hover:bg-rose-500/10 px-3 py-1.5 rounded-lg transition-all self-start sm:self-center">Purge DB Cluster 🗑️</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="domAdminQueueTarget">
+                </div>
+        </div>
+
+    </main>
+
+    <footer class="border-t border-zinc-900 bg-[#09090d] py-6 text-center text-[10px] font-mono text-zinc-600 tracking-widest uppercase">
+        © 2026 Matrix Kitchen Embedded Systems Core // Authorized Operations Terminal By Rohma Noor
+    </footer>
+
+    <script>
+        // --- 🔴 ADVANCED CONFIGURATION MODULES ---
+        const DB_NAME = "MatrixKitchenDB";
+        const DB_VERSION = 1;
+        const STORE_NAME = "orders_stream";
+
+        let dbInstancePointer = null;
+
+        // Structured Business Microservices Product Dataset Array
+        const PRODUCT_MASTER_INDEX = [
+            { id: "P1", title: "Smoked Wagyu Brisket Platter", price: 78.00, details: "12-hour oakwood slow smoked cut with molasses rub glaze." },
+            { id: "P2", title: "Pan Seared Chilean Sea Bass", price: 62.50, details: "Infused with ginger-lemongrass dashi bouillon fluid broth." },
+            { id: "P3", title: "Black Garlic Truffle Gnocchi", price: 34.00, details: "Handcrafted potato dumplings rolled in aged parmesan foam." },
+            { id: "P4", title: "Artisan Obsidian Matcha Brew", price: 16.00, details: "Ceremonial grade cold-whipped tea layered with sweet cream syrup." }
+        ];
+
+        // Memory Store Pointers
+        let clientLocalBasketMemory = {};
+        let currentViewContext = "customer";
+
+        // ================= 🏛️ 1. SECURED INDEXEDDB DATABASE ENGINE DRIVERS =================
+        function initializePersistentDatabaseCluster() {
+            const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+            request.onupgradeneeded = function(event) {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains(STORE_NAME)) {
+                    // Instantiating strict database structural relational rows with primary key indexing
+                    db.createObjectStore(STORE_NAME, { keyPath: "id", autoIncrement: true });
+                }
+            };
+
+            request.onsuccess = function(event) {
+                dbInstancePointer = event.target.result;
+                console.log("[IndexedDB Cluster Handshake Status: SUCCESSFUL]");
+                compileCustomerInterfaceCards();
+                renderLatestDatabaseQueue();
+            };
+
+            request.onerror = function(event) {
+                console.error("[IndexedDB Crash Signal Log]", event.target.error);
+            };
+        }
+
+        // ================= 🛠️ 2. REACTIVE CONTROLLERS & WORKFLOW MANAGERS =================
+        function toggleWorkspacePortal(targetView) {
+            currentViewContext = targetView;
+            const cSection = document.getElementById("portalCustomerSection");
+            const aSection = document.getElementById("portalAdminSection");
+            const cTab = document.getElementById("tabCustomer");
+            const aTab = document.getElementById("tabAdmin");
+
+            if(targetView === "customer") {
+                cSection.classList.remove("hidden");
+                aSection.classList.add("hidden");
+                cTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all";
+                aTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all";
+            } else {
+                cSection.classList.add("hidden");
+                aSection.classList.remove("hidden");
+                aTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg bg-amber-500 text-black transition-all";
+                cTab.className = "text-[10px] uppercase tracking-wider font-extrabold px-4 py-2 rounded-lg text-zinc-400 hover:text-white transition-all";
+                renderLatestDatabaseQueue();
+            }
+        }
+
+        function compileCustomerInterfaceCards() {
+            const grid = document.getElementById("domMenuCardsTarget");
+            if (!grid) return;
+            grid.innerHTML = "";
+
+            PRODUCT_MASTER_INDEX.forEach(product => {
+                grid.innerHTML += `
+                    <div class="bg-[#12121a] border border-zinc-900/80 p-5 rounded-2xl flex flex-col justify-between gap-4 group hover:border-zinc-800 transition-all">
+                        <div class="space-y-1">
+                            <div class="flex justify-between items-baseline gap-4">
+                                <h4 class="text-white font-bold text-sm tracking-wide group-hover:text-amber-400 transition-all">${product.title}</h4>
+                                <span class="text-amber-400 font-mono font-bold text-xs shrink-0">$${product.price.toFixed(2)}</span>
+                            </div>
+                            <p class="text-[11px] text-zinc-500 leading-relaxed">${product.details}</p>
+                        </div>
+                        <button onclick="pushProductToMemoryStream('${product.id}')" class="w-full bg-[#181822] hover:bg-[#1f1f2d] border border-zinc-800/80 text-zinc-300 font-bold text-[10px] uppercase tracking-widest py-3 rounded-xl transition-all">
+                            Allocate Unit +
+                        </button>
+                    </div>`;
+            });
+        }
+
+        // ================= 🛒 3. LOCAL STATE MEMORY MANAGEMENT =================
+        function pushProductToMemoryStream(productId) {
+            if (clientLocalBasketMemory[productId]) {
+                clientLocalBasketMemory[productId].quantity++;
+            } else {
+                const schemaMatch = PRODUCT_MASTER_INDEX.find(item => item.id === productId);
+                clientLocalBasketMemory[productId] = { ...schemaMatch, quantity: 1 };
+            }
+            synchronizeCartDOMInterface();
+        }
+
+        function popProductFromMemoryStream(productId) {
+            if (!clientLocalBasketMemory[productId]) return;
+            clientLocalBasketMemory[productId].quantity--;
+            if(clientLocalBasketMemory[productId].quantity <= 0) {
+                delete clientLocalBasketMemory[productId];
+            }
+            synchronizeCartDOMInterface();
+        }
+
+        function synchronizeCartDOMInterface() {
+            const container = document.getElementById("cartItemsWrapper");
+            const counter = document.getElementById("cartItemsCounter");
+            const totalLabel = document.getElementById("cartTotalSumLabel");
+
+            container.innerHTML = "";
+            let netTotalAccumulatedValuation = 0;
+            let netQuantityAccumulator = 0;
+
+            const activeKeys = Object.keys(clientLocalBasketMemory);
+
+            if(activeKeys.length === 0) {
+                container.innerHTML = `<p class="text-zinc-600 text-center py-8">Your culinary basket is unallocated.</p>`;
+                counter.innerText = "0 Units";
+                totalLabel.innerText = "$0.00";
+                return;
+            }
+
+            activeKeys.forEach(key => {
+                const node = clientLocalBasketMemory[key];
+                netQuantityAccumulator += node.quantity;
+                netTotalAccumulatedValuation += (node.price * node.quantity);
+
+                container.innerHTML += `
+                    <div class="flex items-center justify-between py-3 text-zinc-300">
+                        <div class="min-w-0 pr-2">
+                            <p class="font-bold text-white truncate text-xs">${node.title}</p>
+                            <span class="text-[10px] text-zinc-500 font-mono">$${node.price.toFixed(2)} x ${node.quantity}</span>
+                        </div>
+                        <div class="flex items-center gap-3 shrink-0">
+                            <span class="font-mono font-bold text-amber-400">$${(node.price * node.quantity).toFixed(2)}</span>
+                            <button onclick="popProductFromMemoryStream('${node.id}')" class="w-5 h-5 bg-[#181822] border border-zinc-800 text-zinc-500 hover:text-rose-500 rounded font-bold flex items-center justify-center text-xs">-</button>
+                        </div>
+                    </div>`;
+            });
+
+            counter.innerText = `${netQuantityAccumulator} Units`;
+            totalLabel.innerText = "$" + netTotalAccumulatedValuation.toFixed(2);
+        }
+
+        // ================= 📥 4. WRITE TRANSACTION DATA INGESTION (CREATE) =================
+        function commitOrderPayloadToDatabase() {
+            if (!dbInstancePointer) return;
+
+            const identityField = document.getElementById("guestIdentifierInput");
+            const identityValue = identityField.value.trim();
+
+            if (!identityValue) {
+                alert("[Execution Refused] Please provide a Guest Identifier or Table location sequence parameter.");
+                return;
+            }
+
+            const activeKeys = Object.keys(clientLocalBasketMemory);
+            if (activeKeys.length === 0) {
+                alert("[Execution Refused] Target core basket buffer unallocated.");
+                return;
+            }
+
+            // Creating sub-array object strings arrays mapped securely inside rows
+            const itemizedPayloadArray = activeKeys.map(k => `${clientLocalBasketMemory[k].title} (x${clientLocalBasketMemory[k].quantity})`).join(", ");
+            const aggregatedGrossCost = parseFloat(document.getElementById("cartTotalSumLabel").innerText.replace("$", ""));
+
+            const structuralRecordObjectPayload = {
+                customer_name: identityValue,
+                items_summary: itemizedPayloadArray,
+                net_cost: aggregatedGrossCost,
+                processing_status: "Pending",
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+
+            // Triggering isolated transactional read-write thread operations pipeline
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            const operationRequest = store.add(structuralRecordObjectPayload);
+
+            operationRequest.onsuccess = function() {
+                // Clear local structures upon database verification callback returns
+                clientLocalBasketMemory = {};
+                identityField.value = "";
+                synchronizeCartDOMInterface();
+                toggleWorkspacePortal('admin');
+            };
+        }
+
+        // ================= 🛰️ 5. READ DATA MONITOR PIPELINE (SELECT) =================
+        function renderLatestDatabaseQueue() {
+            if(!dbInstancePointer) return;
+
+            const targetGrid = document.getElementById("domAdminQueueTarget");
+            targetGrid.innerHTML = "<div class='col-span-full font-mono text-xs text-zinc-600 text-center py-6'>Polling database engine indices...</div>";
+
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readonly");
+            const store = transaction.objectStore(STORE_NAME);
+            const getAllQueryRequest = store.getAll();
+
+            getAllQueryRequest.onsuccess = function(event) {
+                const datasetArray = event.target.result || [];
+                targetGrid.innerHTML = "";
+
+                if(datasetArray.length === 0) {
+                    targetGrid.innerHTML = `
+                        <div class="col-span-full border border-dashed border-zinc-900 p-8 text-center text-xs text-zinc-600 font-mono">
+                            [PIPELINE EMPTY] No records logged inside memory stream arrays.
+                        </div>`;
+                    return;
+                }
+
+                // Sorting arrays natively for fresh incoming data visibility
+                datasetArray.reverse().forEach(record => {
+                    const isPending = record.processing_status === "Pending";
+                    const statusBadgeTheme = isPending ? "bg-amber-400 text-black border-amber-400" : "bg-zinc-900 border-zinc-800 text-zinc-500";
+                    const interactiveHandlerMethod = isPending ? `onclick="mutateOrderRowState(${record.id})"` : "";
+                    const layerOpacityStyle = isPending ? "" : "opacity-40 line-through";
+
+                    targetGrid.innerHTML += `
+                        <div class="bg-[#12121a] border border-zinc-900 rounded-2xl p-5 flex flex-col justify-between gap-6 hover:border-zinc-800 transition-all ${layerOpacityStyle}">
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-start gap-4">
+                                    <div class="min-w-0">
+                                        <h5 class="text-white font-extrabold text-sm truncate tracking-wide">${record.customer_name}</h5>
+                                        <span class="text-[9px] font-mono font-bold text-zinc-600 block mt-0.5">ROW_ID: #${record.id}</span>
+                                    </div>
+                                    <span class="font-mono font-bold text-sm text-amber-400 shrink-0">$${record.net_cost.toFixed(2)}</span>
+                                </div>
+                                <p class="text-[11px] text-zinc-400 leading-relaxed font-medium bg-[#161622] border border-zinc-900 p-3 rounded-xl">${record.items_summary}</p>
+                            </div>
+
+                            <div class="flex items-center justify-between border-t border-zinc-900/60 pt-3">
+                                <span class="text-[10px] font-mono text-zinc-500 font-bold">${record.timestamp}</span>
+                                <button ${interactiveHandlerMethod} class="text-[9px] uppercase tracking-widest font-black px-3 py-1.5 border rounded-lg transition-all active:scale-95 ${statusBadgeTheme}">
+                                    ${record.processing_status}
+                                </button>
+                            </div>
+                        </div>`;
+                });
+            };
+        }
+
+        // ================= 🔄 6. DATABASE CELL STATE MUTATION (UPDATE) =================
+        function mutateOrderRowState(rowPrimaryKeyId) {
+            if (!dbInstancePointer) return;
+
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            
+            // Query current row trace target
+            const fetchRowQuery = store.get(rowPrimaryKeyId);
+
+            fetchRowQuery.onsuccess = function(event) {
+                const targetRowData = event.target.result;
+                if(targetRowData) {
+                    targetRowData.processing_status = "Dispatched 📦";
+                    
+                    // Rewrite and overwrite updated data object properties back to local database file disk block
+                    const updateQuery = store.put(targetRowData);
+                    updateQuery.onsuccess = function() {
+                        renderLatestDatabaseQueue();
+                    };
+                }
+            };
+        }
+
+        // ================= 🗑️ 7. HARD RESET ALL DATA TRACKS (DELETE CLUSTER) =================
+        function wipeEntireDatabaseInstance() {
+            if (!confirm("CRITICAL PROTOCOL ALERT:\nAre you absolutely certain you want to permanently delete all rows inside the database disk structure?")) return;
+            if (!dbInstancePointer) return;
+
+            const transaction = dbInstancePointer.transaction([STORE_NAME], "readwrite");
+            const store = transaction.objectStore(STORE_NAME);
+            const wipeQueryRequest = store.clear();
+
+            wipeQueryRequest.onsuccess = function() {
+                renderLatestDatabaseQueue();
+            };
+        }
+
+        // Self-executing setup hooks on view mounting cycles
+        window.onload = initializePersistentDatabaseCluster;
+    </script>
+</body>
+</html>
