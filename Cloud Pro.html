@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📊 CloudLedger Pro | Enterprise CRM Billing Matrix</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .heading-font { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#f4f5f7] text-slate-700 min-h-screen antialiased flex flex-col justify-between">
+
+    <header class="sticky top-0 z-40 bg-white border-b border-gray-200/80 backdrop-blur-md bg-white/90 shadow-2xs">
+        <div class="max-w-7xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-indigo-600 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-indigo-600/20 heading-font">
+                    CL
+                </div>
+                <div>
+                    <h1 class="text-slate-900 font-extrabold text-base md:text-lg tracking-tight heading-font">CLOUDLEDGER PRO</h1>
+                    <span class="text-[10px] text-slate-400 font-bold uppercase tracking-widest block">Distributed PostgreSQL Cloud Engine Matrix</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <span id="dbStatusBadge" class="bg-amber-50 border border-amber-100 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+                    Connecting Cloud Backend...
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 md:px-8 py-8 flex-1 w-full space-y-8">
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Total Pipeline Capital</span>
+                <div class="text-3xl font-bold text-slate-900 heading-font mt-2" id="totalCapitalLabel">$0.00</div>
+            </div>
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Unpaid Cloud Receivables</span>
+                <div class="text-3xl font-bold text-rose-600 heading-font mt-2" id="unpaidCapitalLabel">$0.00</div>
+            </div>
+            <div class="bg-white border border-gray-200 p-5 rounded-2xl shadow-2xs">
+                <span class="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Settled Liquid Revenue</span>
+                <div class="text-3xl font-bold text-emerald-600 heading-font mt-2" id="settledCapitalLabel">$0.00</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            
+            <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-2xs space-y-4">
+                <div>
+                    <h3 class="text-slate-900 font-bold text-base heading-font">Dispatch Cloud Transaction</h3>
+                    <p class="text-xs text-slate-400 mt-0.5">Stream payload protocols securely into PostgreSQL nodes.</p>
+                </div>
+                <hr class="border-gray-100">
+                
+                <form id="billingTransactionForm" onsubmit="pushTransactionToCloud(event)" class="space-y-4">
+                    <div>
+                        <label class="text-[11px] uppercase tracking-wider font-bold text-slate-400 block mb-1">Corporate Client Entity Name</label>
+                        <input type="text" id="clientNameInput" required placeholder="e.g., SpaceX Global Node" 
+                            class="w-full bg-slate-50 border border-gray-200 focus:border-indigo-600 focus:bg-white rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-all placeholder:text-slate-400 font-medium">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] uppercase tracking-wider font-bold text-slate-400 block mb-1">Transaction Value ($ USD)</label>
+                        <input type="number" step="0.01" id="invoiceAmountInput" required placeholder="e.g., 4500.00" 
+                            class="w-full bg-slate-50 border border-gray-200 focus:border-indigo-600 focus:bg-white rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-all placeholder:text-slate-400 font-medium font-mono">
+                    </div>
+
+                    <div>
+                        <label class="text-[11px] uppercase tracking-wider font-bold text-slate-400 block mb-1">Settlement Status</label>
+                        <select id="invoiceStatusSelect" class="w-full bg-slate-50 border border-gray-200 focus:border-indigo-600 focus:bg-white rounded-xl px-4 py-2.5 text-sm focus:outline-none transition-all font-medium">
+                            <option value="Unpaid">❌ Overdue / Unpaid</option>
+                            <option value="Settled">🟢 Cleared / Settled</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs uppercase tracking-widest py-3 rounded-xl shadow-xs transition-all active:scale-95">
+                        Broadcast to Server 📡
+                    </button>
+                </form>
+            </div>
+
+            <div class="lg:col-span-2 space-y-4">
+                <div class="flex items-center justify-between border-b border-gray-200 pb-3">
+                    <div>
+                        <h3 class="text-slate-900 font-bold text-base heading-font">Real-time Cloud Query Streams</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Isolated transaction logs populated from remote database grid.</p>
+                    </div>
+                </div>
+
+                <div id="cloudDataStreamGrid" class="space-y-3">
+                    <div class="text-center p-8 text-slate-400 text-xs font-mono">Initializing handshake synchronization protocols...</div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="w-full text-center py-6 border-t border-gray-200 mt-12 text-xs text-slate-400 font-semibold bg-white">
+        <p>© 2026 CloudLedger Pro Distributed Core. Network Engineer Command Shell: Rohma Noor.</p>
+    </footer>
+
+    <script>
+        // --- 🔴 CRITICAL: CONFIGURATION GATEWAY SETTINGS ---
+        const SUPABASE_PROJECT_URL = "YOUR_SUPABASE_URL"; 
+        const SUPABASE_ANON_PUBLIC_KEY = "YOUR_SUPABASE_KEY"; 
+
+        let supabaseClientInstance = null;
+        let activeDatabaseBufferMemory = [];
+
+        // 1. Initialize Secured Socket Connection Pipeline
+        function initializeCloudSystemBackend() {
+            const statusBadge = document.getElementById("dbStatusBadge");
+            
+            if (SUPABASE_PROJECT_URL === "YOUR_SUPABASE_URL") {
+                statusBadge.className = "bg-rose-50 border border-rose-100 text-rose-700 text-xs font-bold px-3 py-1.5 rounded-xl";
+                statusBadge.innerHTML = "⚠️ Configuration Missing (Insert API Keys)";
+                document.getElementById("cloudDataStreamGrid").innerHTML = `
+                    <div class="bg-rose-50 border border-dashed border-rose-200 rounded-2xl p-6 text-slate-700 text-xs leading-relaxed">
+                        <strong>Developer Action Required:</strong> Please replace the placeholder API credentials at lines 114 & 115 inside the script tag with your actual Supabase Project Key allocations to establish connection with the live PostgreSQL instance.
+                    </div>`;
+                return;
+            }
+
+            try {
+                // Instantiating remote server connection factory
+                supabaseClientInstance = supabase.createClient(SUPABASE_PROJECT_URL, SUPABASE_ANON_PUBLIC_KEY);
+                statusBadge.className = "bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl flex items-center gap-1.5";
+                statusBadge.innerHTML = "<span class='w-2 h-2 rounded-full bg-emerald-500 animate-pulse'></span> Postgre Cloud Server Connected";
+                
+                fetchPayloadDataFromCloudServer();
+            } catch (err) {
+                statusBadge.className = "bg-rose-50 border border-rose-100 text-rose-700 text-xs font-bold px-3 py-1.5 rounded-xl";
+                statusBadge.innerHTML = "❌ Connection Handshake Denied";
+            }
+        }
+
+        // 2. Fetch / Query Datasets Directly From Remote Cloud DB Instance
+        async function fetchPayloadDataFromCloudServer() {
+            if (!supabaseClientInstance) return;
+
+            // Trigger real-time SELECT query sorted by creation time
+            let { data: invoices, error } = await supabaseClientInstance
+                .from('invoices')
+                .select('*')
+                .order('created_at', { ascending: false });
+
+            if (error) {
+                console.error("Cloud Error:", error);
+                return;
+            }
+
+            activeDatabaseBufferMemory = invoices || [];
+            recalculateFinancialMetrics();
+            compileCloudLedgerVisualInterface();
+        }
+
+        // 3. Insert / Push New Rows To External Server Row Indexes
+        async function pushTransactionToCloud(event) {
+            event.preventDefault();
+            if (!supabaseClientInstance) return;
+
+            const nameInput = document.getElementById("clientNameInput");
+            const amountInput = document.getElementById("invoiceAmountInput");
+            const statusSelect = document.getElementById("invoiceStatusSelect");
+
+            const payloadRow = {
+                client_name: nameInput.value.trim(),
+                amount: parseFloat(amountInput.value),
+                status: statusSelect.value
+            };
+
+            // Inject SQL statement asynchronously over REST API pipeline
+            const { error } = await supabaseClientInstance
+                .from('invoices')
+                .insert([payloadRow]);
+
+            if (error) {
+                alert("Database submission fault detected: " + error.message);
+                return;
+            }
+
+            // Reset forms and trigger instant layout sync pull
+            nameInput.value = "";
+            amountInput.value = "";
+            statusSelect.value = "Unpaid";
+            fetchPayloadDataFromCloudServer();
+        }
+
+        // 4. Update Remote Row Cell Attributes Asynchronously
+        async function mutateTransactionStatusOnCloud(id, currentStatus) {
+            if (!supabaseClientInstance) return;
+            const targetNewStatus = currentStatus === "Pending" || currentStatus === "Unpaid" ? "Settled" : "Unpaid";
+
+            const { error } = await supabaseClientInstance
+                .from('invoices')
+                .update({ status: targetNewStatus })
+                .eq('id', id);
+
+            if (error) {
+                console.error("Mutation Error:", error);
+                return;
+            }
+
+            fetchPayloadDataFromCloudServer();
+        }
+
+        // 5. Hard Purge Specific Entry Records From Cloud Engine Server Disk
+        async function deleteRowRecordFromCloud(id) {
+            if (!confirm("Confirm Command: Erase this immutable transactional row item from cloud sector?")) return;
+            if (!supabaseClientInstance) return;
+
+            const { error } = await supabaseClientInstance
+                .from('invoices')
+                .delete()
+                .eq('id', id);
+
+            if (error) {
+                console.error("Purge Error:", error);
+                return;
+            }
+
+            fetchPayloadDataFromCloudServer();
+        }
+
+        // 6. Compute Data Matrix Metrics Math Calculations
+        function recalculateFinancialMetrics() {
+            let total = 0;
+            let unpaid = 0;
+            let settled = 0;
+
+            activeDatabaseBufferMemory.forEach(row => {
+                const amt = parseFloat(row.amount) || 0;
+                total += amt;
+                if (row.status === "Settled") settled += amt;
+                else unpaid += amt;
+            });
+
+            document.getElementById("totalCapitalLabel").innerText = "$" + total.toFixed(2);
+            document.getElementById("unpaidCapitalLabel").innerText = "$" + unpaid.toFixed(2);
+            document.getElementById("settledCapitalLabel").innerText = "$" + settled.toFixed(2);
+        }
+
+        // 7. Dynamic Data Element Compiler Render Engine
+        function compileCloudLedgerVisualInterface() {
+            const wrapper = document.getElementById("cloudDataStreamGrid");
+            if (!wrapper) return;
+
+            wrapper.innerHTML = "";
+
+            if (activeDatabaseBufferMemory.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="bg-white border border-dashed border-gray-300 rounded-2xl p-8 text-center text-slate-400 text-xs">
+                        📡 Server pipelines active. No data traces present in PostgreSQL sector indices.
+                    </div>`;
+                return;
+            }
+
+            activeDatabaseBufferMemory.forEach(row => {
+                const isCleared = row.status === "Settled";
+                const statusBadgeStyle = isCleared ? "bg-emerald-50 border-emerald-100 text-emerald-700" : "bg-rose-50 border-rose-100 text-rose-700";
+                const iconState = isCleared ? "☑️" : "⏳";
+                const titleDecoration = isCleared ? "line-through text-slate-400" : "text-slate-800 font-bold";
+
+                wrapper.innerHTML += `
+                    <div class="bg-white border border-gray-200 p-4 rounded-xl shadow-2xs flex items-center justify-between gap-4 group hover:border-indigo-400 transition-all">
+                        <div class="flex items-center gap-3 min-w-0">
+                            <button onclick="mutateTransactionStatusOnCloud('${row.id}', '${row.status}')" class="text-base focus:outline-none transition-transform active:scale-90 select-none">${iconState}</button>
+                            <div class="min-w-0">
+                                <p class="text-sm tracking-tight truncate ${titleDecoration}">${row.client_name}</p>
+                                <p class="text-[10px] text-slate-400 mt-0.5 font-mono">UUID: ${row.id.substring(0,8)}... </p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 shrink-0">
+                            <div class="text-right">
+                                <p class="text-sm font-bold text-slate-900 font-mono">$${parseFloat(row.amount).toFixed(2)}</p>
+                                <span class="text-[9px] px-1.5 py-0.5 rounded border uppercase tracking-wider font-extrabold ${statusBadgeStyle}">${row.status}</span>
+                            </div>
+                            <button onclick="deleteRowRecordFromCloud('${row.id}')" class="text-slate-300 hover:text-rose-600 text-xs p-1 rounded-md hover:bg-rose-50 transition-all opacity-0 group-hover:opacity-100">
+                                ✖
+                            </button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        // Self-initializing runtime hook trigger on content layout mount load
+        window.onload = function() {
+            initializeCloudSystemBackend();
+        }
+    </script>
+</body>
+</html>
